@@ -71,19 +71,19 @@
     <div class=" b mx-auto h-16 w-32 flex justify-center items-center">
       <div class="i h-16 w-32 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
-      <a class="text-center text-sm text-white font-semibold z-10 pointer-events-none">Choose your favorite bike!</a>
+      <a class="text-center text-xs text-white font-semibold z-10 pointer-events-none">Choose your favorite bike!</a>
     </div>
 
     <div class=" b mx-auto h-16 w-32 flex justify-center items-center">
       <div class="i h-16 w-32 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
-      <a class="text-center text-sm text-white font-semibold z-10 pointer-events-none">Make an booking!</a>
+      <a class="text-center text-xs text-white font-semibold z-10 pointer-events-none">Make an booking!</a>
     </div>
 
     <div class=" b mx-auto h-16 w-32 flex justify-center items-center">
       <div class="i h-16 w-32 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
-      <a class="text-center text-sm text-white font-semibold z-10 pointer-events-none">Take and pay on the spot!</a>
+      <a class="text-center text-xs text-white font-semibold z-10 pointer-events-none">Take and pay on the spot!</a>
     </div>
 
     </div>
