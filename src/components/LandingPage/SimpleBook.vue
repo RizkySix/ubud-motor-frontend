@@ -65,7 +65,7 @@
     </div>
 
     <div
-      class="my-0 mx-[!important] flex items-center justify-center gap-[35px] z-[2] mb-10"
+      class="my-0 mx-[!important] flex items-center justify-center gap-[35px] z-[2] mb-10 px-10"
     >
     
     <div class=" b mx-auto h-16 w-32 flex justify-center items-center">

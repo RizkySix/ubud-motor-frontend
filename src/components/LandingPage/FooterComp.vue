@@ -1,5 +1,5 @@
 <template>
-	<footer class="md:absolute mt-20 md:top-[2078px] w-full px-4 divide-y bg-black text-whitesmoke dark:bg-gray-800 dark:text-gray-100">
+	<footer class="md:absolute mt-20 md:top-[2078px] w-full px-4 divide-y bg-black text-whitesmoke ">
 		<div class="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
 			<div class="lg:w-1/3">
 				<a rel="noopener noreferrer" href="#" class="flex justify-center space-x-3 lg:justify-start">
