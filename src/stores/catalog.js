@@ -4,7 +4,8 @@ import http from '@/helper/domain';
 
 export const useCatalogStore = defineStore('catalog' , () => {
 
-    const deleteTempImg = async (path) => {
+    //delete temp image action
+    const deleteTempImgAction = async (path) => {
         try {
           const response = await http().delete('/temp/catalog', {
             data: {temp_path: path}
@@ -18,6 +19,9 @@ export const useCatalogStore = defineStore('catalog' , () => {
         }
 
       };
+
+      //array property File
+      const catalogFiles = ref([])
     
-      return {deleteTempImg}
+      return {deleteTempImgAction , catalogFiles}
 })
