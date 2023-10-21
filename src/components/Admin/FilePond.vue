@@ -4,9 +4,9 @@
             id="file"
             name="temp_path"
             ref="pond"
-            label-idle="Pilih gambar <span class='filepond--label-action'>Browse</span>"
+            label-idle="Pilih gambar <span class='filepond--label-action'>Browse,</span> Urutkan gambar setelah semua selesai terupload!"
             allow-multiple="true"
-            maxFiles="3"
+            :maxFiles="maxMultipleFile"
             maxParallelUploads="1"
             accepted-file-types="image/jpeg, image/png , image/jpg, image/gif"
             acceptedFileTypes="image/*"
@@ -17,7 +17,7 @@
             v-on:reorderfiles="handleReorderPosition"
             :server="{
                 process: {
-                    url: 'http://ubud-motor.test/api/v1/temp/catalog',
+                    url: uploadTempEndpoint,
                     method: 'POST',
                     onload: handleFilePondOnLoad,
                 },
@@ -41,6 +41,13 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 
+
+const props = defineProps({
+    deleteTempEndpoint: String,
+    uploadTempEndpoint: String,
+    maxMultipleFile: Number
+})
+
 const catalog = useCatalogStore()
 
 const filePond = vueFilePond(
@@ -56,31 +63,37 @@ const handleFilePondOnLoad = (response) => {
     response = JSON.parse(response)
     myFiles.value.push(response.data)
     catalog.catalogFiles = myFiles.value
-
     return response.data
 }
+
+
 
 const handleFilePondRevert = async (uniqueID , load) => {
     //hapus gambar dari array
     myFiles.value = myFiles.value.filter((image) => image !== uniqueID)
     catalog.catalogFiles = myFiles.value
-    await catalog.deleteTempImgAction(uniqueID);
+    await catalog.deleteTempImgAction(uniqueID , props.deleteTempEndpoint);
     load()
 }
 
 const handleReorderPosition = (files, origin , target) => {
+   
     //kosongkan myFiles.value
     myFiles.value = [];
 
     //reorder berdasarkan new position
     files.forEach((obj , index) => {
-        myFiles.value.push(
-            obj.serverId,
-        )
+        if(obj.serverId){
+            myFiles.value.push(
+                obj.serverId,
+            )
+        }
     });
 
     catalog.catalogFiles = myFiles.value
+    
 }
+
 
 
 </script>

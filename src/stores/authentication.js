@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import http from '@/helper/domain';
+import {http} from '@/helper/domain';
 
 export const useAuthenticationStore = defineStore('authentication' , () => {
 

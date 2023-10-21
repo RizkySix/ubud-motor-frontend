@@ -1,9 +1,10 @@
 import axios from "axios"
 
+const url = 'http://ubud-motor.test/api/v1'
 const http = () => {
 
     let options = {
-        baseURL: 'http://ubud-motor.test/api/v1',
+        baseURL: url,
         headers: {}
     }
 
@@ -14,4 +15,4 @@ const http = () => {
     return axios.create(options)
 }
 
-export default http
+export {http , url}

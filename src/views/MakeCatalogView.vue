@@ -2,7 +2,7 @@
 
 <Sidebar>
     
-   <FilePond/>
+   <FilePond :uploadTempEndpoint="url+'/temp/catalog'" :deleteTempEndpoint="'/temp/catalog'" :maxMultipleFile="3" />
 
 <ValidationError v-if="hasError">
     <div v-for="(error , index) in errorBag" :key="index">
@@ -59,7 +59,7 @@ import { ref , watch , reactive } from 'vue'
 import Sidebar from '@/components/Admin/Sidebar.vue';
 import ValidationError from '@/components/Alert/ValidationError.vue';
 import { useCatalogStore } from '@/stores/catalog' 
-import http from '@/helper/domain';
+import {http , url } from '@/helper/domain';
 import FilePond from '@/components/Admin/FilePond.vue';
 import toaster from '@/helper/toaster';
 import { useRouter } from 'vue-router';
