@@ -2,7 +2,10 @@
 <Sidebar>
     <FilePond :uploadTempEndpoint="url+'/temp/gallery'" :deleteTempEndpoint="'/temp/gallery'" :maxMultipleFile="5" />
 
-    <form @submit.prevent="storeGallery">
+<ValidationError v-if="hasError">
+    <span class="text-xs md:text-sm">- {{ errorBag.gallery_image }}</span>
+</ValidationError>
+    <form @submit.prevent="storeGallery" class="mt-10">
         <button @submit.prevent="storeGallery" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tambah Gallery</button>
     </form>
 </Sidebar>
@@ -23,7 +26,9 @@ const router = useRouter()
 const myFiles = ref([])
 
 const hasError = ref(false)
-
+const errorBag = reactive({
+    gallery_image: ''
+})
 const storeGallery = async () => {
     try {
         const response =  await http().post('/gallery' , {
@@ -38,9 +43,8 @@ const storeGallery = async () => {
 
     } catch (error) {
         const errors = error.response.data.validation_errors
-        console.log(error.response.data)
-        
-
+        errorBag.gallery_image = errors['gallery_image'][0]
+      
         hasError.value = true
     }
 }

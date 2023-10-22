@@ -20,7 +20,7 @@
   </div>
 
   <div class="mt-4 md:mt-10 md:mb-4 w-full flex justify-end">
-    <div class="mt-2 w-[30%] md:w-[15%] flex justify-between text-xs md:text-base">
+    <div class="mt-2 w-[40%] md:w-[15%] flex justify-between text-xs md:text-base">
         <span class="cursor-pointer hover:text-gray-400" @click="addPriceLists">+ Price list</span>
         <span class="cursor-pointer hover:text-gray-400" @click="removePriceLists">- Price list</span>
     </div>
@@ -92,8 +92,10 @@ const addPriceLists = () => {
 }
 
 const removePriceLists = () => {
-    items.value -= 1;
-    priceLists.value.pop()
+    if(items.value > 1){
+        items.value -= 1;
+        priceLists.value.pop()
+    }
 }
 
 const errorBag = reactive({
@@ -118,7 +120,10 @@ const storeCatalog = async () => {
 
     } catch (error) {
         const errors = error.response.data.validation_errors
-
+        errorBag.charge = ''
+        errorBag.motor_name = ''
+        errorBag.path_catalog = ''
+        errorBag.price_lists = ''
         for (const propName in errorBag) {
             if (errors[propName]) {
                 errorBag[propName] = errors[propName][0];
