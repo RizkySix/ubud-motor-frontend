@@ -14,11 +14,11 @@
   const textClass = computed(() => {
     switch (props.variant) {
       case 'variant1':
-        return 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-slate-600 to-red-600 bg-clip-text text-transparent'
+        return 'text-3xl py-1 md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-slate-600 to-red-600 bg-clip-text text-transparent'
       case 'variant2':
-        return 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 via-red-600 to-gray-500 bg-clip-text text-transparent'
+        return 'text-3xl py-1 md:text-4xl font-bold bg-gradient-to-r from-purple-500 via-red-600 to-gray-500 bg-clip-text text-transparent'
       default:
-        return 'text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-slate-600 to-red-600 bg-clip-text text-transparent'
+        return 'text-3xl py-1 md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-slate-600 to-red-600 bg-clip-text text-transparent'
     }
   });
   </script>

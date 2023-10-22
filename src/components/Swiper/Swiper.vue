@@ -41,18 +41,9 @@
         images: Array
       },
       setup(props) {
-        const onSwiper = (swiper) => {
-          console.log(swiper);
-        
-        };
-        const onSlideChange = () => {
-          console.log('slide change');
-        };
 
         const images = ref(props.images)
         return {
-          onSwiper,
-          onSlideChange,
           modules: [Navigation, Pagination, A11y , Autoplay],
           images
         };

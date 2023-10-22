@@ -51,7 +51,6 @@ const storeGallery = async () => {
 
 watch([() => catalog.catalogFiles ] , ([currentFiles] , [oldFiles]) => {
     myFiles.value = currentFiles
-    console.log(myFiles.value)
 })
 
 </script>

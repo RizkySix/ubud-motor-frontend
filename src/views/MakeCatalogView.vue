@@ -11,12 +11,10 @@
 </ValidationError>
 <form @submit.prevent="storeCatalog">
   <div class="relative z-0 w-full mt-14 mb-6 group">
-      <input v-model="catalogPayload.motor_name" type="text" name="motor_name" id="motor_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-      <label for="motor_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama Motor</label>
+    <FloatingInput v-model="catalogPayload.motor_name" :type="'text'" name="motor_name" :id="'motor_name'" :label="'Nama Motor'" />
   </div>
   <div class="relative z-0 w-full mb-6 group">
-      <input v-model="catalogPayload.charge" type="number" name="charge" id="charge" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-      <label for="charge" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Denda (Telat Pengembalian)</label>
+    <FloatingInput v-model="catalogPayload.charge" :type="'text'" name="charge" :id="'charge'" :label="'Denda (Telat Pengembalian)'" />
   </div>
 
   <div class="mt-4 md:mt-10 md:mb-4 w-full flex justify-end">
@@ -28,22 +26,18 @@
 <div v-for="(item , index) in items" :key="index">
   <div class="grid md:grid-cols-2 md:gap-6">
     <div class="relative z-0 w-full mb-6 group">
-        <input v-model="priceLists[index].price" type="number" name="price" :id="'price'+index" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label :for="'price'+index" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Harga</label>
+        <FloatingInput v-model="priceLists[index].price" :type="'number'" :name="'price'" :id="'price'+index" :label="'Harga'" />
     </div>
     <div class="relative z-0 w-full mb-6 group">
-        <input v-model="priceLists[index].package" type="text" name="package" :id="'package'+index" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
-        <label :for="'package'+index" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 package-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama Paket (ex: Daily/Monthly)</label>
+        <FloatingInput v-model="priceLists[index].package" :type="'text'" :name="'package'" :id="'package'+index" :label="'Nama Paket (ex: Daily/Monthly)'" />
     </div>
   </div>
   <div class="grid md:grid-cols-2 md:gap-6 mb-10">
     <div class="relative z-0 w-full mb-6 group">
-        <input v-model="priceLists[index].duration" type="number" name="duration" :id="'duration'+index" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label :for="'duration'+index" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Durasi Paket (ex: 24)</label>
+        <FloatingInput v-model="priceLists[index].duration" :type="'number'" :name="'duration'" :id="'duration'+index" :label="'Durasi Paket (ex: 24)'" />
     </div>
     <div class="relative z-0 w-full mb-6 group">
-        <input v-model="priceLists[index].duration_suffix" type="text" name="duration_suffix" :id="'duration_suffix'+index" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label :for="'duration_suffix'+index" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Tipe (ex: hours/days)</label>
+        <FloatingInput v-model="priceLists[index].duration_suffix" :type="'text'" :name="'duration_suffix'" :id="'duration_suffix'+index" :label="'Tipe (ex: hours/days)'" />
     </div>
   </div>
 </div>
@@ -63,6 +57,7 @@ import {http , url } from '@/helper/domain';
 import FilePond from '@/components/Admin/FilePond.vue';
 import toaster from '@/helper/toaster';
 import { useRouter } from 'vue-router';
+import FloatingInput from '../components/Form/FloatingInput.vue';
 
 const catalog = useCatalogStore()
 const router = useRouter()
