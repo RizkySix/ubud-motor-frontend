@@ -72,7 +72,7 @@ const handleFilePondRevert = async (uniqueID , load) => {
     //hapus gambar dari array
     myFiles.value = myFiles.value.filter((image) => image !== uniqueID)
     catalog.catalogFiles = myFiles.value
-    await catalog.deleteTempImgAction(uniqueID , props.deleteTempEndpoint);
+    await catalog.deleteTempImgAction({temp_path: uniqueID} , props.deleteTempEndpoint);
     load()
 }
 

@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import {http} from '@/helper/domain';
 
@@ -7,11 +7,12 @@ export const useCatalogStore = defineStore('catalog' , () => {
     //delete temp image action
     const deleteTempImgAction = async (path , endpoint) => {
         try {
+    
           const response = await http().delete(endpoint, {
-            data: {temp_path: path}
+            data: path
           });
       
-          console.log(response.data)
+          return response.data
         
         } catch (error) {
           console.log(error.response.data)
@@ -22,6 +23,7 @@ export const useCatalogStore = defineStore('catalog' , () => {
 
       //array property File
       const catalogFiles = ref([])
+      const refresh = ref(false)
     
-      return {deleteTempImgAction , catalogFiles}
+      return {deleteTempImgAction , catalogFiles , refresh}
 })
