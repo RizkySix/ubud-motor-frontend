@@ -7,7 +7,17 @@
             <CatalogTitle v-if="index % 2 != 0" :variant="'variant2'">{{ catalog.motor_name }}</CatalogTitle>
             <CatalogTitle v-else :variant="'variant1'">{{ catalog.motor_name }}</CatalogTitle>
             
-            <span @click="toggleModalCatalog(catalog.motor_name, catalog.charge , customCatalogKey(catalog))" class="rounded-sm font-semibold cursor-pointer bg-yellow-300 px-4 py-1 h-1/2 mt-auto shadow-lg">Edit</span>
+            <div class="rounded-sm font-semibold cursor-pointer bg-yellow-300 px-4 py-1 h-1/2 mt-auto shadow-2xl flex gap-2">
+                <span @click="toggleModalCatalog(catalog.motor_name, catalog.charge , customCatalogKey(catalog))" >
+                    <EditIcon :width="25" :height="25" />
+                </span>
+                <span @click="handleDeleteCatalog(catalog.motor_name)">
+                    <DeleteIcon :width="25" :height="25" />
+                </span>
+                <router-link :to="{name: 'admin.add.package' , params: {motor_name: catalog.motor_name}}">
+                    <PackageIcon :width="25" :height="25" />
+                </router-link>
+            </div>
         </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -38,8 +48,13 @@
                 <td class="px-6 py-4">
                     {{ rpCurrency(price.price) }}
                 </td>
-                <td class="px-6 py-4">
-                    <button @click="toggleModal(catalog.motor_name, price)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                <td class="px-6 py-4 flex gap-1">
+                    <button @click="toggleModal(catalog.motor_name, price)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <EditIcon :width="25" :height="25" />
+                    </button>
+                    <button @click="handleDeletePrice(price.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <DeleteIcon :width="25" :height="25" />
+                    </button>
                 </td>
                
             </tr>
@@ -93,12 +108,17 @@ import { ref , watch , reactive , onMounted } from 'vue'
 import Sidebar from '@/components/Admin/Sidebar.vue';
 import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 import {http , url } from '@/helper/domain';
+import {confirmation } from '@/helper/confirmation';
 import {rpCurrency } from '@/helper/currency';
 import FloatingInput from '@/components/Form/FloatingInput.vue';
 import BaseModal from "@/components/Modal/BaseModal.vue"
 import Swiper from '@/components/Swiper/Swiper.vue';
 import toaster from '@/helper/toaster';
 import { useCatalogStore } from '@/stores/catalog'
+import EditIcon from '@/components/icons/EditIcon.vue';
+import DeleteIcon from '@/components/icons/DeleteIcon.vue';
+import PackageIcon from '@/components/icons/PackageIcon.vue';
+
 
 const catalogs = ref(null)
 const catalog = useCatalogStore()
@@ -192,6 +212,8 @@ const toggleModalCatalog = async( motor_name = null , charge = null , images = [
     }
 }
 
+
+//update catalog
 const handleUpdateCatalog = async() => {
     try {
         const formData = new FormData()
@@ -215,6 +237,37 @@ const handleUpdateCatalog = async() => {
     }
 }
 
+//handle delete catalog price
+const handleDeletePrice = async(priceId) => {
+    try {
+        if(await confirmation() === false){
+            return false
+        }
+
+        const response = await http().delete('/catalog/prices/' + priceId)
+        await handleFetchCatalog()
+        toaster('Price berhasil terhapus' , true)
+    } catch (error) {
+        console.log(error.response.status)
+        toaster('Price gagal dihapus' , false)
+    }
+}
+
+
+const handleDeleteCatalog = async(motorName) => {
+    try {
+        if(await confirmation() === false){
+            return false
+        }
+
+        const response = await http().delete('/catalog/' + motorName)
+        await handleFetchCatalog()
+        toaster('Catalog berhasil terhapus' , true)
+    } catch (error) {
+        console.log(error.response.status)
+        toaster('Catalog gagal dihapus' , false)
+    }
+}
 
 const handleRefresh = async() => {
     catalogs.value = {}

@@ -23,6 +23,7 @@
         <span class="cursor-pointer hover:text-gray-400" @click="removePriceLists">- Price list</span>
     </div>
   </div>
+  
 <div v-for="(item , index) in items" :key="index">
   <div class="grid md:grid-cols-2 md:gap-6">
     <div class="relative z-0 w-full mb-6 group">
@@ -57,7 +58,7 @@ import {http , url } from '@/helper/domain';
 import FilePond from '@/components/Admin/FilePond.vue';
 import toaster from '@/helper/toaster';
 import { useRouter } from 'vue-router';
-import FloatingInput from '../components/Form/FloatingInput.vue';
+import FloatingInput from '@/components/Form/FloatingInput.vue';
 
 const catalog = useCatalogStore()
 const router = useRouter()
