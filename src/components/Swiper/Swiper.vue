@@ -11,6 +11,7 @@
     }"
     >
       <swiper-slide v-for="(image , index) in images" :key="index">
+       
         <div class="relative">
           <img class="h-[300px] md:h-[350px] w-full" v-if="image" :id="imageId+image" :src="image" loading="lazy" alt="ErrorIMG" />
           <div v-if="allowDelete || allowUpdate" class="absolute inset-0 flex items-center justify-center">

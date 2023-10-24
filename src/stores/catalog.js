@@ -19,11 +19,22 @@ export const useCatalogStore = defineStore('catalog' , () => {
        
         }
 
-      };
+      }
+
+      //fetch catalog action
+      const fetchCatalogAction = async() => {
+        try {
+          const response = await http().get('/catalog')
+         
+          return response.data.data
+        } catch (error) {
+            console.log(error.response.data)
+        }
+    }
 
       //array property File
       const catalogFiles = ref([])
       const refresh = ref(false)
     
-      return {deleteTempImgAction , catalogFiles , refresh}
+      return {deleteTempImgAction , fetchCatalogAction , catalogFiles , refresh}
 })

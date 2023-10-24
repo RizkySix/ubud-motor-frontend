@@ -1,69 +1,72 @@
 <template>
 <Sidebar>
-  <div class="w-full flex flex-wrap gap-12 md:gap-3 justify-between" v-if="catalogs">
-    <div class="w-full md:w-[45%]" v-for="(catalog, index) in catalogs">
-        <Swiper :images="customCatalogKey(catalog)" /> 
-        <div class="my-4 text-center w-full flex justify-center gap-4">
-            <CatalogTitle v-if="index % 2 != 0" :variant="'variant2'">{{ catalog.motor_name }}</CatalogTitle>
-            <CatalogTitle v-else :variant="'variant1'">{{ catalog.motor_name }}</CatalogTitle>
-            
-            <div class="rounded-sm font-semibold cursor-pointer bg-yellow-300 px-4 py-1 h-1/2 mt-auto shadow-2xl flex gap-2">
-                <span @click="toggleModalCatalog(catalog.motor_name, catalog.charge , customCatalogKey(catalog))" >
-                    <EditIcon :width="25" :height="25" />
-                </span>
-                <span @click="handleDeleteCatalog(catalog.motor_name)">
-                    <DeleteIcon :width="25" :height="25" />
-                </span>
-                <router-link :to="{name: 'admin.add.package' , params: {motor_name: catalog.motor_name}}">
-                    <PackageIcon :width="25" :height="25" />
-                </router-link>
-            </div>
-        </div>
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Paket
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Durasi
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Harga
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Aksi
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(price, index) in catalog.price_lists" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ price.package }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ price.duration + ' ' + price.duration_suffix }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ rpCurrency(price.price) }}
-                </td>
-                <td class="px-6 py-4 flex gap-1">
-                    <button @click="toggleModal(catalog.motor_name, price)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+    <div class="w-full flex flex-wrap gap-12 md:gap-3 justify-between" v-if="catalogs">
+        <div class="w-full md:w-[45%]" v-for="(catalog, index) in catalogs">
+            <Swiper v-if="reRenderSwiper" :images="customCatalogKey(catalog)" /> 
+            <ImageSkeletonVue v-else />
+            <div class="my-4 text-center w-full flex justify-center gap-4">
+                <CatalogTitle v-if="index % 2 != 0" :variant="'variant2'">{{ catalog.motor_name }}</CatalogTitle>
+                <CatalogTitle v-else :variant="'variant1'">{{ catalog.motor_name }}</CatalogTitle>
+                
+                <div class="rounded-sm font-semibold cursor-pointer bg-yellow-300 px-4 py-1 h-1/2 mt-auto shadow-2xl flex gap-2">
+                    <span @click="toggleModalCatalog(catalog.motor_name, catalog.charge , customCatalogKey(catalog))" >
                         <EditIcon :width="25" :height="25" />
-                    </button>
-                    <button @click="handleDeletePrice(price.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    </span>
+                    <span @click="handleDeleteCatalog(catalog.motor_name)">
                         <DeleteIcon :width="25" :height="25" />
-                    </button>
-                </td>
-               
-            </tr>
-        </tbody>
-    </table>
-</div>
-
+                    </span>
+                    <router-link :to="{name: 'admin.add.package' , params: {motor_name: catalog.motor_name}}">
+                        <PackageIcon :width="25" :height="25" />
+                    </router-link>
+                </div>
+            </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Paket
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Durasi
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Harga
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Aksi
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(price, index) in catalog.price_lists" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ price.package }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ price.duration + ' ' + price.duration_suffix }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ rpCurrency(price.price) }}
+                    </td>
+                    <td class="px-6 py-4 flex gap-1">
+                        <button @click="toggleModal(catalog.motor_name, price)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            <EditIcon :width="25" :height="25" />
+                        </button>
+                        <button @click="handleDeletePrice(price.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            <DeleteIcon :width="25" :height="25" />
+                        </button>
+                    </td>
+                
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
+
+        </div>
+    </div>
+    <CatalogSkeletonVue v-else />
+    
   <BaseModal :modalActive="modalActive.price" @close-modal="toggleModal">
         <form @submit.prevent="handleUpdatePrice" class="p-5">
         <span class="font-bold"> {{ motorName }}</span>
@@ -104,20 +107,25 @@
 </template>
 
 <script setup>
-import { ref , watch , reactive , onMounted } from 'vue' 
+import { ref , watch , reactive , onMounted, defineAsyncComponent  } from 'vue' 
 import Sidebar from '@/components/Admin/Sidebar.vue';
 import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 import {http , url } from '@/helper/domain';
 import {confirmation } from '@/helper/confirmation';
 import {rpCurrency } from '@/helper/currency';
 import FloatingInput from '@/components/Form/FloatingInput.vue';
-import BaseModal from "@/components/Modal/BaseModal.vue"
 import Swiper from '@/components/Swiper/Swiper.vue';
 import toaster from '@/helper/toaster';
 import { useCatalogStore } from '@/stores/catalog'
 import EditIcon from '@/components/icons/EditIcon.vue';
 import DeleteIcon from '@/components/icons/DeleteIcon.vue';
 import PackageIcon from '@/components/icons/PackageIcon.vue';
+import ImageSkeletonVue from '@/components/Skeleton/ImageSkeleton.vue';
+import CatalogSkeletonVue from '@/components/Skeleton/CatalogSkeleton.vue';
+
+const BaseModal = defineAsyncComponent(() =>
+    import ("@/components/Modal/BaseModal.vue")
+)
 
 
 const catalogs = ref(null)
@@ -125,13 +133,8 @@ const catalog = useCatalogStore()
 
 //fetch catalog
 const handleFetchCatalog = async() => {
-    try {
-      const response = await http().get('/catalog')
-     
-      catalogs.value = response.data.data
-    } catch (error) {
-        console.log(error.response.data)
-    }
+    const response = await catalog.fetchCatalogAction() 
+    catalogs.value = response
 }
 
 
@@ -212,6 +215,7 @@ const toggleModalCatalog = async( motor_name = null , charge = null , images = [
     }
 }
 
+const reRenderSwiper = ref(true)
 
 //update catalog
 const handleUpdateCatalog = async() => {
@@ -227,7 +231,6 @@ const handleUpdateCatalog = async() => {
 
         const response = await http().post('/catalog/' + motorName.value , formData)
 
-        //kosongkan dulu catalogs
         handleRefresh()
         toggleModalCatalog()
     
@@ -270,8 +273,9 @@ const handleDeleteCatalog = async(motorName) => {
 }
 
 const handleRefresh = async() => {
-    catalogs.value = {}
+    reRenderSwiper.value = false
     await handleFetchCatalog()
+    reRenderSwiper.value = true
 }
 onMounted(async() => {
      await handleFetchCatalog()

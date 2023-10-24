@@ -6,6 +6,7 @@ import MakeCatalogView from '@/views/MakeCatalogView.vue'
 import MakeGalleryView from '@/views/MakeGalleryView.vue'
 import CatalogView from '@/views/CatalogView.vue'
 import AddPackageView from '@/views/AddPackageView.vue'
+import GalleriesView from '@/views/GalleriesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/admin/catalogs',
       name: 'admin.catalogs',
       component: CatalogView
+    },
+    {
+      path: '/admin/galleries',
+      name: 'admin.galleries',
+      component: GalleriesView
     },
   ]
 })
