@@ -122,6 +122,7 @@ import DeleteIcon from '@/components/icons/DeleteIcon.vue';
 import PackageIcon from '@/components/icons/PackageIcon.vue';
 import ImageSkeletonVue from '@/components/Skeleton/ImageSkeleton.vue';
 import CatalogSkeletonVue from '@/components/Skeleton/CatalogSkeleton.vue';
+import {customCatalogKey } from '@/helper/helperMethod';
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
@@ -137,23 +138,6 @@ const handleFetchCatalog = async() => {
     catalogs.value = response
 }
 
-
-const customCatalogKey = (catalog) => {
-   let withKeyCatalogs = {}
-   if(catalog.first_catalog){
-        withKeyCatalogs.first_catalog = catalog.first_catalog
-   }
-
-   if(catalog.second_catalog){
-        withKeyCatalogs.second_catalog = catalog.second_catalog
-   }
-
-   if(catalog.third_catalog){
-        withKeyCatalogs.third_catalog = catalog.third_catalog
-   }
-
-   return withKeyCatalogs
-}
 
 const prices = reactive({
     price: null,

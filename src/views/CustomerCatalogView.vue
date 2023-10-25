@@ -143,6 +143,7 @@ import CatalogSkeletonVue from '@/components/Skeleton/CatalogSkeleton.vue';
 import { useCatalogStore } from '@/stores/catalog'
 import { useAuthenticationStore } from '@/stores/authentication'
 import {rpCurrency } from '@/helper/currency';
+import {customCatalogKey } from '@/helper/helperMethod';
 import PageTitleVue from '@/components/Text/PageTitle.vue';
 import LoginRegis from '@/components/Customer/LoginRegis.vue';
 
@@ -163,28 +164,11 @@ const handleFetchCatalog = async() => {
     catalogs.value = response
 }
 
-const customCatalogKey = (catalog) => {
-   let withKeyCatalogs = {}
-   if(catalog.first_catalog){
-        withKeyCatalogs.first_catalog = catalog.first_catalog
-   }
-
-   if(catalog.second_catalog){
-        withKeyCatalogs.second_catalog = catalog.second_catalog
-   }
-
-   if(catalog.third_catalog){
-        withKeyCatalogs.third_catalog = catalog.third_catalog
-   }
-
-   return withKeyCatalogs
-}
-
 const modalActive = ref(null)
 
 const toggleModal = () => {
     modalActive.value = !modalActive.value
-    localStorage.setItem('toPage' , '/booking/selection')
+    localStorage.setItem('toPage' , 'booking')
 }
 
 onMounted(async() => {

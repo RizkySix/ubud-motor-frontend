@@ -87,7 +87,7 @@ const handleRegister = async() => {
     const response = await authentication.registerAction('/customer/register' , data);
    if(response === true){
         router.push({
-            path: localStorage.getItem('toPage') ?? '/'
+            name: localStorage.getItem('toPage') ?? 'home'
         })
    }
 }
@@ -96,7 +96,7 @@ const handleLogin = async () => {
    const response = await authentication.loginAction('/customer/login' , credential);
    if(response === true){
         router.push({
-            path: localStorage.getItem('toPage') ?? '/'
+            name: localStorage.getItem('toPage') ?? 'home'
         })
    }
 };

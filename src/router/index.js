@@ -24,9 +24,8 @@ const router = createRouter({
       component: CustomerCatalogView
     },
     {
-      path: '/booking/:motor_name',
+      path: '/booking',
       name: 'booking',
-      params: true,
       component: CustomerBookingView
     },
     {

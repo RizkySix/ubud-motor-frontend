@@ -12,5 +12,11 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  optimizeDeps: { //add ini untuk memakai google map
+    include: [
+      "@fawmi/vue-google-maps",
+      "fast-deep-equal",
+    ],
+  },
 })
