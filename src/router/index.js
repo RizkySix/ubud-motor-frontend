@@ -7,6 +7,8 @@ import MakeGalleryView from '@/views/MakeGalleryView.vue'
 import CatalogView from '@/views/CatalogView.vue'
 import AddPackageView from '@/views/AddPackageView.vue'
 import GalleriesView from '@/views/GalleriesView.vue'
+import CustomerCatalogView from '@/views/CustomerCatalogView.vue'
+import CustomerBookingView from '@/views/CustomerBookingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +17,17 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/catalogs',
+      name: 'catalogs',
+      component: CustomerCatalogView
+    },
+    {
+      path: '/booking/:motor_name',
+      name: 'booking',
+      params: true,
+      component: CustomerBookingView
     },
     {
       path: '/admin/login',

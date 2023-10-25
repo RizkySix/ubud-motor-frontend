@@ -10,6 +10,8 @@ const http = () => {
 
     if(localStorage.getItem('token')){
         options.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
+    }else if(localStorage.getItem('customer_token')){
+        options.headers.Authorization = 'Bearer ' + localStorage.getItem('customer_token')
     }
 
     return axios.create(options)

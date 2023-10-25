@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-wrap gap-12 md:gap-3 justify-between">
+    <div class="w-full flex flex-wrap gap-12 md:gap-3 justify-between mb-72">
       <div class="w-full md:w-[45%]" v-for="(catalog, index) in catalogs">
         <!-- Skeleton for the image -->
         <div class="skeleton h-[300px] md:h-[350px] w-full"></div>
