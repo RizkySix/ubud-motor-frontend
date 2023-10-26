@@ -32,7 +32,7 @@
                      
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <select required v-model="selectedPackage" id="package" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <select @change="refreshAmount" required v-model="selectedPackage" id="package" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                 <option selected disabled :value="{}">Available package</option>
                                 <option v-for="(price, index) in packages" :value="price" :key="index">
                                     {{ price.package }} ({{ rpCurrency(price.price) }}/{{ price.duration }} {{ price.duration_suffix }})
@@ -84,10 +84,12 @@ import {rpCurrency } from '@/helper/currency';
 import PageTitleVue from '@/components/Text/PageTitle.vue';
 import FloatingInput from '@/components/Form/FloatingInput.vue';
 import {http , url } from '@/helper/domain';
-import {customCatalogKey } from '@/helper/helperMethod';
 import toaster from '@/helper/toaster';
 import { useRoute } from 'vue-router';
+import { useBookingStore } from '@/stores/booking';
 
+
+const booking = useBookingStore()
 const route = useRoute()
 const packages = ref({})
 const selectedPackage = ref({})
@@ -111,23 +113,27 @@ const handleGetPrice = async() => {
 }
 
 const refreshAmount = async() => {
+    hasError.value = false
     await handleCalculatePrice()
+    
 }
 
 //handle calculate price
 const handleCalculatePrice = async() => {
     let endpoint = ''
-
+    console.log(selectedPackage.value.duration_suffix)
     switch (selectedPackage.value.duration_suffix) {
         case 'hours':
         case 'hour':
         case 'jam':
         case 'jams':
             endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + 1 + '&rental_date=' + route.params.return_date + '&return_date=' + renewalData.return_date
+            renewalData.rental_duration = null
             break;
     
         default:
             endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + 1 + '&rental_date=' + route.params.return_date + '&rental_duration=' + renewalData.rental_duration
+            renewalData.return_date = null
             break;
     }
 
@@ -139,8 +145,16 @@ const handleCalculatePrice = async() => {
     }, 30);
 
     console.log(response.data.data)
+
    } catch (error) {
+
     console.log(error.response.data)
+    if(error.response.data.validation_errors.return_date){
+        hasError.value = true
+        errorBag.value = {
+            return_date: 'Invalid return date'
+        }
+    }
    }
 }
 
@@ -164,6 +178,7 @@ const handleAddRenewal = async() => {
         console.log(response.data.data)
         toaster('Success Add Renewal', true)
         clearPayload()
+        booking.newBooking += 1
     } catch (error) {
         console.log(error.response.data)
         errorBag.value = error.response.data

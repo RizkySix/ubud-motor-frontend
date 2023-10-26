@@ -30,5 +30,7 @@ export const useBookingStore = defineStore('booking' , () => {
          console.log(error.response.data)
         }
      }
-      return { calculatePriceAction}
+
+     const newBooking = ref(0)
+      return { calculatePriceAction , newBooking}
 })

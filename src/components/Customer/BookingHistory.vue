@@ -2,14 +2,14 @@
     
 <div class="px-10 py-10 max-h-[700px] overflow-y-scroll custom-scrollbar">
     <div class="flex flex-col rounded-lg shadow-lg border border-yellow-200 p-3">
-        <button @click="handleFetchBooking" class="mb-3 hover:text-blue-400 transition duration-300" type="button">Booking History</button>
-        <hr>
-        <button class="mt-3 hover:text-blue-400 transition duration-300" type="button">Extension History</button>
+        <button v-if="onChoosed !== 'booking'" @click="handleFetchBooking" class="mb-3 hover:text-blue-400 transition duration-300" type="button">Show Booking History</button>
+        <hr v-if="!onChoosed">
+        <button v-if="onChoosed !== 'renewal'" @click="handleFetchRenewal" class="mt-3 hover:text-blue-400 transition duration-300" type="button">Show Extension History</button>
     </div>
 
     <!-- Data -->
     <div v-if="items" class="mt-4">
-        <div class="w-full mt-4 max-w-sm overflow-x-scroll custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index">
+        <div v-if="onChoosed === 'booking'" class="w-full mt-4 overflow-x-scroll custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index" :class="{'bg-yellow-200': item.is_active, 'bg-red-400': !item.is_active}" >
                
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
@@ -72,11 +72,8 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-6 w-1/2 mx-auto">
-                <div v-if="!item.is_confirmed" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
-                    <EditIcon :width="30" :height="30" />
-                </div>
-                <div v-if="!item.is_confirmed" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
+            <div class="grid grid-cols-2 gap-6 w-1/4 mx-auto">
+                <div v-if="!item.is_confirmed" @click="handleCancelBooking(item.uuid)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
                     <DeleteIcon :width="30" :height="30" />                 
                 </div>
                 <div @click="toggleModalDetail(item.booking_details)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
@@ -85,10 +82,75 @@
             </div>
 
         </div>
+
+        <div v-if="onChoosed === 'renewal'" class="w-full mt-4 overflow-x-scroll custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index" >
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Motor:</span>
+                    <span class="font-normal text-sm">{{ item.motor_name }}</span>
+                </div>
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Amount:</span>
+                    <span class="font-normal text-sm">{{ rpCurrency(item.amount) }}</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Package: </span>
+                    <span class="font-normal text-sm">{{ item.package }}</span>
+                </div>
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Email: </span>
+                    <span class="font-normal text-sm">{{ item.email }}</span>
+                </div>
+             
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Name: </span>
+                    <span class="font-normal text-sm">{{ item.full_name }}</span>
+                </div>
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Whatsapp Number: </span>
+                    <span class="font-normal text-sm">{{ item.whatsapp_number }}</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Expired On: </span>
+                    <span class="font-normal text-sm">{{ dateFormat(item.expired_payment) }}</span>
+                </div>
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Status: </span>
+                    <span class="font-normal text-sm">{{ item.is_confirmed ? 'Paid' : 'Unpaid' }}</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Extension From: </span>
+                    <span class="font-normal text-sm">{{ dateFormat(item.extension_from) }}</span>
+                </div>
+                <div class="relative z-0 w-full mb-2 group flex flex-col">
+                    <span class="font-semibold">Extension To: </span>
+                    <span class="font-normal text-sm">{{ dateFormat(item.extension_to) }}</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-6 w-1/5 mx-auto">
+                <div v-if="!item.is_confirmed" @click="handleCancelRenewal(item.uuid)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
+                    <DeleteIcon :width="30" :height="30" />                 
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<BaseModal :modalActive="modalActive" @close-modal="toggleModalDetail">
+<BaseModal :modalActive="modalActive" :width="'max-w-3xl'" @close-modal="toggleModalDetail">
     <BookingDetail :items="bookingDetail" />
   </BaseModal>
 
@@ -105,20 +167,64 @@ import EditIcon from '@/components/icons/EditIcon.vue';
 import DeleteIcon from '@/components/icons/DeleteIcon.vue';
 import PackageIcon from '@/components/icons/PackageIcon.vue';
 import BookingDetail  from '@/components/Customer/BookingDetail.vue'
+import {confirmation } from '@/helper/confirmation';
+import toaster from '@/helper/toaster';
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
 )
 
+const onChoosed = ref('')
 const items = ref(null)
 
 const handleFetchBooking = async() => {
     try {
         const response = await http().get('/booking')
         items.value = response.data.data
-        console.log(items.value)
+        onChoosed.value = 'booking'
     } catch (error) {
         console.log(error.response.data)
+    }
+}
+
+const handleFetchRenewal = async() => {
+    try {
+        const response = await http().get('/booking/extension')
+        items.value = response.data.data
+        console.log(items.value)
+        onChoosed.value = 'renewal'
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
+
+const handleCancelBooking = async(uuid) => {
+    if(await confirmation() === false){
+        return false
+    }
+    try {
+        const response = await http().delete('/booking/cancel/' + uuid)
+        await handleFetchBooking()
+        console.log(response.data.data)
+        toaster('Booking canceled' , true)
+    } catch (error) {
+        console.log(error.response.data)
+        toaster('Fail cancel Booking' , false)
+    }
+}
+
+const handleCancelRenewal = async(uuid) => {
+    if(await confirmation() === false){
+        return false
+    }
+    try {
+        const response = await http().delete('/booking/extension/cancel/' + uuid)
+        await handleFetchRenewal()
+        console.log(response.data.data)
+        toaster('Renewal canceled' , true)
+    } catch (error) {
+        console.log(error.response.data)
+        toaster('Fail cancel Renewal' , false)
     }
 }
 

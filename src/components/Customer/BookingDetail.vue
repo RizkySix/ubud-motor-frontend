@@ -7,8 +7,8 @@
     </div>
 
     <!-- Data -->
-    <div v-if="items" class="mt-4">
-        <div class="w-full mt-4 max-w-sm overflow-x-scroll custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index">
+    <div v-if="items" class="mt-4 grid md:grid-cols-2 gap-3">
+        <div class="w-full mt-4 max-w-sm custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index">
                
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
@@ -42,13 +42,7 @@
             </div>
            
 
-            <div class="grid grid-cols-3 gap-6 w-1/2 mx-auto">
-                <div class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
-                    <EditIcon :width="30" :height="30" />
-                </div>
-                <div class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
-                    <DeleteIcon :width="30" :height="30" />                 
-                </div>
+            <div class="grid grid-cols-2 gap-6 w-1/5 mx-auto">
                 <div @click="toRenewalPage(item)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
                   <PackageIcon :width="30" :height="30" />
                 </div>

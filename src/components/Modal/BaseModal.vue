@@ -4,7 +4,8 @@
          <div v-show="modalActive" tabindex="-1" :class="['fixed top-0 left-0 right-0 h-screen' ,  zIndex , overflow, 'bg-black bg-opacity-40 flex justify-center p-4 md:inset-0 h-[calc(100%-1rem)]']">
          <!-- for the modal -->
          <Transition name="modal-inner">
-           <div v-if="modalActive" :class="['relative', 'self-start', 'mt-32', 'mb-20' , 'w-full', width, 'lg:max-h-full', 'py']">
+           <div v-if="modalActive" :class="['relative', 'self-start', 'mt-32', 'mb-20' , 'w-full', width , 'lg:max-h-full', 'py']">
+           
          <div class="relative bg-white rounded-lg shadow">
              <button @click="$emit('close-modal')" type="button" class="absolute z-[501] top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-500 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">

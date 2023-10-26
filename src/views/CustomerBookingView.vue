@@ -79,7 +79,7 @@
 
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.rental_date" :type="'date'" :name="'rental_date'" :id="'rental_date'" :label="'Rental Date'" />
+                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.rental_date" :type="'date'" :name="'rental_date'" :id="'rental_date'" :label="'Rental Date (today/tomorrow)'" />
                             </div>
 
                             <div v-if="['hours', 'hour', 'jam', 'jams'].includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
@@ -87,7 +87,7 @@
                             </div>
 
                             <div v-if="!['hours', 'hour', 'jam', 'jams'].includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
-                                <FloatingInput @change-action="refreshAmount" v-model="bookingData.rental_duration" :type="'number'" :name="'rental_duration'" :id="'rental_duration'" :label="'Rental Duration (ex: 2) = 2 Month/Week'" />
+                                <FloatingInput @change-action="refreshAmount" v-model="bookingData.rental_duration" :type="'number'" :name="'rental_duration'" :id="'rental_duration'" :label="'Rental Duration (ex: 2)'" />
                             </div>
                         </div>
                     
@@ -148,7 +148,7 @@
                         </div>
                         
                      
-                    <button @submit.prevent="handleMakeBooking" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buat Booking</button>
+                    <button @submit.prevent="handleMakeBooking" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Make Booking</button>
                     </form>
                 </div>
             </div>
@@ -176,10 +176,12 @@ import {http , url } from '@/helper/domain';
 import {customCatalogKey } from '@/helper/helperMethod';
 import toaster from '@/helper/toaster';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
+import { useBookingStore } from '@/stores/booking';
 
 const catalogs = ref(null)
 const catalog = useCatalogStore()
 const authentication = useAuthenticationStore()
+const booking = useBookingStore()
 const authData = ref(null)
 
 
@@ -282,6 +284,7 @@ const handleMakeBooking = async() => {
         const response = await http().post('/booking' , form)
         clearPayload()
         toaster('Booking berhasil dibuat' , true)
+        booking.newBooking += 1
         
     } catch (error) {
         console.log(error.response.data)
@@ -305,6 +308,9 @@ const clearPayload = () => {
 
     selectedMotor.value = {}
     selectedPackage.value = {}
+
+    document.getElementById('delivery_address').value = ''
+     document.getElementById('pickup_address').value = ''
 }
 
 

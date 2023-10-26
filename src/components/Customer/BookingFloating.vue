@@ -1,11 +1,15 @@
 <template>
  <div @click="toggleModal" class="fixed w-20 md:w-16 bottom-0 mb-10 md:mb-0 left-0 p-4 z-50 cursor-pointer">
+  <div v-if="booking.newBooking > 0" class="notif w-7 h-7 bg-red-500 text-white text-sm font-semibold rounded-full flex items-center justify-center absolute left-12 md:left-14 top-8">
+    <!-- Isi badge (misalnya, angka notifikasi) -->
+    {{ booking.newBooking }}
+  </div>
     <a id="booking-auth" class="text-white py-2 px-4 rounded-full">
       <svg class="h-14 w-14 md:h-16 md:w-16 " version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 508 508" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle style="fill:#324A5E;" cx="254" cy="254" r="254"></circle> <g> <path style="fill:#2B3B4E;" d="M465.2,218.4v52.8c0,3.6-3.2,6.8-7.2,6c-2.8-0.4-4.8-2.8-5.2-5.6l-5.2-54c0-1.6-1.6-3.2-3.6-3.2 s-3.6,1.6-3.6,3.6v159.2c0,4.4-3.2,8.4-7.6,9.2c-4.8,0.4-9.2-2.8-9.6-7.6l-8.4-83.6c0-2-2-3.6-4-3.6s-3.6,1.6-3.6,3.6l-6.4,82.8 c-0.4,4.4-4,8-8.8,8h-1.6c-4.8,0-8.8-4-8.8-8.8V218c0-2-1.6-3.6-3.6-3.6c-1.6,0-2.8,0.8-3.2,2.4c0-2,2-4,4-4s4,1.6,4,4l6.4,65.2 c0.4,3.6,2.8,6.4,6.4,6.8c4.8,0.8,8.8-2.8,8.8-7.2V218c0-18-7.2-34.4-19.2-46.4c7.2-4.4,15.6-6.8,24.8-7.2 C440,163.6,465.2,188,465.2,218.4z"></path> <circle style="fill:#2B3B4E;" cx="411.2" cy="131.2" r="25.2"></circle> <path style="fill:#2B3B4E;" d="M126.4,216.8c0-0.8,0.4-1.2,0.4-1.6C126.4,215.6,126.4,216,126.4,216.8l0.4,158.8 c0,4.4-3.2,8.4-7.6,9.2c-4.8,0.4-9.2-2.8-9.6-7.6l-8.4-83.6c0-2-2-3.6-4-3.6s-3.6,1.6-3.6,3.6l-6.8,83.2c-0.4,4.4-4,8-8.8,8h-1.6 c-4.8,0-8.8-4-8.8-8.8V216.4c0-2-1.6-3.6-3.6-3.6c-1.6,0-3.2,1.2-3.6,3.2l-5.2,54c-0.4,3.2-2.8,5.6-6,5.6c-3.6,0-6-2.8-6-6V218 c0-29.6,23.2-54.4,52.4-55.2c11.2-0.4,21.2,2.8,30,8c-12.4,12.4-20,29.6-20,48v62.4c0,4,3.2,7.6,7.6,7.6l0,0c4,0,7.2-2.8,7.2-6.8 L126.4,216.8z"></path> <path style="fill:#2B3B4E;" d="M134.4,217.2v11.6l-1.2-12.4c0-1.6-1.2-2.8-2.8-3.2C132.8,213.2,134.4,214.8,134.4,217.2z"></path> <circle style="fill:#2B3B4E;" cx="96.8" cy="130" r="25.2"></circle> </g> <g> <path style="fill:#FF7058;" d="M298,212.8c0.8,0,1.6,0.4,2.4,0.8c-0.4,0-1.2-0.4-1.6-0.4c-2,0-4,1.6-4,4l-1.2,12.8v-12.8 C293.6,214.8,295.6,212.8,298,212.8z"></path> <path style="fill:#FF7058;" d="M404,218v63.6c0,4.4-4,8-8.8,7.2c-3.6-0.4-6-3.6-6.4-6.8l-6-65.2c0-2-2-4-4-4c-2.4,0-4.4,2-4.4,4.4 v192c0,5.2-4,10.4-9.2,10.8c-6,0.8-10.8-3.6-11.6-9.2l-10-100.8c-0.4-2.4-2-4-4.4-4s-4.4,2-4.4,4.4L326,410.8 c-0.4,5.2-5.2,9.6-10.4,9.6h-2c-5.6,0-10.4-4.8-10.4-10.4V222l6,65.2c0.4,3.6,3.2,6.8,6.8,7.6c5.2,0.8,9.2-3.2,9.2-8V218 c0-21.2-9.2-40-24-53.2c10-7.2,22.4-11.6,35.6-12C374,151.6,404,181.2,404,218z"></path> <circle style="fill:#FF7058;" cx="338.8" cy="112.4" r="30.4"></circle> </g> <g> <path style="fill:#84DBFF;" d="M184,219.2v67.6c0,4.4,3.6,8,8,8l0,0c4,0,7.6-3.2,8-7.2l6-66v187.6c0,5.2-4,10.4-9.2,10.8 c-5.6,0.8-10.8-3.6-11.6-9.2L174.8,310c-0.4-2.4-2.4-4-4.4-4c-2.4,0-4.4,1.6-4.4,4l-8.4,100.8c-0.4,5.2-5.2,9.6-10.4,9.6h-2 c-5.6,0-10.4-4.8-10.4-10.4V217.2c0-2.4-2-4.4-4.4-4.4c-2,0-4,1.6-4,4L120,282c-0.4,4-3.6,6.8-7.2,6.8l0,0c-4,0-7.6-3.2-7.6-7.6 v-62c0-35.6,28-65.6,63.2-66.4c14.8-0.4,28.4,4,39.6,12C193.2,178,184,197.6,184,219.2z"></path> <path style="fill:#84DBFF;" d="M130.4,213.2c-1.6,0-2.8,0.8-3.6,2C127.2,214,128.4,212.8,130.4,213.2 C130,212.8,130,212.8,130.4,213.2z"></path> <path style="fill:#84DBFF;" d="M215.6,217.2V230l-1.2-13.2c0-2-2-4-4-4c-0.4,0-1.2,0-1.6,0.4c0.8-0.4,1.6-0.8,2.4-0.8 C213.6,212.8,215.6,214.8,215.6,217.2z"></path> <circle style="fill:#84DBFF;" cx="170.4" cy="112.4" r="30.4"></circle> </g> <g> <path style="fill:#FFFFFF;" d="M252.8,147.2c-38.4,1.2-68.8,33.6-68.8,72.4v67.6c0,4.4,3.6,8,8,8l0,0c4,0,7.6-3.2,8-7.2l6.8-70.8 c0.4-2.4,2-4,4.4-4s4.4,2,4.4,4.4v209.2c0,6.4,5.2,11.2,11.2,11.2h2.4c6,0,10.8-4.4,11.2-10.4l9.2-109.6c0.4-2.4,2.4-4.4,4.8-4.4 s4.8,2,4.8,4.4l11.2,110c0.8,6,6.4,10.8,12.4,10s10-6,10-12V217.2c0-2.4,2-4.4,4.4-4.4s4.4,1.6,4.4,4l6.8,70.8 c0.4,3.6,3.2,6.8,6.8,7.6c5.2,0.8,9.2-3.2,9.2-8V218C325.6,178,292.8,146,252.8,147.2z"></path> <path style="fill:#FFFFFF;" d="M208.8,213.2c-1.2,0.8-2,2-2,3.6l-0.8,4.8v-4.4C206,215.6,207.2,214,208.8,213.2z"></path> <circle style="fill:#FFFFFF;" cx="254.8" cy="103.6" r="33.2"></circle> </g> </g></svg>
     </a>
   </div>
   
-  <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
+  <BaseModal :modalActive="modalActive" :width="'max-w-3xl'" @close-modal="toggleModal">
     <BookingHistory />
   </BaseModal>
 </template>
@@ -13,6 +17,9 @@
 <script setup>
 import { ref , defineAsyncComponent } from 'vue';
 import BookingHistory  from '@/components/Customer/BookingHistory.vue'
+import { useBookingStore } from '@/stores/booking';
+
+const booking = useBookingStore()
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
@@ -24,3 +31,21 @@ const toggleModal = () => {
 }
 
 </script>
+
+
+<style scoped>
+/* Tambahan CSS untuk badge */
+.notif {
+  border: 2px solid white; /* Tambahkan border */
+  animation: pulse 1.5s infinite; /* Animasi pulse */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+</style>
