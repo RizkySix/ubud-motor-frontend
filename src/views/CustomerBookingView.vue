@@ -154,6 +154,8 @@
             </div>
         </div>
     </div>
+
+   <BookingFloatingVue />
 </section>
 </template>
 
@@ -173,6 +175,7 @@ import FloatingGmap from '@/components/Form/FloatingGmap.vue';
 import {http , url } from '@/helper/domain';
 import {customCatalogKey } from '@/helper/helperMethod';
 import toaster from '@/helper/toaster';
+import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 
 const catalogs = ref(null)
 const catalog = useCatalogStore()
@@ -258,7 +261,7 @@ const handleChangePassport = (e) => {
     bookingData.card_image = file
     setTimeout(() => {
         document.getElementById('previewPassport').src = URL.createObjectURL(file)
-    }, 10);
+    }, 5);
 }
 
 const handleMakeBooking = async() => {
