@@ -11,8 +11,10 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
           //jika admin
           if(response.data.data.email){
             localStorage.setItem('token', response.data.data.token);
+            localStorage.removeItem('customer_token');
           }else if(response.data.data.username){
             localStorage.setItem('customer_token', response.data.data.token);
+            localStorage.removeItem('token');
           }
 
           console.log(response.data.data.token)
@@ -61,6 +63,7 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
       }
 
       const customerToken = ref(localStorage.getItem('customer_token'))
+      const refreshGetToken = ref(false)
     
-      return {loginAction , customerToken , registerAction , getUserAction}
+      return {loginAction , customerToken , registerAction , getUserAction , refreshGetToken}
 })

@@ -129,6 +129,7 @@
     <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
         <LoginRegis />
     </BaseModal>
+    <BookingFloatingVue />
 </section>
 </template>
 
@@ -146,7 +147,7 @@ import {rpCurrency } from '@/helper/currency';
 import {customCatalogKey } from '@/helper/helperMethod';
 import PageTitleVue from '@/components/Text/PageTitle.vue';
 import LoginRegis from '@/components/Customer/LoginRegis.vue';
-
+import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")

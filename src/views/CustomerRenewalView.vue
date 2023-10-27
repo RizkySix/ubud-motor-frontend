@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import { ref , watch , reactive , onMounted, defineAsyncComponent  } from 'vue' 
+import { ref , reactive , onMounted, defineAsyncComponent  } from 'vue' 
 import Image1 from "@/components/LandingPage/Image1.vue"
 import NavBar from "@/components/LandingPage/NavBar.vue"
 import ValidationError from '@/components/Alert/ValidationError.vue';
@@ -149,7 +149,7 @@ const handleCalculatePrice = async() => {
    } catch (error) {
 
     console.log(error.response.data)
-    if(error.response.data.validation_errors.return_date){
+    if(error.response.data.validation_errors){
         hasError.value = true
         errorBag.value = {
             return_date: 'Invalid return date'

@@ -10,6 +10,7 @@ import GalleriesView from '@/views/GalleriesView.vue'
 import CustomerCatalogView from '@/views/CustomerCatalogView.vue'
 import CustomerBookingView from '@/views/CustomerBookingView.vue'
 import CustomerRenewalView from '@/views/CustomerRenewalView.vue'
+import CustomerGalleryView from '@/views/CustomerGalleryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/booking',
       name: 'booking',
       component: CustomerBookingView
+    },
+    {
+      path: '/gallery',
+      name: 'gallery',
+      component: CustomerGalleryView
     },
     {
       path: '/renewal/:motor_name/:id/:return_date',

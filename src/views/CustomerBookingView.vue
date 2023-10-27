@@ -34,21 +34,26 @@
         </div>
         <div class="w-full md:w-2/3">
             <div class="w-full">
+
+
                 <div class="rounded-lg shadow-lg border border-dotted p-5">
                     <form @submit.prevent="handleMakeBooking" class="p-5">
                    
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingInput v-model="bookingData.full_name" :type="'text'" :name="'full_name'" :id="'full_name'" :label="'Your Name'" />
+                                <ErrorMessage v-if="errorBag.full_name">{{ errorBag.full_name }}</ErrorMessage>
                             </div>
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingInput v-model="bookingData.email" :type="'email'" :name="'email'" :id="'email'" :label="'Email'" />
+                                <ErrorMessage v-if="errorBag.email">{{ errorBag.email }}</ErrorMessage>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingInput v-model="bookingData.whatsapp_number" :type="'number'" :name="'whatsapp_number'" :id="'whatsapp_number'" :label="'Whatsapp Number'" />
+                                <ErrorMessage v-if="errorBag.whatsapp_number">{{ errorBag.whatsapp_number }}</ErrorMessage>
                             </div>
                             <div class="relative z-0 w-full mb-6 group">
                             
@@ -74,20 +79,24 @@
                     
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingInput @change-action="refreshAmount" v-model="bookingData.total_unit" :type="'number'" :name="'total_unit'" :id="'total_unit'" :label="'Total Unit'" />
+                                <ErrorMessage v-if="errorBag.total_unit">{{ errorBag.total_unit }}</ErrorMessage>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.rental_date" :type="'date'" :name="'rental_date'" :id="'rental_date'" :label="'Rental Date (today/tomorrow)'" />
+                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.rental_date" :type="'datetime-local'" :name="'rental_date'" :id="'rental_date'" :label="'Rental Date (today/tomorrow)'" />
+                                <ErrorMessage v-if="errorBag.rental_date">{{ errorBag.rental_date }}</ErrorMessage>
                             </div>
 
                             <div v-if="['hours', 'hour', 'jam', 'jams'].includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
-                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.return_date" :type="'date'" :name="'return_date'" :id="'return_date'" :label="'Return Date'" />
+                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.return_date" :type="'datetime-local'" :name="'return_date'" :id="'return_date'" :label="'Return Date'" />
+                                <ErrorMessage v-if="errorBag.return_date">{{ errorBag.return_date }}</ErrorMessage>
                             </div>
 
                             <div v-if="!['hours', 'hour', 'jam', 'jams'].includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
                                 <FloatingInput @change-action="refreshAmount" v-model="bookingData.rental_duration" :type="'number'" :name="'rental_duration'" :id="'rental_duration'" :label="'Rental Duration (ex: 2)'" />
+                                <ErrorMessage v-if="errorBag.rental_duration">{{ errorBag.rental_duration }}</ErrorMessage>
                             </div>
                         </div>
                     
@@ -102,15 +111,18 @@
                                         <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none z-20 pr-4">
                                         </div>
                                     </div>
+                                    <ErrorMessage v-if="errorBag.data">{{ errorBag.data }}</ErrorMessage>
                             </div>
                         </div>
                        
                         <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingGmap  :type="'text'" :name="'delivery_address'" :id="'delivery_address'" :label="'Delivery Address'" />
+                                <ErrorMessage v-if="errorBag.delivery_address">{{ errorBag.delivery_address }}</ErrorMessage>
                             </div>
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingGmap :type="'text'" :name="'pickup_address'" :id="'pickup_address'" :label="'Pickup Address'" />
+                                <ErrorMessage v-if="errorBag.pickup_address">{{ errorBag.pickup_address }}</ErrorMessage>
                             </div>
                         </div>
 
@@ -135,6 +147,7 @@
                                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> your Passport picture</p>
                                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG </p>
                                         </div>
+                                        <ErrorMessage v-if="errorBag.card_image">{{ errorBag.card_image }}</ErrorMessage>
                                         <input @change="handleChangePassport($event)" id="dropzone-file" type="file" class="hidden" />
                                     </label>
                                 </div> 
@@ -157,6 +170,7 @@
 
    <BookingFloatingVue />
 </section>
+<SimpleFooterVue />
 </template>
 
 <script setup>
@@ -172,11 +186,14 @@ import {rpCurrency } from '@/helper/currency';
 import PageTitleVue from '@/components/Text/PageTitle.vue';
 import FloatingInput from '@/components/Form/FloatingInput.vue';
 import FloatingGmap from '@/components/Form/FloatingGmap.vue';
+import ErrorMessage from '@/components/Form/ErrorMessage.vue';
 import {http , url } from '@/helper/domain';
 import {customCatalogKey } from '@/helper/helperMethod';
 import toaster from '@/helper/toaster';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import { useBookingStore } from '@/stores/booking';
+import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
+
 
 const catalogs = ref(null)
 const catalog = useCatalogStore()
@@ -254,6 +271,11 @@ const handleCalculatePrice = async() => {
     console.log(response.data.data)
    } catch (error) {
     console.log(error.response.data)
+    const errors = error.response.data.validation_errors
+
+    Object.keys(errors).forEach(key => {
+        errorBag.value[key] =  errors[key][0]
+    })
    }
 }
 
@@ -265,6 +287,8 @@ const handleChangePassport = (e) => {
         document.getElementById('previewPassport').src = URL.createObjectURL(file)
     }, 5);
 }
+
+const errorBag = ref({})
 
 const handleMakeBooking = async() => {
     bookingData.motor_name = selectedMotor.value.motor_name
@@ -288,6 +312,19 @@ const handleMakeBooking = async() => {
         
     } catch (error) {
         console.log(error.response.data)
+        let errors = null
+
+        if(error.response.data.validation_errors){
+             errors = error.response.data.validation_errors
+                Object.keys(errors).forEach(key => {
+                errorBag.value[key] =  errors[key][0]
+            })
+        }else{
+             errors = error.response.data
+             errorBag.value['data'] =  errors.data
+        }
+       
+
     }
 }
 

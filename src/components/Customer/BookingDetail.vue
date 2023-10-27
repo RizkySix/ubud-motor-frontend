@@ -8,7 +8,7 @@
 
     <!-- Data -->
     <div v-if="items" class="mt-4 grid md:grid-cols-2 gap-3">
-        <div class="w-full mt-4 max-w-sm custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index">
+        <div class="w-full mt-4 max-w-sm max-h-[250px] overflow-y-scroll custom-scrollbar rounded-lg shadow-lg border border-dotted p-2 custom-scrollbar" v-for="(item, index) in items" :key="index" :class="{'bg-red-400': item.total_charge > 0}">
                
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
@@ -17,7 +17,12 @@
                 </div>
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
                     <span class="font-semibold">Renewal History:</span>
-                    <span class="font-normal text-sm">{{ item.renewal_history ?? '*' }}</span>
+                    <span v-if="item.renewal_history" v-for="(history , index) in JSON.parse(item.renewal_history)" :key="index" class="font-normal text-sm flex flex-col">
+                        <span>{{ history.package }}</span>
+                        <span class="font-semibold">from: <span class="font-normal">{{ dateFormat(history.extension_from) }}</span></span>
+                        <span class="font-semibold">to: <span class="font-normal">{{ dateFormat(history.extension_to) }},</span></span>
+                    </span>
+                    <span v-else class="font-normal text-sm">*</span>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-6">
@@ -43,7 +48,7 @@
            
 
             <div class="grid grid-cols-2 gap-6 w-1/5 mx-auto">
-                <div @click="toRenewalPage(item)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
+                <div v-if="item.total_charge == 0" @click="toRenewalPage(item)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
                   <PackageIcon :width="30" :height="30" />
                 </div>
             </div>
@@ -80,3 +85,38 @@ const toRenewalPage = (item) => {
 }
 
 </script>
+
+
+<style scoped>/* Scrollbar Y (tegak lurus) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Lebar scrollbar horizontal */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Warna thumb scrollbar */
+  border-radius: 0; /* Radius thumb untuk sudut kanan atas dan sudut kiri bawah */
+  border-bottom-right-radius: 3px; /* Radius sudut kanan bawah */
+  border-top-right-radius: 3px; /* Radius sudut kiri atas */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Warna thumb saat dihover */
+}
+
+/* Scrollbar X (horizontal) */
+.custom-scrollbar::-webkit-scrollbar:horizontal {
+  height: 4px; /* Tinggi scrollbar vertikal */
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal-thumb {
+  background: #888; /* Warna thumb scrollbar */
+  border-radius: 0; /* Radius thumb untuk sudut kanan bawah dan sudut kiri atas */
+  border-bottom-left-radius: 3px; /* Radius sudut kiri bawah */
+  border-bottom-right-radius: 3px; /* Radius sudut kanan bawah */
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal-thumb:hover {
+  background: #555; /* Warna thumb saat dihover */
+}
+
+</style>

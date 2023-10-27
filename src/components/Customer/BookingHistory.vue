@@ -193,10 +193,12 @@ const handleFetchRenewal = async() => {
         items.value = response.data.data
         console.log(items.value)
         onChoosed.value = 'renewal'
+        
     } catch (error) {
         console.log(error.response.data)
     }
 }
+
 
 const handleCancelBooking = async(uuid) => {
     if(await confirmation() === false){
@@ -238,18 +240,37 @@ const toggleModalDetail = (detail = {}) => {
 
 </script>
 
-<style scoped>
+
+<style scoped>/* Scrollbar Y (tegak lurus) */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px; /* Lebar scrollbar horizontal */
-  height: 6px; /* Tinggi scrollbar vertikal */
+  width: 4px; /* Lebar scrollbar horizontal */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #888; /* Warna thumb scrollbar */
-  border-radius: 3px; /* Radius sudut thumb scrollbar */
+  border-radius: 0; /* Radius thumb untuk sudut kanan atas dan sudut kiri bawah */
+  border-bottom-right-radius: 3px; /* Radius sudut kanan bawah */
+  border-top-right-radius: 3px; /* Radius sudut kiri atas */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555; /* Warna thumb saat dihover */
 }
+
+/* Scrollbar X (horizontal) */
+.custom-scrollbar::-webkit-scrollbar:horizontal {
+  height: 4px; /* Tinggi scrollbar vertikal */
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal-thumb {
+  background: #888; /* Warna thumb scrollbar */
+  border-radius: 0; /* Radius thumb untuk sudut kanan bawah dan sudut kiri atas */
+  border-bottom-left-radius: 3px; /* Radius sudut kiri bawah */
+  border-bottom-right-radius: 3px; /* Radius sudut kanan bawah */
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal-thumb:hover {
+  background: #555; /* Warna thumb saat dihover */
+}
+
 </style>

@@ -63,6 +63,10 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication'
 
+const props = defineProps({
+    currentRoute: String
+})
+
 const onLogin = ref(true)
 const credential = reactive({
     username: '',
@@ -86,19 +90,29 @@ const toggleView = () => {
 const handleRegister = async() => {
     const response = await authentication.registerAction('/customer/register' , data);
    if(response === true){
-        router.push({
-            name: localStorage.getItem('toPage') ?? 'home'
-        })
+       navigation()
    }
 }
 
 const handleLogin = async () => {
    const response = await authentication.loginAction('/customer/login' , credential);
    if(response === true){
-        router.push({
-            name: localStorage.getItem('toPage') ?? 'home'
-        })
+      navigation()
    }
-};
+}
+
+const navigation = () => {
+    authentication.refreshGetToken = true
+    if(props.currentRoute !== 'home'){
+            router.push({
+                name: localStorage.getItem('toPage') ?? 'home'
+            })
+       }else{
+            router.push({
+                name: 'booking'
+            })
+       }
+       
+}
 
 </script>
