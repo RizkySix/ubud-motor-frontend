@@ -1,40 +1,43 @@
 <template>
-    <table class="long-tbl w-[1500px] text-sm text-left text-gray-500 dark:text-gray-400 border shadow-xl">
+    <table class="long-tbl w-[1700px] text-sm text-left text-gray-500 dark:text-gray-400 border shadow-xl">
                 <tbody v-for="(item, index) in 4" :key="index" >
-                    <tr class="border-b">
-                    <td scope="col" class="px-6 skeleton h-12" style="width:3%">
-                   
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  style="width:15%">
-                       
-                    </td>
-                    <td scope="col" class="px-6 skeleton " style="width:10%">
+                  <tr class="border-b">
+                    <th scope="col" class="px-6 skeleton h-12" style="width:3%">
                       
-                    </td>
-                    <td scope="col" class="px-6 skeleton " style="width:15%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
                         
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  style="width:10%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton " style="width:10%">
                         
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  >
+                    </th>
+                    <th scope="col" class="px-6 skeleton " style="width:10%">
                         
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  style="width:8%">
-                       
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  style="width:10%">
-                       
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  style="width:10%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
                         
-                    </td>
-                    <td scope="col" class="px-6 skeleton "  >
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  >
                       
-                    </td>
-                    <td scope="col" class="px-6 skeleton ">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:8%">
+                        
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
+                        
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
+                        
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
+                        
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  >
+                       
+                    </th>
+                    <th scope="col" class="px-6 skeleton ">
                       
-                    </td>
+                    </th>
                 </tr>
                 </tbody>
     </table>

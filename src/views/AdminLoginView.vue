@@ -50,7 +50,7 @@ const handleLogin = async () => {
    const response = await authentication.loginAction('/admin/login' , credential);
    if(response === true){
         router.push({
-            name: 'admin.dashboard'
+            name: 'admin.booking'
         })
    }
 };

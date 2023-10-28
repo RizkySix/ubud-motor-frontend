@@ -43,31 +43,31 @@
     </ul>
 </div>
 
-<table v-if="['today' , 'confirmed' , 'unconfirmed' , 'expired'].includes(status)" class="long-tbl w-[2000px] text-sm text-left text-gray-500 dark:text-gray-400 mt-32 border shadow-xl">
+<table v-if="['today' , 'confirmed' , 'unconfirmed' , 'expired'].includes(status)" class="long-tbl w-[2500px] text-sm text-left text-gray-500 dark:text-gray-400 mt-32 border shadow-xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 " style="width:3%">
                         No
                     </th>
-                    <th scope="col" class="px-6 "  style="width:8%">
+                    <th scope="col" class="px-6 "  style="width:7%">
                         Nama
                     </th>
-                    <th scope="col" class="px-6 " style="width:8%">
+                    <th scope="col" class="px-6 " style="width:7%">
                         WhatsApp
                     </th>
-                    <th scope="col" class="px-6 " style="width:10%">
+                    <th scope="col" class="px-6" style="width:10%">
                         Email
                     </th>
-                    <th scope="col" class="px-6 "  style="width:7%">
+                    <th scope="col" class="px-6 "  style="width:5%">
                         Motor
                     </th>
                     <th scope="col" class="px-6 "  style="width:7%">
                         Paket
                     </th>
-                    <th scope="col" class="px-6 " >
+                    <th scope="col" class="px-6 " style="width: 3%;">
                         Total Unit
                     </th>
-                    <th scope="col" class="px-6 "  style="width:5%">
+                    <th scope="col" class="px-6 "  style="width:6%">
                         Amount
                     </th>
                     <th scope="col" class="px-6 "  style="width:8%">
@@ -88,14 +88,14 @@
                     <th scope="col" class="px-6 "  style="width:8%">
                        Pesan
                     </th>
-                    <th scope="col" class="px-6 ">
+                    <th scope="col" class="px-6 " style="width:5%">
                        Aksi
                     </th>
                 </tr>
             </thead>
             <tbody v-if="items.length > 0" v-for="(item, index) in items" :key="index" >
-                <tr class="bg-white border-b">
-                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                <tr class="bg-white border-b break-words" >
+                    <th class="px-6 py-4 font-medium text-gray-900">
                         {{ index + 1 }}
                     </th>
                     <td class="px-6 py-4">
@@ -132,15 +132,18 @@
                         {{ item.pickup_address }}
                     </td>
                     <td class="px-6 py-4">
-                        <img :src="item.card_image" class="w-50 h-50 object-cover">
+                        <img :src="item.card_image" class="w-50 h-20 object-cover" alt="passport">
                     </td>
                     <td class="px-6 py-4">
-                        {{ item.additional_message ?? '*' }}
+                        {{ item.additional_message ?? 'NULL' }}
                     </td>
-                    <td class="px-6 py-4 flex flex-col gap-1">
-                        <span @click="handleConfirmBooking(item.uuid)">Edit</span>
-                        <span>Tolak</span>
-                        <span>Show</span>
+                    <td class="px-6 py-4 flex gap-4 mt-5 cursor-pointer">
+                        <span v-if="['today' , 'unconfirmed'].includes(status)" @click="handleConfirmBooking(item.uuid)" class="border-2 border-blue-700 rounded-full">
+                            <ConfirmIconVue :width="25" :height="25" />
+                        </span>
+                        <span @click="toggleModal(item.booking_details)" class="border-2 border-blue-700 rounded-full">
+                            <MotorIconVue :width="25" :height="25" />
+                        </span>
                     </td>
                 
                 </tr>
@@ -156,19 +159,19 @@
 </table>
 
 
-<table v-if="status == 'charge'" class="long-tbl w-[1500px] text-sm text-left text-gray-500 dark:text-gray-400 mt-32 border shadow-xl">
+<table v-if="status == 'charge'" class="long-tbl w-[1700px] text-sm text-left text-gray-500 dark:text-gray-400 mt-32 border shadow-xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 " style="width:3%">
                         No
                     </th>
-                    <th scope="col" class="px-6 "  style="width:15%">
+                    <th scope="col" class="px-6 "  style="width:10%">
                         Nama
                     </th>
                     <th scope="col" class="px-6 " style="width:10%">
                         WhatsApp
                     </th>
-                    <th scope="col" class="px-6 " style="width:15%">
+                    <th scope="col" class="px-6 " style="width:10%">
                         Email
                     </th>
                     <th scope="col" class="px-6 "  style="width:10%">
@@ -186,6 +189,9 @@
                     <th scope="col" class="px-6 "  style="width:10%">
                         Tanggal Kembali
                     </th>
+                    <th scope="col" class="px-6 "  style="width:10%">
+                        Status Kembali
+                    </th>
                     <th scope="col" class="px-6 "  >
                        Passport
                     </th>
@@ -195,7 +201,7 @@
                 </tr>
             </thead>
             <tbody v-if="items.length > 0" v-for="(item, index) in items" :key="index" >
-                <tr class="bg-white border-b">
+                <tr class="bg-white border-b break-words">
                     <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ index + 1 }}
                     </th>
@@ -224,12 +230,15 @@
                         {{ dateFormat(item.return_date) }}
                     </td>
                     <td class="px-6 py-4">
+                        {{ item.is_done ? 'Kembali' : 'Belum Kembali' }}
+                    </td>
+                    <td class="px-6 py-4">
                         <img :src="item.card_image" class="w-50 h-50 object-cover">
                     </td>
                     <td class="px-6 py-4 flex flex-col gap-1">
-                        <span>Edit</span>
-                        <span>Tolak</span>
-                        <span>Show</span>
+                        <span @click="handleDoneRental(item.id)" class="cursor-pointer rounded-full">
+                            <ConfirmIconVue :width="25" :height="25" />
+                        </span>
                     </td>
                 
                 </tr>
@@ -243,37 +252,126 @@
 </table>
  </div>
 
+<BaseModal :width="'max-w-6xl'" :modalActive="modalActive" @close-modal="toggleModal">
+  <div class="overflow-x-scroll relative p-4">
+   <span class="flex justify-center">
+    <CatalogTitle :variant="'variant2'">Detail Booking</CatalogTitle>
+   </span>
+    <table class="w-[1000px] md:w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-10 border shadow-xl">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 ">
+                        No
+                    </th>
+                    <th scope="col" class="px-6 ">
+                        Motor
+                    </th>
+                    <th scope="col" class="px-6 "  >
+                        Hari Lewat
+                    </th>
+                    <th scope="col" class="px-6 ">
+                        Total Denda
+                    </th>
+                    <th scope="col" class="px-6 ">
+                        Tanggal Sewa
+                    </th>
+                    <th scope="col" class="px-6 ">
+                        Tanggal Kembali
+                    </th>
+                    <th scope="col" class="px-6 "  >
+                       Status Kembali
+                    </th>
+                    <th scope="col" class="px-6 ">
+                       Aksi
+                    </th>
+                </tr>
+            </thead>
+            <tbody v-if="details.length > 0" v-for="(detail, index) in details" :key="index" >
+                <tr class="bg-white border-b break-words">
+                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{ index + 1 }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ detail.motor_name }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ detail.passed_days }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ rpCurrency(detail.total_charge) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ dateFormat(detail.rental_date) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ dateFormat(detail.return_date) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ detail.is_done ? 'Kembali' : 'Belum Kembali' }}
+                    </td>
+                    <td class="px-6 py-4 flex flex-col gap-1">
+                        <span v-if="!detail.is_done" @click="handleDoneRental(detail.id , index)" class="cursor-pointer rounded-full">
+                            <ConfirmIconVue :width="25" :height="25" />
+                        </span>
+                    </td>
+                
+                </tr>
+            </tbody>
+            <tbody v-else>
+                <td colspan="2" class="px-6 py-4 font-bold">
+                    NO DATA
+                </td>
+            </tbody>
+</table>
+  </div>
+</BaseModal>
+
 </Sidebar>
 
 </template>
 
 <script setup>
 import Sidebar from '@/components/Admin/Sidebar.vue';
-import { ref , onMounted } from 'vue';
+import { ref , onMounted , defineAsyncComponent } from 'vue';
 import {http , url } from '@/helper/domain';
 import {rpCurrency } from '@/helper/currency';
+import {confirmationAccept } from '@/helper/confirmation';
 import {dateFormat } from '@/helper/helperMethod';
 import TableSkeleton from '@/components/Skeleton/TableSkeleton.vue'
 import TableSkeletonLong from '@/components/Skeleton/TableSkeletonLong.vue'
 import toaster from '@/helper/toaster';
+import ConfirmIconVue from '@/components/icons/ConfirmIcon.vue';
+import MotorIconVue from '@/components/icons/MotorIcon.vue';
+import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 
+const BaseModal = defineAsyncComponent(() =>
+    import ("@/components/Modal/BaseModal.vue")
+)
 
 const status = ref('today')
 const items = ref([])
+const details = ref([])
 const waiting = ref(false)
 
 const handleFetchBookingData = async(type) => {
     try {
+        waiting.value = true
         const response = await http().get('/booking/admin?type=' + type)
-      
+        waiting.value = false
         items.value = response.data.data
         status.value = type
     } catch (error) {
         console.log(error.response.data)
+        waiting.value = false
     }
 }
 
 const handleConfirmBooking = async(uuid) => {
+
+    if(await confirmationAccept() === false){
+        return false
+    }
+
     try {
         items.value = []
         waiting.value = true
@@ -290,6 +388,34 @@ const handleConfirmBooking = async(uuid) => {
         await handleFetchBookingData(status.value)
         toaster('Gagal Konfirmasi' , false)
     }   
+}
+
+const modalActive = ref(null)
+
+const toggleModal = (detail = null) => {
+    details.value = detail
+    modalActive.value = !modalActive.value
+}
+
+const handleDoneRental = async(id , index = 0) => {
+    if(await confirmationAccept() == false){
+        return false
+    }
+
+    try {
+        const response = await http().put('/booking/done/' + id)
+        
+        if(index > 0){
+            details.value[index].is_done = 1
+        }else{
+            await handleFetchBookingData(status.value) 
+        }
+
+        toaster('Berhasil Konfirmasi' , true)
+    } catch (error) {
+        console.log(error.response.data)
+        toaster('Gagal Konfirmasi' , false)
+    }
 }
 
 onMounted(async() => {

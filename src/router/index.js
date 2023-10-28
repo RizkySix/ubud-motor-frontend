@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import AdminLoginView from '@/views/AdminLoginView.vue'
-import DashboardView from '@/views/DashboardView.vue'
+import BookingView from '@/views/BookingView.vue'
+import RenewalView from '@/views/RenewalView.vue'
 import MakeCatalogView from '@/views/MakeCatalogView.vue'
 import MakeGalleryView from '@/views/MakeGalleryView.vue'
 import CatalogView from '@/views/CatalogView.vue'
@@ -47,9 +48,14 @@ const router = createRouter({
       component: AdminLoginView
     },
     {
-      path: '/admin/dashboard',
-      name: 'admin.dashboard',
-      component: DashboardView
+      path: '/admin/booking',
+      name: 'admin.booking',
+      component: BookingView
+    },
+    {
+      path: '/admin/renewal',
+      name: 'admin.renewal',
+      component: RenewalView
     },
     {
       path: '/admin/catalog/make',

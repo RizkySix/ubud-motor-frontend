@@ -110,7 +110,7 @@ const storeCatalog = async () => {
 
         console.log(response.data)
         router.push({
-            name: 'admin.dashboard'
+            name: 'admin.booking'
         })
         toaster('Catalog berhasil dibuat' , true)
 

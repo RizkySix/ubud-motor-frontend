@@ -1,52 +1,52 @@
 <template>
-    <table class="long-tbl w-[2000px] text-sm text-left text-gray-500 dark:text-gray-400 border shadow-xl">
+    <table class="long-tbl w-[2500px] text-sm text-left text-gray-500 dark:text-gray-400 border shadow-xl">
                 <tbody v-for="(item, index) in 4" :key="index" >
-                    <tr class="border-b">
-                    <td scope="col" class="px-6  h-12 skeleton" style="width:3%">
+                  <tr class="border-b">
+                    <th scope="col" class="px-6 skeleton h-12" style="width:3%">
+                       
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:7%">
+                        
+                    </th>
+                    <th scope="col" class="px-6 skeleton " style="width:7%">
+                       
+                    </th>
+                    <th scope="col" class="px-6 skeleton" style="width:10%">
                       
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:8%">
-                      
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton" style="width:8%">
-                       
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton" style="width:10%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:5%">
                         
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:7%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:7%">
                         
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:7%">
-                       
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton" >
+                    </th>
+                    <th scope="col" class="px-6 skeleton " style="width: 3%;">
                         
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:5%">
-                       
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:8%">
-                     
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:4%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:6%">
                         
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:10%">
-                     
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:10%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:8%">
                        
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:5%">
-                      
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton"  style="width:8%">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:4%">
                        
-                    </td>
-                    <td scope="col" class="px-6  h-12 skeleton">
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
                        
-                    </td>
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:10%">
+                       
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:5%">
+                       
+                    </th>
+                    <th scope="col" class="px-6 skeleton "  style="width:8%">
+                       
+                    </th>
+                    <th scope="col" class="px-6 skeleton " style="width:5%">
+                       
+                    </th>
                 </tr>
                 </tbody>
     </table>
