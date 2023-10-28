@@ -63,7 +63,6 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
       }
 
       const customerToken = ref(localStorage.getItem('customer_token'))
-      const refreshGetToken = ref(false)
     
-      return {loginAction , customerToken , registerAction , getUserAction , refreshGetToken}
+      return {loginAction , customerToken , registerAction , getUserAction}
 })

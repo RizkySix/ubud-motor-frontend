@@ -27,6 +27,7 @@
     </div>
 </section>
 <BookingFloatingVue />
+<SimpleFooterVue />
 </template>
 
 <script setup>
@@ -34,20 +35,16 @@ import { ref , reactive , onMounted, defineAsyncComponent  } from 'vue'
 import Image1 from "@/components/LandingPage/Image1.vue"
 import NavBar from "@/components/LandingPage/NavBar.vue"
 import PageTitleVue from '@/components/Text/PageTitle.vue';
-import {http , url } from '@/helper/domain';
 import ImageSkeletonVue from '@/components/Skeleton/ImageSkeleton.vue';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
+import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
+import { useGalleryStore } from '@/stores/gallery'
 
+const gallery = useGalleryStore()
 const galleries = ref(null)
 const handleFetchGallery = async() => {
-    try {
-        const response = await http().get('/gallery')
-        console.log(response.data.data)
-        galleries.value = response.data.data
-        console.log(galleries.value)
-    } catch (error) {
-        console.log(error.response.data)
-    }
+     const response = await gallery.fetchGalleryAction()
+     galleries.value = response
 }
 
 onMounted(async() => {

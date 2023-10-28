@@ -73,6 +73,7 @@
     </div>
 
 </section>
+<SimpleFooterVue />
 </template>
 
 <script setup>
@@ -87,7 +88,7 @@ import {http , url } from '@/helper/domain';
 import toaster from '@/helper/toaster';
 import { useRoute } from 'vue-router';
 import { useBookingStore } from '@/stores/booking';
-
+import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
 
 const booking = useBookingStore()
 const route = useRoute()

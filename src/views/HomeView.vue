@@ -3,7 +3,7 @@
     <Image1 /><NavBar /><SimpleBook /><Facilities />
     <FooterComp /> 
   </div>
-  <BookingFloatingVue />
+  <BookingFloatingVue  />
 </template>
 
 <script setup>
@@ -14,5 +14,7 @@ import SpecialOffers from "@/components/LandingPage/SpecialOffers.vue"
 import FooterComp from "@/components/LandingPage/FooterComp.vue"
 import SimpleBook from "@/components/LandingPage/SimpleBook.vue"
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
+
+
 </script>
 

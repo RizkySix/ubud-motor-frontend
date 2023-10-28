@@ -10,7 +10,7 @@
   </div>
   
   <BaseModal :modalActive="modalActive" :width="'max-w-3xl'" @close-modal="toggleModal">
-    <BookingHistory v-if="authentication.customerToken" />
+    <BookingHistory v-if="token" />
     <LoginRegis :currentRoute="route.name" v-else />
   </BaseModal>
 </template>
@@ -20,31 +20,23 @@ import { ref , defineAsyncComponent, watch } from 'vue';
 import BookingHistory  from '@/components/Customer/BookingHistory.vue'
 import LoginRegis  from '@/components/Customer/LoginRegis.vue'
 import { useBookingStore } from '@/stores/booking';
-import { useAuthenticationStore } from '@/stores/authentication';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
-const authentication = useAuthenticationStore()
 const booking = useBookingStore()
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
 )
 
+const token = ref(null)
 const modalActive = ref(null)
 const toggleModal = () => {
+    token.value = localStorage.getItem('customer_token')
     modalActive.value = !modalActive.value
 }
 
 
-watch(authentication.refreshGetToken, (newStatus, oldStatus) => {
-  if(newStatus == true){
-        authentication.customerToken = null
-        setTimeout(() => {
-            authentication.customerToken = authentication.customerToken
-        }, 500);
-    }
-});
 
 </script>
 

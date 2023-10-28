@@ -102,7 +102,7 @@ const handleLogin = async () => {
 }
 
 const navigation = () => {
-    authentication.refreshGetToken = true
+   
     if(props.currentRoute !== 'home'){
             router.push({
                 name: localStorage.getItem('toPage') ?? 'home'

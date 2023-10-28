@@ -130,7 +130,9 @@
         <LoginRegis />
     </BaseModal>
     <BookingFloatingVue />
+
 </section>
+<SimpleFooterVue />
 </template>
 
 <script setup>
@@ -148,6 +150,7 @@ import {customCatalogKey } from '@/helper/helperMethod';
 import PageTitleVue from '@/components/Text/PageTitle.vue';
 import LoginRegis from '@/components/Customer/LoginRegis.vue';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
+import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")

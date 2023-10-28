@@ -9,7 +9,7 @@
 
     <!-- Data -->
     <div v-if="items" class="mt-4">
-        <div v-if="onChoosed === 'booking'" class="w-full mt-4 overflow-x-scroll custom-scrollbar bg-white rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index" :class="{'bg-yellow-200': item.is_active, 'bg-red-400': !item.is_active}" >
+        <div v-if="onChoosed === 'booking'" class="w-full mt-4 overflow-x-scroll custom-scrollbar rounded-lg shadow-lg border border-dotted p-2" v-for="(item, index) in items" :key="index" :class="{'bg-yellow-200': item.is_active, 'bg-red-400': !item.is_active}" >
                
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
