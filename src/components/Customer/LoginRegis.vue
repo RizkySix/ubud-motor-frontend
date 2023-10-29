@@ -6,6 +6,7 @@
           Flowbite    
       </a>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+        <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
           <div v-if="onLogin" class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                   Sign in to your account
@@ -33,15 +34,18 @@
               <form @submit.prevent="handleRegister" class="space-y-4 md:space-y-6" action="#">
                   <div>
                       <label for="username" class="block mb-2 text-sm font-medium text-gray-900 ">Your Username</label>
-                      <input v-model="data.username" type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5   " placeholder="name@company.com" required="">
+                      <input v-model="data.username" type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5   " placeholder="gordon666" required="">
+                      <ErrorMessage v-if="errorBag.username">{{ errorBag.username }}</ErrorMessage>
                   </div>
                   <div>
                       <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 ">Your Full Name</label>
-                      <input v-model="data.full_name" type="text" name="full_name" id="full_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5   " placeholder="name@company.com" required="">
+                      <input v-model="data.full_name" type="text" name="full_name" id="full_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5   " placeholder="Axel Rose" required="">
+                      <ErrorMessage v-if="errorBag.full_name">{{ errorBag.full_name }}</ErrorMessage>
                   </div>
                   <div>
                       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
                       <input v-model="data.password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5   " required="">
+                      <ErrorMessage v-if="errorBag.password">{{ errorBag.password }}</ErrorMessage>
                   </div>
                   <div>
                       <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 ">Password Confirmation</label>
@@ -62,6 +66,8 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication'
+import toaster from '@/helper/toaster';
+import ErrorMessage from '@/components/Form/ErrorMessage.vue';
 
 const props = defineProps({
     currentRoute: String
@@ -87,17 +93,36 @@ const toggleView = () => {
     onLogin.value = !onLogin.value
 }
 
+const errorBag = ref({})
+const waitingResponse = ref(false)
+
 const handleRegister = async() => {
+    waitingResponse.value = true
     const response = await authentication.registerAction('/customer/register' , data);
+    waitingResponse.value = false
    if(response === true){
        navigation()
+   }else{
+        let errors = ''
+        console.log(response)
+        if(response.validation_errors){
+                errors = response.validation_errors
+                Object.keys(errors).forEach(key => {
+                errorBag.value[key] =  errors[key][0]
+            })
+        }
+        toaster('Some data invalid' , false)
    }
 }
 
 const handleLogin = async () => {
+   waitingResponse.value = true
    const response = await authentication.loginAction('/customer/login' , credential);
+   waitingResponse.value = false
    if(response === true){
       navigation()
+   }else{
+    toaster('Invalid Credential' , false)
    }
 }
 

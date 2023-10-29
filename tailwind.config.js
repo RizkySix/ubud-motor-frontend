@@ -41,6 +41,8 @@ module.exports = {
       inherit: "inherit",
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }
 

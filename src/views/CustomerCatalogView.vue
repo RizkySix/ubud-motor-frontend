@@ -12,19 +12,21 @@
                     Our Collection & Package
                 </template>
             </PageTitleVue>
+
+            <span class="text-center text-gray-500 text-xs md:text-base">Double click to preview full image of catalog</span>
         </div>
 
     </div>
     <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" v-if="catalogs">
         <div class="w-full" v-for="(catalog, index) in catalogs">
-            <Swiper v-if="reRenderSwiper" :images="customCatalogKey(catalog)" /> 
+            <Swiper class="cursor-pointer" v-if="reRenderSwiper" :images="customCatalogKey(catalog)" @click="lightToggle(catalog) , activeImage = index" /> 
             <ImageSkeletonVue v-else />
             <div class="my-4 text-center w-full flex justify-center gap-4">
                 <CatalogTitle v-if="index % 2 != 0" :variant="'variant2'">{{ catalog.motor_name }}</CatalogTitle>
                 <CatalogTitle v-else :variant="'variant1'">{{ catalog.motor_name }}</CatalogTitle>
             </div>
 
-            <router-link :to="{name: 'booking' , params:{motor_name: catalog.motor_name}}" v-if="authentication.customerToken"  class=" b mx-auto h-16 w-64 flex justify-center items-center">
+            <router-link :to="{name: 'booking'}" v-if="authentication.customerToken"  class=" b mx-auto h-16 w-64 flex justify-center items-center">
             <div class="i h-12 w-32 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
             </div>
             <span class="text-center text-white font-semibold z-10 pointer-events-none">Booking</span>
@@ -133,6 +135,13 @@
 
 </section>
 <SimpleFooterVue />
+
+<FsLightbox
+    :toggler="toggler"
+    :sources="lightImages"
+    type="image"
+    :key="activeImage"
+/>
 </template>
 
 <script setup>
@@ -151,6 +160,7 @@ import PageTitleVue from '@/components/Text/PageTitle.vue';
 import LoginRegis from '@/components/Customer/LoginRegis.vue';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
+import FsLightbox from "fslightbox-vue/v3";
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
@@ -174,6 +184,31 @@ const toggleModal = () => {
     modalActive.value = !modalActive.value
     localStorage.setItem('toPage' , 'booking')
 }
+
+const toggler = ref(false)
+const lightImages = ref([])
+const activeImage = ref(0)
+
+const lightToggle = (catalog ) => {
+  
+    lightImages.value = []
+  
+    if(catalog.first_catalog){
+         lightImages.value.push( catalog.first_catalog)
+    }
+ 
+    if(catalog.second_catalog){
+        lightImages.value.push( catalog.second_catalog)
+    }
+ 
+    if(catalog.third_catalog){
+        lightImages.value.push( catalog.third_catalog)
+    }
+    
+    toggler.value = !toggler.value
+}
+
+
 
 onMounted(async() => {
      await handleFetchCatalog()

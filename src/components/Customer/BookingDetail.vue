@@ -47,9 +47,9 @@
             </div>
            
 
-            <div class="grid grid-cols-2 gap-6 w-1/5 mx-auto">
+            <div class="w-full border-t-2">
                 <div v-if="item.total_charge == 0" @click="toRenewalPage(item)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
-                  <PackageIcon :width="30" :height="30" />
+                  <DateIcon :width="30" :height="30" />
                 </div>
             </div>
 
@@ -66,7 +66,7 @@ import DeleteIcon from '@/components/icons/DeleteIcon.vue';
 import PackageIcon from '@/components/icons/PackageIcon.vue';
 import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 import { useRouter } from 'vue-router';
-
+import DateIcon from '@/components/icons/DateIcon.vue';
 
 const props = defineProps({
     items: Object

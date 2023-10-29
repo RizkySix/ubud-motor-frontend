@@ -48,7 +48,7 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
         } catch (error) {
           console.log(error.response.data)
 
-          return false;
+          return error.response.data;
         }
       }
 

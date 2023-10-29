@@ -124,7 +124,10 @@
                     
                         <div class="grid md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <label for="hs-input-with-leading-and-trailing-icon" class="block text-sm text-gray-500 dark:text-gray-400 mb-3">Total Amount</label>
+                              
+                                <label for="hs-input-with-leading-and-trailing-icon" class="flex text-sm text-gray-500 dark:text-gray-400 mb-3">Total Amount
+                                    <img v-if="waitingCalculate" class="h-4 w-4 ml-3 mt-1 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
+                                </label>
                                     <div class="relative">
                                         <input readonly type="text" id="hs-input-with-leading-and-trailing-icon" name="hs-input-with-leading-and-trailing-icon" class="py-3 px-4 pl-9 pr-16 block w-full  shadow-sm rounded-md text-sm focus:z-10  dark:text-gray-400">
                                         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
@@ -167,7 +170,7 @@
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                             </svg>
                                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> your Passport picture</p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG </p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG, JPG </p>
                                         </div>
                                         <ErrorMessage v-if="errorBag.card_image">{{ errorBag.card_image }}</ErrorMessage>
                                         <input @change="handleChangePassport($event)" id="dropzone-file" type="file" class="hidden" />
@@ -182,8 +185,13 @@
                             </div>
                         </div>
                         
-                     
-                    <button @submit.prevent="handleMakeBooking" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Make Booking</button>
+                   
+                    <button @submit.prevent="handleMakeBooking" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex gap-3">
+                       <span>
+                        Make Booking
+                       </span>  
+                       <img v-if="waitingResponse" class="h-6 w-6 mx-auto animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
+                    </button>
                     </form>
                 </div>
             </div>
@@ -288,8 +296,11 @@ const refreshAmount = async() => {
    }
 }
 
+const waitingCalculate = ref(false)
+
 //handle calculate price
 const handleCalculatePrice = async() => {
+    waitingCalculate.value = true
     let endpoint = ''
 
     switch (selectedPackage.value.duration_suffix) {
@@ -311,10 +322,17 @@ const handleCalculatePrice = async() => {
     setTimeout(() => {
         bookingData.amount = response.data.data
     }, 30);
-
+    waitingCalculate.value = false
     console.log(response.data.data)
+    
    } catch (error) {
     console.log(error.response.data)
+    waitingCalculate.value = false
+
+    if(error.response.status == 401){
+        toaster('Login before make an booking' , false)
+    }
+
     const errors = error.response.data.validation_errors
 
     Object.keys(errors).forEach(key => {
@@ -333,8 +351,10 @@ const handleChangePassport = (e) => {
 }
 
 const errorBag = ref({})
+const waitingResponse = ref(false)
 
 const handleMakeBooking = async() => {
+    waitingResponse.value = true
     bookingData.motor_name = selectedMotor.value.motor_name
     bookingData.package = selectedPackage.value.id
     bookingData.delivery_address =  document.getElementById('delivery_address').value
@@ -351,11 +371,13 @@ const handleMakeBooking = async() => {
     try {
         const response = await http().post('/booking' , form)
         clearPayload()
+        waitingResponse.value = false
         toaster('Booking created' , true)
         booking.newBooking += 1
         
     } catch (error) {
         console.log(error.response.data)
+        waitingResponse.value = false
         let errors = null
 
         if(error.response.data.validation_errors){

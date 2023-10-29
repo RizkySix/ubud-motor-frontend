@@ -37,6 +37,7 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication'
+import toaster from '@/helper/toaster';
 
 const credential = reactive({
     email: '',
@@ -52,6 +53,8 @@ const handleLogin = async () => {
         router.push({
             name: 'admin.booking'
         })
+   }else{
+        toaster('Data tidak ditemukan' , false)
    }
 };
 

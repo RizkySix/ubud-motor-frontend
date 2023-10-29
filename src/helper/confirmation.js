@@ -37,4 +37,23 @@ const confirmationAccept = async() => {
     }
 }
 
-export {confirmation , confirmationAccept}
+
+const logoutConfirmationCustomer = async() => {
+  const result = await Swal.fire({
+      title: 'Are You Sure?',
+      text: "You will logged out!",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!'
+    })
+
+    if (result.isConfirmed) {
+      return true;
+    } else {
+      return false;
+    }
+}
+
+export {confirmation , confirmationAccept , logoutConfirmationCustomer}

@@ -72,13 +72,15 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-6 w-1/4 mx-auto">
-                <div v-if="!item.is_confirmed" @click="handleCancelBooking(item.uuid)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
+            <div class="border-t-2 w-full">
+               <div class="w-1/4 flex">
+                <div v-if="!item.is_confirmed" @click="handleCancelBooking(item.uuid)" class="relative z-0 w-full mt-4 group cursor-pointer">
                     <DeleteIcon :width="30" :height="30" />                 
                 </div>
-                <div @click="toggleModalDetail(item.booking_details)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
-                  <PackageIcon :width="30" :height="30" />
+                <div @click="toggleModalDetail(item.booking_details)" class="relative z-0 w-full mt-4 group cursor-pointer">
+                  <MotorIcon :width="30" :height="30" :border="'border border-whitesmoke rounded-full'" />
                 </div>
+               </div>
             </div>
 
         </div>
@@ -141,7 +143,7 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 gap-6 w-1/5 mx-auto">
+            <div class="w-full border-t-2">
                 <div v-if="!item.is_confirmed" @click="handleCancelRenewal(item.uuid)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
                     <DeleteIcon :width="30" :height="30" />                 
                 </div>
@@ -158,17 +160,16 @@
 
 <script setup>
 import { ref , defineAsyncComponent } from 'vue';
-import { useCatalogStore } from '@/stores/catalog'
-import { useAuthenticationStore } from '@/stores/authentication'
 import {rpCurrency } from '@/helper/currency';
 import {dateFormat } from '@/helper/helperMethod';
 import {http , url } from '@/helper/domain';
-import EditIcon from '@/components/icons/EditIcon.vue';
 import DeleteIcon from '@/components/icons/DeleteIcon.vue';
-import PackageIcon from '@/components/icons/PackageIcon.vue';
+import MotorIcon from '@/components/icons/MotorIcon.vue';
 import BookingDetail  from '@/components/Customer/BookingDetail.vue'
 import {confirmation } from '@/helper/confirmation';
 import toaster from '@/helper/toaster';
+
+
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
