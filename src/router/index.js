@@ -15,6 +15,17 @@ import CustomerGalleryView from '@/views/CustomerGalleryView.vue'
 import AboutUsView from '@/views/AboutUsView.vue'
 import AdminRegisterView from '@/views/AdminRegisterView.vue'
 import AdminVerifyOtpView from '@/views/AdminVerifyOtpView.vue'
+import { useAuthenticationStore } from '@/stores/authentication'
+
+let verifiedAdminRoute = [
+  'admin.booking',
+  'admin.renewal',
+  'admin.make.catalog',
+  'admin.make.gallery',
+  'admin.add.package',
+  'admin.catalogs',
+  'admin.galleries',
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -104,8 +115,41 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to , from) => {
+router.beforeEach(async (to , from) => {
   
+  //ADMIN ROUTE
+  if(localStorage.getItem('token')){
+    const authentication = useAuthenticationStore()
+    
+    if(to.name == 'admin.verify'){
+       const isVerified = await authentication.getUserAction()
+       if(isVerified.email_verified_at){
+          return {
+            name: 'admin.booking'
+          }
+       }
+    }
+
+    if(verifiedAdminRoute.includes(to.name)){
+      const isVerified = await authentication.getUserAction()
+      if(!isVerified.email_verified_at){
+        return {
+          name: 'admin.verify'
+        }
+     }
+    }
+
+  }
+
+  if(!localStorage.getItem('token')){
+      if(verifiedAdminRoute.includes(to.name) || to.name == 'admin.verify'){
+        return {
+          name: 'home'
+        }
+      }
+  }
+
+
 })
 
 export default router
