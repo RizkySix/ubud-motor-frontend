@@ -7,7 +7,7 @@
     <div class="relative hover:text-blue-400 cursor-pointer">Booking</div>
     <div class="relative  w-[30px] md:w-[78px] h-[12px] md:h-[42px] text-center md:text-13xl font-inika">
       <b class="absolute top-[0px] left-[0px] leading-[64.3%]">
-        <p class="m-0">Ubud</p>
+        <p class="m-0">Lavista</p>
         <p class="m-0">Motor</p>
       </b>
     </div>
@@ -22,8 +22,8 @@
   >
     <div class="relative w-[30px] h-[12px] text-center md:text-13xl font-inika">
       <b class="absolute top-[0px] left-[40px] leading-[64.3%]">
-        <p class="m-0">Ubud</p>
-        <p class="m-0">Motor</p>
+        <p class="m-0">Lavista</p>
+        <p class="m-0">Rental</p>
       </b>
 
       <div class="absolute top-[0px] left-[90px] leading-[64.3%] cursor-pointer" @click="toggleModal">

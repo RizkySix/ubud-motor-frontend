@@ -12,6 +12,9 @@ import CustomerCatalogView from '@/views/CustomerCatalogView.vue'
 import CustomerBookingView from '@/views/CustomerBookingView.vue'
 import CustomerRenewalView from '@/views/CustomerRenewalView.vue'
 import CustomerGalleryView from '@/views/CustomerGalleryView.vue'
+import AboutUsView from '@/views/AboutUsView.vue'
+import AdminRegisterView from '@/views/AdminRegisterView.vue'
+import AdminVerifyOtpView from '@/views/AdminVerifyOtpView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +40,11 @@ const router = createRouter({
       component: CustomerGalleryView
     },
     {
+      path: '/about-us',
+      name: 'about.us',
+      component: AboutUsView
+    },
+    {
       path: '/renewal/:motor_name/:id/:return_date',
       name: 'renewal',
       params: true,
@@ -46,6 +54,16 @@ const router = createRouter({
       path: '/admin/login',
       name: 'admin.login',
       component: AdminLoginView
+    },
+    {
+      path: '/admin/register',
+      name: 'admin.register',
+      component: AdminRegisterView
+    },
+    {
+      path: '/admin/verify',
+      name: 'admin.verify',
+      component: AdminVerifyOtpView
     },
     {
       path: '/admin/booking',
@@ -84,6 +102,10 @@ const router = createRouter({
       component: GalleriesView
     },
   ]
+})
+
+router.beforeEach((to , from) => {
+  
 })
 
 export default router

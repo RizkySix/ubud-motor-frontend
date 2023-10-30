@@ -1,6 +1,7 @@
 <template>
     
 <div class="px-10 py-10 max-h-[700px] overflow-y-scroll custom-scrollbar">
+    <img v-if="waitingResponse" class="h-6 w-6 mb-3 animate-spin mx-auto" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
     <div class="flex flex-col rounded-lg shadow-lg border border-yellow-200 p-3">
         <button v-if="onChoosed !== 'booking'" @click="handleFetchBooking" class="mb-3 hover:text-blue-400 transition duration-300" type="button">Show Booking History</button>
         <hr v-if="!onChoosed">
@@ -177,11 +178,14 @@ const BaseModal = defineAsyncComponent(() =>
 
 const onChoosed = ref('')
 const items = ref(null)
+const waitingResponse = ref(false)
 
 const handleFetchBooking = async() => {
     try {
+        waitingResponse.value = true
         const response = await http().get('/booking')
         items.value = response.data.data
+        waitingResponse.value = false
         onChoosed.value = 'booking'
     } catch (error) {
         console.log(error.response.data)
@@ -190,8 +194,10 @@ const handleFetchBooking = async() => {
 
 const handleFetchRenewal = async() => {
     try {
+        waitingResponse.value = true
         const response = await http().get('/booking/extension')
         items.value = response.data.data
+        waitingResponse.value = false
         console.log(items.value)
         onChoosed.value = 'renewal'
         

@@ -53,7 +53,10 @@
                     
                         <div class="grid md:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <label for="hs-input-with-leading-and-trailing-icon" class="block text-sm text-gray-500 dark:text-gray-400 mb-3">Total Amount</label>
+                                <label for="hs-input-with-leading-and-trailing-icon" class=" text-sm text-gray-500 dark:text-gray-400 mb-3 flex gap-2">
+                                    Total Amount
+                                    <img v-if="waitingCalculate" class="h-4 w-4 ml-2 mt-1 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
+                                </label>
                                     <div class="relative">
                                         <input readonly type="text" id="hs-input-with-leading-and-trailing-icon" name="hs-input-with-leading-and-trailing-icon" class="py-3 px-4 pl-9 pr-16 block w-full  shadow-sm rounded-md text-sm focus:z-10  dark:text-gray-400">
                                         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
@@ -65,7 +68,10 @@
                             </div>
                         </div>
                      
-                    <button @submit.prevent="handleAddRenewal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Renewal</button>
+                    <button @submit.prevent="handleAddRenewal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex gap-2">
+                        Add Renewal
+                        <img v-if="waitingResponse" class="h-5 w-5 ml-2 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
+                    </button>
                     </form>
                 </div>
             </div>
@@ -103,6 +109,9 @@ const renewalData = reactive({
     rental_duration: null,
 })
 
+const waitingResponse = ref(false)
+const waitingCalculate = ref(false)
+
 const handleGetPrice = async() => {
     try {
         const response = await http().get('/booking/price?motor_name=' + route.params.motor_name)
@@ -139,8 +148,9 @@ const handleCalculatePrice = async() => {
     }
 
     try {
+    waitingCalculate.value = true
     const response = await http().get(endpoint)
-    
+    waitingCalculate.value = false
     setTimeout(() => {
         renewalData.amount = response.data.data
     }, 30);
@@ -175,8 +185,9 @@ const handleAddRenewal = async() => {
     });
 
     try {
+        waitingResponse.value = true
         const response = await http().post('/booking/extension' , form)
-        console.log(response.data.data)
+        waitingResponse.value = false
         toaster('Success Add Renewal', true)
         clearPayload()
         booking.newBooking += 1
