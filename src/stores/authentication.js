@@ -53,6 +53,19 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
       }
 
 
+      const logoutAction = async(endpoint) => {
+        try {
+          await http().post(endpoint)
+          localStorage.removeItem('token')
+          localStorage.removeItem('customer_token')
+          return true
+        } catch (error) {
+          console.log(error.response)
+          return false
+        }
+      }
+
+
       const getUserAction = async() => {
           try {
             const response = await http().get('/user/data');
@@ -63,6 +76,7 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
       }
 
       const customerToken = ref(localStorage.getItem('customer_token'))
+      const adminVerify = ref(null)
     
-      return {loginAction , customerToken , registerAction , getUserAction}
+      return {loginAction , customerToken , registerAction , logoutAction , getUserAction , adminVerify}
 })

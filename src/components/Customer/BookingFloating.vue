@@ -35,9 +35,11 @@ import { useBookingStore } from '@/stores/booking';
 import { useRoute } from 'vue-router';
 import {logoutConfirmationCustomer } from '@/helper/confirmation';
 import {http , url } from '@/helper/domain';
+import { useAuthenticationStore } from '@/stores/authentication';
 
 const route = useRoute()
 const booking = useBookingStore()
+const authentication = useAuthenticationStore()
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
@@ -57,9 +59,8 @@ const handleLogout = async() => {
   }
 
   try {
-    const response = await http().post('/customer/logout')
+    const response = await authentication.logoutAction('/customer/logout')
     console.log(response.data)
-    localStorage.removeItem('customer_token')
     token.value = localStorage.getItem('customer_token')
   } catch (error) {
     console.log(error.response.data)

@@ -15,6 +15,7 @@ import CustomerGalleryView from '@/views/CustomerGalleryView.vue'
 import AboutUsView from '@/views/AboutUsView.vue'
 import AdminRegisterView from '@/views/AdminRegisterView.vue'
 import AdminVerifyOtpView from '@/views/AdminVerifyOtpView.vue'
+import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
 
 let verifiedAdminRoute = [
@@ -72,6 +73,11 @@ const router = createRouter({
       component: AdminRegisterView
     },
     {
+      path: '/admin/forgot/password',
+      name: 'admin.forgot.password',
+      component: ForgotPasswordView
+    },
+    {
       path: '/admin/verify',
       name: 'admin.verify',
       component: AdminVerifyOtpView
@@ -121,9 +127,9 @@ router.beforeEach(async (to , from) => {
   if(localStorage.getItem('token')){
     const authentication = useAuthenticationStore()
     
+    await checkVerify()
     if(to.name == 'admin.verify'){
-       const isVerified = await authentication.getUserAction()
-       if(isVerified.email_verified_at){
+       if(authentication.adminVerify){
           return {
             name: 'admin.booking'
           }
@@ -131,14 +137,18 @@ router.beforeEach(async (to , from) => {
     }
 
     if(verifiedAdminRoute.includes(to.name)){
-      const isVerified = await authentication.getUserAction()
-      if(!isVerified.email_verified_at){
+      if(!authentication.adminVerify){
         return {
           name: 'admin.verify'
         }
      }
     }
 
+    if(to.name == 'admin.login' || to.name == 'admin.register' || to.name == 'admin.forgot.password'){
+        return {
+          name: authentication.adminVerify ? 'admin.booking' : 'admin.verify'
+        }
+    }
   }
 
   if(!localStorage.getItem('token')){
@@ -151,5 +161,15 @@ router.beforeEach(async (to , from) => {
 
 
 })
+
+
+const checkVerify = async() => {
+  const authentication = useAuthenticationStore()
+    
+  if(!authentication.adminVerify){
+     const isVerified = await authentication.getUserAction()
+     authentication.adminVerify = isVerified.email_verified_at ?? null
+  }
+}
 
 export default router

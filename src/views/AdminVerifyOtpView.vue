@@ -4,13 +4,13 @@
         <div class="max-w-sm mx-auto md:max-w-lg">
             <div class="w-full">
                 <a href="#" class="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
+                    <img class="w-32 h-auto" src="@/assets/logo.svg" alt="logo"> 
                 </a>
                 <div class="bg-white rounded shadow dark:border h-64 py-3 text-center">
                     <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
                       <h1 class="text-2xl font-bold">Verifikasi OTP</h1>
                       <div class="flex flex-col mt-4">
-                          <span>Masukan 6 digit kode otp yang kamu terima pada</span>
+                          <span>Masukan 6 digit kode otp yang kamu terima pada email</span>
                           <span class="font-bold">{{ email }}</span>
                       </div>
                       
@@ -50,11 +50,67 @@ import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/stores/authentication'
 import { otpSlider } from '@/helper/otp-slider.js'
+import {http , url } from '@/helper/domain';
+import toaster from '@/helper/toaster';
 
 const router = useRouter()
 const authentication = useAuthenticationStore()
 
 const waitingResponse = ref(false)
+
+const handleResendOtp = async() => {
+    try {
+        waitingResponse.value = true
+        const response = await http().post('/otp/resend')
+     
+        waitingResponse.value = false
+        toaster('Kode otp baru terkirim' , true)
+    } catch (error) {
+      
+        waitingResponse.value = false
+        if(error.response.status == 429){
+            toaster('Coba 1 menit lagi' , false)
+        }else{
+            toaster('Permintaan tidak sah' , false)
+        }
+
+      
+    }
+}
+
+const handleVerifyOtp = async() => {
+    try {
+        waitingResponse.value = true
+        const otpCode = document.getElementById('first').value + 
+                        document.getElementById('second').value + 
+                        document.getElementById('third').value + 
+                        document.getElementById('fourth').value + 
+                        document.getElementById('fifth').value + 
+                        document.getElementById('sixth').value
+
+        const response = await http().post('/otp/send' , {otp_code: otpCode})
+
+        waitingResponse.value = false
+        router.push({
+            name: 'admin.booking'
+        })
+    } catch (error) {
+        waitingResponse.value = false
+        toaster('Kode otp invalid' , false)
+    }
+}
+
+const handleLogout = async () => {
+    const response = await authentication.logoutAction('/admin/logout')
+
+    if(response){
+        router.push({
+            name: 'home'
+        })
+    }
+
+    toaster('Gagal Logout' , false)
+}
 
 onMounted(() => {
     otpSlider()

@@ -11,14 +11,14 @@
             </svg>
          </button>
         <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+          <img  src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
         </a>
       </div>
       <div class="flex items-center">
           <div class="flex items-center ml-3">
             <div>
-              <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+              <button @click="toggleModal" type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
                 <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
               </button>
@@ -116,16 +116,122 @@
    </div>
    </div>   
 
+   <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-7 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">  
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                 Update Profile Anda
+              </h1>
+              <form @submit.prevent="handleUpdateProfile" class="space-y-4 md:space-y-6" action="#">
+                  <div>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                      <input v-model="adminData.email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" disabled>
+                      <ErrorMessage v-if="errorBag.email">{{ errorBag.email }}</ErrorMessage>
+                  </div>
+                  <div>
+                      <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
+                      <input v-model="adminData.full_name" type="text" name="full_name" id="full_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nengah Subagia" required="">
+                      <ErrorMessage v-if="errorBag.full_name">{{ errorBag.full_name }}</ErrorMessage>
+                  </div>
+                  <div>
+                      <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No WhatsApp</label>
+                      <input v-model="adminData.phone_number" type="tel" name="phone_number" id="phone_number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="087XXXXX" required="">
+                      <ErrorMessage v-if="errorBag.phone_number">{{ errorBag.phone_number }}</ErrorMessage>
+                  </div>
+                  <div>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                      <input v-model="passwordPayload.password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <ErrorMessage v-if="errorBag.password">{{ errorBag.password }}</ErrorMessage>
+                  </div>
+                  <div>
+                      <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Konfirmasi Password</label>
+                      <input v-model="passwordPayload.password_confirmation" type="password" name="password_confirmation" id="password_confirmation" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>
+                  <button @submit.prevent="handleUpdateProfile" type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+              </form>
+          </div>
+      </div>
+   </BaseModal>
     
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref, defineAsyncComponent } from 'vue';
 import { useRoute } from 'vue-router';
+import { useAuthenticationStore } from '@/stores/authentication'
+import toaster from '@/helper/toaster';
+import ErrorMessage from '@/components/Form/ErrorMessage.vue';
+import {http , url } from '@/helper/domain';
+
+const BaseModal = defineAsyncComponent(() =>
+    import ("@/components/Modal/BaseModal.vue")
+)
 
 const route = useRoute()
+const authentication = useAuthenticationStore()
 
 const sidebarActive = ref(false)
+const modalActive = ref(false)
+const adminData = ref(null)
+const errorBag = ref([])
+const waitingResponse = ref(false)
+
+const passwordPayload = reactive({
+   password: '',
+   password_confirmation: '',
+})
+
+const toggleModal = async() => {
+   if(modalActive.value == false){
+      await handleFecthAdmin()
+   }
+   modalActive.value = !modalActive.value
+}
+
+const handleFecthAdmin = async() => {
+
+   try {
+      const response = await authentication.getUserAction()
+      adminData.value = response
+      
+   } catch (error) {
+      console.log(error.response)
+   }
+}
+
+const handleUpdateProfile = async() => {
+   try {
+      waitingResponse.value = true
+
+      let payload = {
+         full_name: adminData.value.full_name,
+         phone_number: adminData.value.phone_number,
+      }
+
+      if (passwordPayload.password) {
+         payload.password = passwordPayload.password;
+         payload.password_confirmation = passwordPayload.password_confirmation;
+      }
+
+      console.log(payload)
+      const response = await http().put('/admin/profile' , payload)
+      waitingResponse.value = false
+      toggleModal()
+      toaster('Success update profile' , true)
+   } catch (error) {
+      waitingResponse.value = false
+      let errors = ''
+        console.log(error.response)
+        if(error.response.data.validation_errors){
+                errors =error.response.data.validation_errors
+                Object.keys(errors).forEach(key => {
+                errorBag.value[key] =  errors[key][0]
+            })
+        }
+        toaster('Invalid data' , false)
+   }
+}
 
 const toggleSidebar = () => {
    sidebarActive.value = !sidebarActive.value
