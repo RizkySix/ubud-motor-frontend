@@ -1,7 +1,7 @@
 <template>
 <Image1 /><NavBar />
 
-<section class="mt-[330px] md:mt-[700px] px-16 md:px-24 mb-14">
+<section class="mt-[330px] md:mt-[700px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
         <div class="text-center py-4">
             <PageTitleVue>
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="w-full mx-auto mt-24">
+      <!--   <div class="w-full mx-auto mt-24">
             <h3 class="text-gray-500 font-bold text-13xl mb-4 text-center">
                 Meet Our Team
             </h3>
@@ -53,7 +53,7 @@
                     <span class="font-semibold text-lg mt-2 text-gray-500">Owner Lavista Rental Bike</span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </section>

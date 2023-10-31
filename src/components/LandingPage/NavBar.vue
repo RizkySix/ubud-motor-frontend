@@ -13,7 +13,7 @@
     </div>
     <router-link :to="{name: 'gallery'}" class="relative hover:text-blue-400 cursor-pointer">Gallery</router-link >
     <router-link :to="{name: 'about.us'}" class="relative hover:text-blue-400 cursor-pointer">About Us</router-link >
-    <a href="../../src/assets/term.pdf" target="_blank"  class="relative hover:text-blue-400 cursor-pointer">Term & Conditions</a >
+    <a href="../../../public/term.pdf" target="_blank"  class="relative hover:text-blue-400 cursor-pointer">Term & Conditions</a >
   </div>
 
   <!-- MOBILE -->

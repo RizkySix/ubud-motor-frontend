@@ -1,7 +1,7 @@
 <template>
  <Image1 /><NavBar />
 
-<section class="mt-[330px] md:mt-[700px] px-16 md:px-24 mb-14">
+<section class="mt-[330px] md:mt-[700px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
         <div class="text-center py-4">
             <PageTitleVue>
@@ -40,7 +40,7 @@
                         </CatalogTitle>
                     </div>
                     <p class="text-gray-500">
-                            For information on <span class="font-bold">units availability</span> or other information regarding motorbike rental, please contact us.
+                            For information on <span class="font-bold">units availability</span> or other information regarding motorbike rental, please contact us. Oh ya, we will only accept motorbike <span class="font-bold">delivery for bookings over 5 days</span>, but just fill in the delivery address input.
                     </p>
 
                     <div class="flex gap-4 mt-4">
@@ -146,7 +146,7 @@
                                 <ErrorMessage v-if="errorBag.delivery_address">{{ errorBag.delivery_address }}</ErrorMessage>
                             </div>
                             <div class="relative z-0 w-full mb-6 group">
-                                <FloatingGmap :type="'text'" :name="'pickup_address'" :id="'pickup_address'" :label="'Pickup Address'" />
+                                <FloatingGmap :modelValue="'Lavista Rental Bike, Gg. Jalak XV, Tibubeneng, Canggu, Badung Regency, Bali 80363'" :type="'text'" :name="'pickup_address'" :id="'pickup_address'" :label="'Pickup Address'" :disable="true" />
                                 <ErrorMessage v-if="errorBag.pickup_address">{{ errorBag.pickup_address }}</ErrorMessage>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                             </div>
 
                             <div class="relative z-0 w-full mb-6 group">
-                                <img v-if="bookingData.card_image" src="" alt="Passport" id="previewPassport" class="rounded-lg h-[300px] md:h-[350px] w-full">
+                                <img v-if="bookingData.card_image" src="" alt="Passport" id="previewPassport" class="rounded-lg h-[300px] md:h-[350px] w-full object-cover">
                                 <ImageSkeletonVue v-else />
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                             <div class="flex items-center h-5">
                             <input v-model="termAgreement" id="remember" type="checkbox" :value="true" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
                             </div>
-                            <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Agree with <a href="../src/assets/term.pdf" target="_blank" class="text-blue-500">Term and Conditions</a> </label>
+                            <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Agree with <a href="../../public/term.pdf" target="_blank" class="text-blue-500">Term and Conditions</a> </label>
                             
                         </div>
                         <ErrorMessage v-if="errorBag.agreement">{{ errorBag.agreement }}</ErrorMessage>
@@ -214,7 +214,7 @@
                         </CatalogTitle>
                     </div>
                     <p class="text-gray-500">
-                            For information on <span class="font-bold">units availability</span> or other information regarding motorbike rental, please contact us.
+                            For information on <span class="font-bold">units availability</span> or other information regarding motorbike rental, please contact us. Oh ya, we will only accept motorbike <span class="font-bold">delivery for bookings over 5 days</span>, but just fill in the delivery address input.
                     </p>
 
                     <div class="flex gap-4 mt-4">
@@ -373,7 +373,7 @@ const handleMakeBooking = async() => {
     bookingData.motor_name = selectedMotor.value.motor_name
     bookingData.package = selectedPackage.value.id
     bookingData.delivery_address =  document.getElementById('delivery_address').value
-    bookingData.pickup_address =  document.getElementById('pickup_address').value
+    bookingData.pickup_address =  'Lavista Rental Bike, Gg. Jalak XV, Tibubeneng, Canggu, Badung Regency, Bali 80363'
     
     const form = new FormData()
     Object.keys(bookingData).forEach(key => {

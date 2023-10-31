@@ -127,16 +127,17 @@ const handleLogin = async () => {
 }
 
 const navigation = () => {
-   
-    if(props.currentRoute !== 'home'){
-            router.push({
-                name: localStorage.getItem('toPage') ?? 'home'
-            })
-       }else{
-            router.push({
-                name: 'booking'
-            })
-       }
+    if(props.currentRoute !== 'home' && props.currentRoute !== 'booking'){
+        router.push({
+            name: localStorage.getItem('toPage') ?? 'home'
+        })
+    }else if(props.currentRoute === 'booking'){
+        authentication.closeModalAfterAuth = true
+    }else{
+        router.push({
+            name: 'booking'
+        })
+    }
        
 }
 

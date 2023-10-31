@@ -9,7 +9,7 @@
         <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">  
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Sign in to your account
+                    Daftar Sebagai Admin
               </h1>
               <form @submit.prevent="handleRegister" class="space-y-4 md:space-y-6" action="#">
                   <div>

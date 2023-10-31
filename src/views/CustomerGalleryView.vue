@@ -1,7 +1,7 @@
 <template>
 <Image1 /><NavBar />
 
-<section class="mt-[330px] md:mt-[700px] px-16 md:px-24 mb-14">
+<section class="mt-[330px] md:mt-[700px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
         <div class="text-center py-4">
             <PageTitleVue>
@@ -19,7 +19,7 @@
    
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div v-if="galleries" v-for="(gallery, index) in galleries" :key="index">
-            <img :src="gallery.gallery_image" alt="" class="w-full h-[400px] max-w-full max-h-full object-cover cursor-pointer" @click="lightToggle(index)" >
+            <img :src="gallery.gallery_image" alt="" class="w-full h-[300px] md:h-[400px] max-w-full max-h-full object-cover cursor-pointer" @click="lightToggle(index)" >
         </div>
         <div v-else v-for="(skeleton , num) in 12" :key="num">
             <ImageSkeletonVue />

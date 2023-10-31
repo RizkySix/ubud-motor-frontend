@@ -71,6 +71,14 @@ onMounted(() => {
 })
 
 
+watch([() => authentication.closeModalAfterAuth], ([newState] , [oldState]) => {
+  if(newState == true){
+    modalActive.value = false
+    token.value = localStorage.getItem('customer_token')
+    authentication.closeModalAfterAuth = false
+  }
+})
+
 </script>
 
 

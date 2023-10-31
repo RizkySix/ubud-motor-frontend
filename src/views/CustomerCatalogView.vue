@@ -1,7 +1,7 @@
 <template>
  <Image1 /><NavBar />
 
-<section class="mt-[330px] md:mt-[700px] px-16 md:px-24">
+<section class="mt-[330px] md:mt-[700px] px-8 md:px-24">
     <div class="mx-auto">
         <div class="text-center py-4">
             <PageTitleVue>

@@ -77,6 +77,7 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
 
       const customerToken = ref(localStorage.getItem('customer_token'))
       const adminVerify = ref(null)
+      const closeModalAfterAuth = ref(false)
     
-      return {loginAction , customerToken , registerAction , logoutAction , getUserAction , adminVerify}
+      return {loginAction , customerToken , registerAction , logoutAction , getUserAction , adminVerify , closeModalAfterAuth}
 })
