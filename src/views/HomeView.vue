@@ -1,7 +1,8 @@
 <template>
-  <div class="relative bg-white w-full h-auto md:h-[2420px] overflow-hidden">
+  <div class="relative bg-white w-full h-auto md:h-[3000px] overflow-hidden">
     <Image1 /><NavBar /><SimpleBook /><Facilities />
-    <FooterComp /> 
+    <LocationMapVue/>
+    <FooterComp />
   </div>
   <BookingFloatingVue  />
 </template>
@@ -14,7 +15,7 @@ import SpecialOffers from "@/components/LandingPage/SpecialOffers.vue"
 import FooterComp from "@/components/LandingPage/FooterComp.vue"
 import SimpleBook from "@/components/LandingPage/SimpleBook.vue"
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
-
+import LocationMapVue from "@/components/LandingPage/LocationMap.vue"
 
 </script>
 

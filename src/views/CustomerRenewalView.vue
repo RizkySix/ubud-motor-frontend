@@ -69,7 +69,9 @@
                         </div>
                      
                     <button @submit.prevent="handleAddRenewal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex gap-2">
-                        Add Renewal
+                        <span class=" mx-auto">
+                            Add Renewal
+                        </span>
                         <img v-if="waitingResponse" class="h-5 w-5 ml-2 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
                     </button>
                     </form>
@@ -153,7 +155,7 @@ const handleCalculatePrice = async() => {
     waitingCalculate.value = false
     setTimeout(() => {
         renewalData.amount = response.data.data
-    }, 30);
+    }, 100);
 
     console.log(response.data.data)
 
@@ -193,6 +195,7 @@ const handleAddRenewal = async() => {
         booking.newBooking += 1
     } catch (error) {
         console.log(error.response.data)
+        waitingResponse.value = false
         errorBag.value = error.response.data
         hasError.value = true
 

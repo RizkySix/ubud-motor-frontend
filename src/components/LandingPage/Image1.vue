@@ -10,14 +10,14 @@
     <b
       class="absolute my-0 mx-[!important] top-[417px] left-[calc(50%_-_600px)] hidden md:inline-block z-[1] w-3/4"
     >
-      <p class="m-0">Lavista Motor Bike,</p>
+      <p class="m-0">Lavista Rental Bike,</p>
       <p class="m-0">Where Every Ride is an Unforgettable Adventure in Paradise!</p>
     </b>
 
     <b
       class="absolute inline-block md:hidden z-[1] top-[200px] left-10"
     >
-      <p class="m-0">Lavista Motor Bike,</p>
+      <p class="m-0">Lavista Rental Bike,</p>
       <p class="m-0">Where Every Ride is an Unforgettable Adventure in Paradise!</p>
     </b>
   </div>

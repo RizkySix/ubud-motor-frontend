@@ -4,7 +4,7 @@
         <div class="max-w-sm mx-auto md:max-w-lg">
             <div class="w-full">
                 <a href="#" class="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img class="w-32 h-auto" src="@/assets/logo.svg" alt="logo"> 
+                    <img class="w-20 h-auto" src="@/assets/logo.png" alt="logo"> 
                 </a>
                 <div class="bg-white rounded shadow dark:border h-64 py-3 text-center">
                     <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">

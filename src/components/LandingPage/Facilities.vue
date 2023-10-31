@@ -9,11 +9,11 @@
       <img
         class="relative rounded-23xl w-[400px] h-[760px] object-cover z-[0]"
         alt=""
-        src="/rectangle-6@2x.png"
+        src="@/assets/potrait.jpg"
       />
       <b
         class="absolute my-0 mx-[!important] top-[651px] left-[140px] inline-block z-[1]"
-        >Rooms</b
+        >Proper Collection</b
       >
     </div>
     <div
@@ -22,11 +22,14 @@
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
         alt=""
-        src="/rectangle-10@2x.png"
+        src="@/assets/honda.jpg"
       />
       <b
-        class="absolute my-0 mx-[!important] top-[255px] left-[52px] inline-block z-[1]"
-        >Service & Facilities</b
+        class="absolute my-0 mx-[!important] top-[255px] left-[52px] inline-block z-[1] text-center"
+        >
+        <p class="m-0">Well-Maintained</p>
+          <p class="mt-0">Motorbikes</p>
+        </b
       >
     </div>
     <div
@@ -35,11 +38,11 @@
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
         alt=""
-        src="/rectangle-8@2x.png"
+        src="@/assets/nmax.jpg"
       />
       <b
-        class="absolute my-0 mx-[!important] top-[254px] left-[149px] inline-block z-[1]"
-        >Dining</b
+        class="absolute my-0 mx-[!important] top-[254px] left-[110px] inline-block z-[1]"
+        >Competitive Prices</b
       >
     </div>
     <div
@@ -48,13 +51,13 @@
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
         alt=""
-        src="/rectangle-9@2x.png"
+        src="@/assets/motor-group.jpg"
       />
       <b
         class="absolute my-0 mx-[!important] top-[254px] left-[80px] inline-block z-[1]"
       >
-        <p class="m-0">Conferences &</p>
-        <p class="m-0">Meetings</p>
+        <p class="m-0">Wide Selection of</p>
+        <p class="m-0">Quality Motorbikes</p>
       </b>
     </div>
     <div
@@ -63,11 +66,11 @@
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
         alt=""
-        src="/rectangle-11@2x.png"
+        src="@/assets/road.jpg"
       />
       <b
         class="absolute my-0 mx-[!important] top-[255px] left-[52px] inline-block z-[1]"
-        >Wedding Package</b
+        >Established Since 2019</b
       >
     </div>
   </div>
@@ -78,39 +81,42 @@
     
       <div class="justify-center gap-8 text-xl relative mb-5">
         <div class="relative">
-          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image1" src="/rectangle-6@2x.png">
-          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Rooms</b>
+          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image1" src="@/assets/potrait.jpg">
+          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Proper Collection</b>
         </div>
       </div>
 
     <div class="justify-center gap-8 text-xl relative mb-5">
       <div class="relative">
-          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image2" src="/rectangle-10@2x.png">
-          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Service & Facilities</b>
-        </div>
-    </div>
-
-    <div class="justify-center gap-8 text-xl relative mb-5">
-      <div class="relative">
-          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image3" src="/rectangle-8@2x.png">
-          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Dining</b>
-        </div>
-    </div>
-
-    <div class="justify-center gap-8 text-xl relative mb-5">
-      <div class="relative">
-          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image4" src="/rectangle-9@2x.png">
+          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image2" src="@/assets/honda.jpg">
           <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">
-            <p class="m-0">Conferences &</p>
-            <p class="m-0">Meetings</p>
+            <p class="m-0">Well-Maintained</p>
+             <p class="mt-2">Motorbikes</p>
+          </b>
+        </div>
+    </div>
+
+    <div class="justify-center gap-8 text-xl relative mb-5">
+      <div class="relative">
+          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image3" src="@/assets/nmax.jpg">
+          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Competitive Prices</b>
+        </div>
+    </div>
+
+    <div class="justify-center gap-8 text-xl relative mb-5">
+      <div class="relative">
+          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image4" src="@/assets/motor-group.jpg">
+          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">
+            <p class="m-0">Wide Selection of</p>
+             <p class="mt-2">Quality Motorbikes</p>
           </b>
         </div>
     </div>
 
     <div class="justify-center gap-8 text-xl relative">
       <div class="relative">
-          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image5" src="/rectangle-11@2x.png">
-          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Wedding Package</b>
+          <img class="rounded-23xl w-full h-[300px] object-cover z-0" alt="image5" src="@/assets/road.jpg">
+          <b class="absolute text-center bottom-10 left-0 right-0 z-20 text-17xl">Established Since 2019</b>
         </div>
     </div>
     </div>  

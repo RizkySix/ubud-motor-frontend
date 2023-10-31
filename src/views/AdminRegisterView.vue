@@ -1,9 +1,9 @@
 <template>
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          Flowbite    
+    <a class="cursor-pointer flex items-center mb-6 text-2xl font-semibold text-gray-900 ">
+          <img class="w-14 h-14 mr-2" src="@/assets/logo.png" alt="logo">
+          Lavista    
       </a>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">  
@@ -38,7 +38,7 @@
                   </div>
                   <button @submit.prevent="handleRegister" type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign Up</button>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Sudah terdaftar? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In</a>
+                      Sudah terdaftar? <router-link :to="{name: 'admin.login'}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In</router-link>
                   </p>
               </form>
           </div>

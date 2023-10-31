@@ -40,11 +40,11 @@
       class="my-0 mx-[!important] -mt-6 flex items-center justify-center gap-[35px] z-[2]"
     >
     
-    <div class="b animate-bounce mx-auto h-16 w-64 flex justify-center items-center">
+    <router-link :to="{name: 'booking'}" class="b animate-bounce mx-auto h-16 w-64 flex justify-center items-center">
       <div class="i h-16 w-64 bg-gradient-to-br from-blue-400 to-blue-600 items-center rounded-xl shadow-2xl  cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
       <a class="text-center text-5xl text-white font-semibold z-10 pointer-events-none flex justify-content items-center"><span class=""></span>Book Now !!!</a>
-    </div>
+    </router-link>
 
     </div>
    
@@ -93,11 +93,11 @@
       class=" mt-8 mx-[!important] flex items-center justify-center gap-[35px] z-[2]"
     >
     
-    <div class="b animate-bounce mx-auto h-16 w-48 flex justify-center items-center">
+    <router-link :to="{name: 'booking'}" class="b animate-bounce mx-auto h-16 w-48 flex justify-center items-center">
       <div class="i h-16 w-48 bg-gradient-to-br from-blue-400 to-blue-600 items-center rounded-xl shadow-2xl  cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
       <a class="text-center text-xl text-white font-semibold z-10 pointer-events-none flex justify-content items-center"><span class=""></span>Book Now !!!</a>
-    </div>
+    </router-link>
 
     </div>
    </div>

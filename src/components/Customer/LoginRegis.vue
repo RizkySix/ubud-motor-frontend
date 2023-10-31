@@ -2,8 +2,8 @@
 <section class="bg-gray-50">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-10">
       <a class="cursor-pointer flex items-center mb-6 text-2xl font-semibold text-gray-900 ">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          Flowbite    
+          <img class="w-14 h-14 mr-2" src="@/assets/logo.png" alt="logo">
+          Lavista    
       </a>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
         <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">

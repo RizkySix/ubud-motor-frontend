@@ -10,10 +10,11 @@
                <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
             </svg>
          </button>
-        <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-          <img  src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+        <a href="#" class="flex ml-2 md:mr-24">
+          <img  src="@/assets/logo.png" class="h-10 w-10 mr-3" alt="FlowBite Logo" />
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Lavista</span>
         </a>
+        
       </div>
       <div class="flex items-center">
           <div class="flex items-center ml-3">
@@ -85,7 +86,7 @@
                <svg :class="{'text-gray-500': route.name !== 'admin.make.gallery' , 'text-blue-600': route.name === 'admin.make.gallery'}" class="flex-shrink-0 w-5 h-5 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4 3h11.2A2.4 2.4 0 0 1 22 5.4v11.2a2.4 2.4 0 0 1-2.4 2.4H8.4A2.4 2.4 0 0 1 6 16.6V5.4A2.4 2.4 0 0 1 8.4 3ZM14 6a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3h-3a1 1 0 1 1 0-2h3V7a1 1 0 0 1 1-1Z"></path><path d="M4 5a1 1 0 0 0-2 0v11.6C2 20.132 4.868 23 8.4 23H20a1 1 0 1 0 0-2H8.4A4.403 4.403 0 0 1 4 16.6V5Z"></path>
                </svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Buat Gallery</span>
+               <span class="flex-1 ml-3 whitespace-nowrap group-hover:text-gray-900" :class="{'text-gray-500': route.name !== 'admin.make.gallery' , 'text-blue-600': route.name === 'admin.make.gallery'}">Buat Gallery</span>
             </router-link>
          </li>
          <li>
@@ -105,6 +106,16 @@
                </svg>
                <span class="ml-3 flex-1 whitespace-nowrap group-hover:text-gray-900" :class="{'text-gray-500': route.name !== 'admin.galleries' , 'text-blue-600': route.name === 'admin.galleries'}">Galleries</span>
             </router-link>
+         </li>
+         <li>
+            <button @click="handleLogout" type="button" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700 group">
+               <svg class="flex-shrink-0 w-5 h-5 transition duration-75 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
+                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>
+                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"/>
+               </svg>
+               <span class="ml-3 flex-1 whitespace-nowrap text-gray-500 group-hover:text-gray-900">Sign Out</span>
+            </button>
          </li>
       </ul>
    </div>
@@ -158,7 +169,7 @@
 
 <script setup>
 import { reactive, ref, defineAsyncComponent } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAuthenticationStore } from '@/stores/authentication'
 import toaster from '@/helper/toaster';
 import ErrorMessage from '@/components/Form/ErrorMessage.vue';
@@ -169,6 +180,7 @@ const BaseModal = defineAsyncComponent(() =>
 )
 
 const route = useRoute()
+const router = useRouter()
 const authentication = useAuthenticationStore()
 
 const sidebarActive = ref(false)
@@ -230,6 +242,17 @@ const handleUpdateProfile = async() => {
             })
         }
         toaster('Invalid data' , false)
+   }
+}
+
+const handleLogout = async() => {
+   const response = await authentication.logoutAction('/admin/logout')
+   if(response){
+      router.push({
+         name: 'home'
+      })
+   }else{
+      toaster('Gagal logout' , false)
    }
 }
 

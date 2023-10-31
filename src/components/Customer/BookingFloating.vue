@@ -1,5 +1,5 @@
 <template>
- <div @click="toggleModal" class="fixed w-20 md:w-16 bottom-0 mb-10 md:mb-0 left-0 p-4 z-50 cursor-pointer">
+ <div @click="toggleModal" class=" fixed w-14 md:w-16 -bottom-12 md:bottom-0 mb-10 md:mb-0 left-0 p-4 z-[52] cursor-pointer">
   <div v-if="booking.newBooking > 0" class="notif w-7 h-7 bg-red-500 text-white text-sm font-semibold rounded-full flex items-center justify-center absolute left-12 md:left-14 top-8">
     <!-- Isi badge (misalnya, angka notifikasi) -->
     {{ booking.newBooking }}
@@ -13,10 +13,10 @@
   </div>
   
 
-  <div v-if="token" @click="handleLogout" class="fixed w-10 md:w-10 -bottom-5 mb-10 md:mb-0 left-9 md:left-14 p-4 z-[51] cursor-pointer">
+  <div v-if="token" @click="handleLogout" class=" rounded-full fixed w-10 md:w-10 -bottom-16 md:-bottom-5 mb-10 md:mb-0 left-9 md:left-14 p-4 z-[51] cursor-pointer">
     <a id="logout" class="text-white py-2 px-4 rounded-full">
 
-      <svg class="h-7 w-7 md:h-8 md:w-8 " viewBox="-6.4 -6.4 76.80 76.80" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect x="-6.4" y="-6.4" width="76.80" height="76.80" rx="38.4" fill="#700000" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fill-rule="evenodd"> <path fill="#4796E7" d="M1,35.0023695 C1,32.7919219 2.78716697,30.7942228 4.96428975,30.5435455 L18,29.0425936 L31.0357102,30.5435455 C33.225127,30.7956384 35,32.7918218 35,35.0023695 L35,42 L1,42 L1,35.0023695 Z"></path> <path fill="#FFDD95" d="M12,24.3164468 C8.98979073,21.470456 7,16.8615543 7,13 C7,6.92486775 11.9248678,2 18,2 C24.0751322,2 29,6.92486775 29,13 C29,16.8615543 27.0102093,21.470456 24,24.3164468 L24,31 C24,31 19.9325778,32.4486507 18,32.4486507 C16.0674222,32.4486507 12,31 12,31 L12,24.3164468 Z"></path> <circle cx="9" cy="18" r="3" fill="#FFDD95"></circle> <circle cx="27" cy="18" r="3" fill="#FFDD95"></circle> <path fill="#BD7575" d="M29,49.0023695 C29,46.7919219 30.787167,44.7942228 32.9642898,44.5435455 L46,43.0425936 L59.0357102,44.5435455 C61.225127,44.7956384 63,46.7918218 63,49.0023695 L63,56 L29,56 L29,49.0023695 Z"></path> <path fill="#FFDD95" d="M40,38.3164468 C36.9897907,35.470456 35,30.8615543 35,27 C35,20.9248678 39.9248678,16 46,16 C52.0751322,16 57,20.9248678 57,27 C57,30.8615543 55.0102093,35.470456 52,38.3164468 L52,45 C52,45 47.9325778,46.4486507 46,46.4486507 C44.0674222,46.4486507 40,45 40,45 L40,38.3164468 Z"></path> <circle cx="37" cy="32" r="3" fill="#FFDD95"></circle> <circle cx="55" cy="32" r="3" fill="#FFDD95"></circle> <circle cx="15" cy="53" r="8" fill="#F5413E"></circle> <path stroke="#FFDD95" stroke-linecap="round" stroke-width="2" d="M12.007032 50.0268893L18 56M12.0169607 56.0099286L17.9900714 50.0169607"></path> </g> </g></svg>
+      <svg class="h-6 w-6 md:h-8 md:w-8 " viewBox="-6.4 -6.4 76.80 76.80" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect x="-6.4" y="-6.4" width="76.80" height="76.80" rx="38.4" fill="#700000" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" fill-rule="evenodd"> <path fill="#4796E7" d="M1,35.0023695 C1,32.7919219 2.78716697,30.7942228 4.96428975,30.5435455 L18,29.0425936 L31.0357102,30.5435455 C33.225127,30.7956384 35,32.7918218 35,35.0023695 L35,42 L1,42 L1,35.0023695 Z"></path> <path fill="#FFDD95" d="M12,24.3164468 C8.98979073,21.470456 7,16.8615543 7,13 C7,6.92486775 11.9248678,2 18,2 C24.0751322,2 29,6.92486775 29,13 C29,16.8615543 27.0102093,21.470456 24,24.3164468 L24,31 C24,31 19.9325778,32.4486507 18,32.4486507 C16.0674222,32.4486507 12,31 12,31 L12,24.3164468 Z"></path> <circle cx="9" cy="18" r="3" fill="#FFDD95"></circle> <circle cx="27" cy="18" r="3" fill="#FFDD95"></circle> <path fill="#BD7575" d="M29,49.0023695 C29,46.7919219 30.787167,44.7942228 32.9642898,44.5435455 L46,43.0425936 L59.0357102,44.5435455 C61.225127,44.7956384 63,46.7918218 63,49.0023695 L63,56 L29,56 L29,49.0023695 Z"></path> <path fill="#FFDD95" d="M40,38.3164468 C36.9897907,35.470456 35,30.8615543 35,27 C35,20.9248678 39.9248678,16 46,16 C52.0751322,16 57,20.9248678 57,27 C57,30.8615543 55.0102093,35.470456 52,38.3164468 L52,45 C52,45 47.9325778,46.4486507 46,46.4486507 C44.0674222,46.4486507 40,45 40,45 L40,38.3164468 Z"></path> <circle cx="37" cy="32" r="3" fill="#FFDD95"></circle> <circle cx="55" cy="32" r="3" fill="#FFDD95"></circle> <circle cx="15" cy="53" r="8" fill="#F5413E"></circle> <path stroke="#FFDD95" stroke-linecap="round" stroke-width="2" d="M12.007032 50.0268893L18 56M12.0169607 56.0099286L17.9900714 50.0169607"></path> </g> </g></svg>
     </a>
 
   </div>
@@ -34,7 +34,6 @@ import LoginRegis  from '@/components/Customer/LoginRegis.vue'
 import { useBookingStore } from '@/stores/booking';
 import { useRoute } from 'vue-router';
 import {logoutConfirmationCustomer } from '@/helper/confirmation';
-import {http , url } from '@/helper/domain';
 import { useAuthenticationStore } from '@/stores/authentication';
 
 const route = useRoute()

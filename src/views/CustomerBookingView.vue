@@ -185,9 +185,18 @@
                             </div>
                         </div>
                         
-                   
-                    <button @submit.prevent="handleMakeBooking" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex gap-3">
-                       <span>
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                            <input v-model="termAgreement" id="remember" type="checkbox" :value="true" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
+                            </div>
+                            <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Agree with <a href="../src/assets/term.pdf" target="_blank" class="text-blue-500">Term and Conditions</a> </label>
+                            
+                        </div>
+                        <ErrorMessage v-if="errorBag.agreement">{{ errorBag.agreement }}</ErrorMessage>
+
+
+                    <button @submit.prevent="handleMakeBooking" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex gap-3 mt-6">
+                       <span class="mx-auto">
                         Make Booking
                        </span>  
                        <img v-if="waitingResponse" class="h-6 w-6 mx-auto animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
@@ -252,7 +261,7 @@ const catalog = useCatalogStore()
 const authentication = useAuthenticationStore()
 const booking = useBookingStore()
 const authData = ref(null)
-
+const termAgreement = ref(false)
 
 //selecte motor
 const selectedMotor = ref({})
@@ -354,7 +363,13 @@ const errorBag = ref({})
 const waitingResponse = ref(false)
 
 const handleMakeBooking = async() => {
+    
+    if(!termAgreement.value ){
+        errorBag.value['agreement'] = 'Please checklist the agreement'
+        return false
+    }
     waitingResponse.value = true
+
     bookingData.motor_name = selectedMotor.value.motor_name
     bookingData.package = selectedPackage.value.id
     bookingData.delivery_address =  document.getElementById('delivery_address').value

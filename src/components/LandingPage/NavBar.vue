@@ -1,19 +1,19 @@
 <template>
   <div
-    class="absolute top-[20px] md:top-[40px]  md:left-[180px] rounded-lg bg-white overflow-hidden hidden md:flex md:flex-row items-center justify-start py-[10px] md:py-[19px] px-[20px] md:px-[49px] gap-[20px] md:gap-[84px] text-left text-sm md:text-5xl text-gray-100 font-inter"
+    class="absolute top-[20px] md:top-[40px]  md:left-[140px] rounded-lg bg-white overflow-hidden hidden md:flex md:flex-row items-center justify-start py-[10px] md:py-[19px] px-[20px] md:px-[49px] gap-[20px] md:gap-[84px] text-left text-sm md:text-5xl text-gray-100 font-inter"
   >
-    <div class="relative hover:text-blue-400 cursor-pointer">Home</div>
-    <div class="relative hover:text-blue-400 cursor-pointer">Catalog</div>
-    <div class="relative hover:text-blue-400 cursor-pointer">Booking</div>
+    <router-link :to="{name: 'home'}" class="relative hover:text-blue-400 cursor-pointer">Home</router-link>
+    <router-link :to="{name: 'catalogs'}" class="relative hover:text-blue-400 cursor-pointer">Catalog</router-link>
+    <router-link :to="{name: 'booking'}" class="relative hover:text-blue-400 cursor-pointer">Booking</router-link>
     <div class="relative  w-[30px] md:w-[78px] h-[12px] md:h-[42px] text-center md:text-13xl font-inika">
       <b class="absolute top-[0px] left-[0px] leading-[64.3%]">
         <p class="m-0">Lavista</p>
-        <p class="m-0">Motor</p>
+        <p class="m-0">Rental</p>
       </b>
     </div>
-    <div class="relative hover:text-blue-400 cursor-pointer">Gallery</div>
-    <div class="relative hover:text-blue-400 cursor-pointer">Contact</div>
-    <div class="relative hover:text-blue-400 cursor-pointer">Pricing</div>
+    <router-link :to="{name: 'gallery'}" class="relative hover:text-blue-400 cursor-pointer">Gallery</router-link >
+    <router-link :to="{name: 'about.us'}" class="relative hover:text-blue-400 cursor-pointer">About Us</router-link >
+    <a href="../../src/assets/term.pdf" target="_blank"  class="relative hover:text-blue-400 cursor-pointer">Term & Conditions</a >
   </div>
 
   <!-- MOBILE -->
@@ -35,24 +35,24 @@
   </div>
 
   <Hamburger :modalActive="modalActive" @close-modal="toggleModal">
-  <div class="  py-20 flex flex-col items-center justify-center text-center">
+  <div class="  py-20 flex flex-col items-center justify-center text-center gap-4">
     <div class="menu-item hover:bg-slate-200 w-full">
-      <div class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Home</div>
+      <router-link :to="{name: 'home'}" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Home</router-link>
     </div>
     <div class="menu-item hover:bg-slate-200 w-full">
-      <div class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Catalog</div>
+      <router-link :to="{name: 'catalogs'}" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Catalog</router-link>
     </div>
     <div class="menu-item hover:bg-slate-200 w-full">
-      <div class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Booking</div>
+      <router-link :to="{name: 'booking'}" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Booking</router-link>
     </div>
     <div class="menu-item hover:bg-slate-200 w-full">
-      <div class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Gallery</div>
+      <router-link :to="{name: 'gallery'}" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Gallery</router-link>
     </div>
     <div class="menu-item hover:bg-slate-200 w-full">
-      <div class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Contact</div>
+      <router-link :to="{name: 'about.us'}" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">About Us</router-link>
     </div>
     <div class="menu-item hover:bg-slate-200 w-full">
-      <div class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Pricing</div>
+      <a href="../../src/assets/term.pdf" target="_blank" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Term & Conditions</a>
     </div>
   </div>
 </Hamburger>
