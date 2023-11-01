@@ -16,6 +16,7 @@ import AboutUsView from '@/views/AboutUsView.vue'
 import AdminRegisterView from '@/views/AdminRegisterView.vue'
 import AdminVerifyOtpView from '@/views/AdminVerifyOtpView.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
+import ResetPasswordConfirmView from '@/views/ResetPasswordConfirmView.vue'
 import { useAuthenticationStore } from '@/stores/authentication'
 
 let verifiedAdminRoute = [
@@ -117,6 +118,11 @@ const router = createRouter({
       path: '/admin/galleries',
       name: 'admin.galleries',
       component: GalleriesView
+    },
+    {
+      path: '/admin/confirm/:email',
+      name: 'admin.password.confirm',
+      component: ResetPasswordConfirmView
     },
   ]
 })

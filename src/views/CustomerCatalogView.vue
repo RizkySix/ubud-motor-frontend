@@ -146,7 +146,6 @@
 
 <script setup>
 import { ref , watch , reactive , onMounted, defineAsyncComponent  } from 'vue' 
-import Image1 from "@/components/LandingPage/Image1.vue"
 import NavBar from "@/components/LandingPage/NavBar.vue"
 import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 import Swiper from '@/components/Swiper/Swiper.vue';

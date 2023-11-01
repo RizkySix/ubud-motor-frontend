@@ -20,7 +20,7 @@
        },
        readonly: {
            type: Boolean,
-           default: true
+           default: false
        }
    })
    defineEmits(['update:modelValue'])
