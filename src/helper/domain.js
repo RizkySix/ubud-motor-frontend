@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const url = 'http://ubud-motor.test/api/v1'
+const front_local_url = 'http://localhost:5173'
 const http = () => {
 
     let options = {
@@ -17,4 +18,4 @@ const http = () => {
     return axios.create(options)
 }
 
-export {http , url}
+export {http , url , front_local_url}

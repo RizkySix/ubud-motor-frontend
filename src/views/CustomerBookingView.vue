@@ -254,10 +254,40 @@ import toaster from '@/helper/toaster';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import { useBookingStore } from '@/stores/booking';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
-import { useHead } from '@unhead/vue'
+import { useHead } from '@unhead/vue';
+import { front_local_url } from '@/helper/domain';
 
 useHead({
-  title: 'Booking'
+    title: 'Booking Page - Lavista Rental Bike',
+    meta: [
+      {
+        name: 'description',
+        content: 'Book your motor for your Bali adventure with Lavista Rental Bike.'
+      },
+      {
+        name: 'author',
+        content: 'Lavista Rental Bike, rizky__666'
+      },
+        {
+        name: 'keywords',
+        content: 'motorbike rental, Canggu, Bali, latest bikes, best prices, customer support, riding, nmax, vespa, lavista rental bike, lavista, wisatawan, bule, cheap motor',
+        },
+      {
+        property: 'og:title',
+        content: 'Booking Page - Lavista Rental Bike'
+      },
+      {
+        property: 'og:description',
+        content: 'Book your motor for your Bali adventure with Lavista Rental Bike.'
+      },
+      {
+        property: 'og:image',
+        content: 'https://your-domain.com/booking-image.jpg'
+      },{
+      property: 'og:url',
+      content: front_local_url + '/booking', // Replace with the actual URL
+    },
+    ]
 })
 
 const catalogs = ref(null)

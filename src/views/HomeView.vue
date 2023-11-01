@@ -17,17 +17,18 @@ import SimpleBook from "@/components/LandingPage/SimpleBook.vue"
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import LocationMapVue from "@/components/LandingPage/LocationMap.vue"
 import { useHead } from '@unhead/vue'
+import {front_local_url} from '@/helper/domain.js'
 
 useHead({
   title: 'Motorbike Booking in Canggu, Bali - Latest Bikes & Best Prices',
   meta: [
     {
       name: 'description',
-      content: 'Motorbike booking in Canggu, Bali since 2019. Discover a variety of the latest motorbikes with the best quality and affordable prices. Our team is ready to assist you anytime.',
+      content: 'Lavista Rental Bike is your best choice for motorbike rental in Canggu, Bali since 2019. We offer a wide range of the latest motorbikes, known for their quality and affordability. Our dedicated team is always ready to assist you with the best customer support for your ride of a lifetime.',
     },
     {
       name: 'keywords',
-      content: 'motorbike rental, Canggu, Bali, latest bikes, best prices, customer support, riding, nmax, vespa, lavista rental bike, lavista, wisatawan, bule, cheap motor',
+      content: 'motorbike rental, Canggu, Bali, motorbike for rent, latest bikes, best prices, customer support, riding, nmax, vespa, lavista rental bike, lavista, wisatawan, bule, cheap motor, explore Bali, tourist transportation, tropical adventure, scooter rental, vacation experience',
     },
     {
       name: 'author',
@@ -39,7 +40,7 @@ useHead({
     },
     {
       property: 'og:description',
-      content: 'Motorbike booking in Canggu, Bali since 2019. Discover a variety of the latest motorbikes with the best quality and affordable prices. Our team is ready to assist you anytime.',
+      content: 'Lavista Rental Bike is your best choice for motorbike rental in Canggu, Bali since 2019. We offer a wide range of the latest motorbikes, known for their quality and affordability. Our dedicated team is always ready to assist you with the best customer support for your ride of a lifetime.',
     },
     {
       property: 'og:image',
@@ -47,7 +48,7 @@ useHead({
     },
     {
       property: 'og:url',
-      content: 'https://ubur-motor.vercel.app/',
+      content: front_local_url,
     },
   ],
 })

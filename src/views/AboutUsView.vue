@@ -67,5 +67,41 @@ import NavBar from "@/components/LandingPage/NavBar.vue"
 import PageTitleVue from '@/components/Text/PageTitle.vue';
 import FloatingInput from '@/components/Form/FloatingInput.vue';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
+import { useHead } from '@unhead/vue';
+import { front_local_url } from '@/helper/domain';
+
+useHead({
+    title: 'About Us - Lavista Rental Bike',
+    meta: [
+      {
+        name: 'description',
+        content: 'Lavista Rental Bike - Your trusted motorbike rental in Canggu, Bali since 2019. Discover the latest motorbike options with the best quality at affordable prices. Our knowledgeable team is ready to assist you anytime.'
+      },
+      {
+        name: 'keywords',
+        content: 'motorbike rental, Canggu, Bali, latest bikes, best prices, customer support, Lavista Rental Bike, Lavista, tourists, foreigners, affordable motorbike'
+      },
+      {
+        name: 'author',
+        content: 'Lavista Rental Bike, rizky__666'
+      },
+      {
+        property: 'og:title',
+        content: 'About Us - Lavista Rental Bike'
+      },
+      {
+        property: 'og:description',
+        content: 'Lavista Rental Bike - Your trusted motorbike rental in Canggu, Bali since 2019. Discover the latest motorbike options with the best quality at affordable prices. Our knowledgeable team is ready to assist you anytime.'
+      },
+      {
+        property: 'og:image',
+        content: 'https://your-domain.com/about-us.jpg'
+      },
+      {
+        property: 'og:url',
+        content: front_local_url + '/about-us'
+      }
+    ]
+})
 
 </script>

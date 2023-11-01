@@ -47,6 +47,42 @@ import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
 import { useGalleryStore } from '@/stores/gallery'
 import FsLightbox from "fslightbox-vue/v3";
+import { useHead } from '@unhead/vue';
+import { front_local_url } from '@/helper/domain';
+
+useHead({
+    title: 'Galleries Customer - Lavista Rental Bike',
+    meta: [
+      {
+        name: 'description',
+        content: 'Explore our customer galleries. See the best moments of our satisfied customers enjoying their bike rentals in Canggu, Bali.'
+      },
+      {
+        name: 'keywords',
+        content: 'galleries, customer photos, bike rental, Canggu, Bali, satisfied customers, Lavista Rental Bike'
+      },
+      {
+        name: 'author',
+        content: 'Lavista Rental Bike, rizky__666'
+      },
+      {
+        property: 'og:title',
+        content: 'Galleries Customer - Lavista Rental Bike'
+      },
+      {
+        property: 'og:description',
+        content: 'Explore our customer galleries. See the best moments of our satisfied customers enjoying their bike rentals in Canggu, Bali.'
+      },
+      {
+        property: 'og:image',
+        content: 'https://your-domain.com/customer-galleries.jpg'
+      },
+      {
+        property: 'og:url',
+        content: front_local_url + '/gallery'
+      }
+    ]
+})
 
 
 const gallery = useGalleryStore()

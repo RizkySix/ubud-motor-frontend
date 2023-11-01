@@ -161,6 +161,45 @@ import LoginRegis from '@/components/Customer/LoginRegis.vue';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
 import FsLightbox from "fslightbox-vue/v3";
+import { useHead } from '@unhead/vue';
+import { front_local_url } from '@/helper/domain';
+
+
+useHead({
+  title: 'Catalog Motor - Lavista Rental Bike',
+  meta: [
+    {
+      name: 'description',
+      content: 'Explore our wide selection of motorbikes in Canggu. Find the perfect ride for your Bali adventure.'
+    },
+    {
+        name: 'author',
+        content: 'Lavista Rental Bike, rizky__666'
+      },
+    {
+      name: 'keywords',
+      content: 'motorbike rental, Canggu, Bali, latest bikes, best prices, customer support, riding, nmax, vespa, lavista rental bike, lavista, wisatawan, bule, cheap motor',
+    },
+    {
+      property: 'og:title',
+      content: 'Catalog Motor - Lavista Rental Bike',
+    },
+    {
+      property: 'og:description',
+      content: 'Explore our wide selection of motorbikes in Canggu. Find the perfect ride for your Bali adventure.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://example.com/catalog-motor.jpg', // Replace with the actual image URL
+    },
+    {
+      property: 'og:url',
+      content: front_local_url + '/catalogs', // Replace with the actual URL
+    },
+  ],
+})
+
+
 
 const BaseModal = defineAsyncComponent(() =>
     import ("@/components/Modal/BaseModal.vue")
