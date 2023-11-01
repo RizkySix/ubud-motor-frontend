@@ -254,7 +254,11 @@ import toaster from '@/helper/toaster';
 import BookingFloatingVue from '@/components/Customer/BookingFloating.vue';
 import { useBookingStore } from '@/stores/booking';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
+import { useHead } from '@unhead/vue'
 
+useHead({
+  title: 'Booking'
+})
 
 const catalogs = ref(null)
 const catalog = useCatalogStore()
