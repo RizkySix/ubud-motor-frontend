@@ -146,7 +146,7 @@
                                 <ErrorMessage v-if="errorBag.delivery_address">{{ errorBag.delivery_address }}</ErrorMessage>
                             </div>
                             <div class="relative z-0 w-full mb-6 group">
-                                <FloatingGmap :modelValue="'Lavista Rental Bike, Gg. Jalak XV, Tibubeneng, Canggu, Badung Regency, Bali 80363'" :type="'text'" :name="'pickup_address'" :id="'pickup_address'" :label="'Pickup Address'" :disable="true" />
+                                <FloatingGmap :modelValue="'Lavista Rental Bike, Gg. Jalak XV, Tibubeneng, Canggu, Badung Regency, Bali 80363'" :type="'text'" :name="'pickup_address'" :id="'pickup_address'" :label="'Pickup Address'" :readonly="true" />
                                 <ErrorMessage v-if="errorBag.pickup_address">{{ errorBag.pickup_address }}</ErrorMessage>
                             </div>
                         </div>

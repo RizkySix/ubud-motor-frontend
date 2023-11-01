@@ -78,9 +78,9 @@
     <div class="mt-24">
     <div class="w-full mx-auto rounded border border-l-4 shadow-lg mb-10">
     <div class="bg-white p-10 shadow-sm">
-        <h3 class="text-lg font-medium text-gray-800">Apa yang didapat</h3>
+        <h3 class="text-lg font-medium text-gray-800">What will you get ?</h3>
         <p class="text-sm font-light text-gray-600 my-3">
-        The accordion is a graphical control element comprising a vertically stacked list of items such as labels or thumbnails
+            We guarantee your safety and completeness when riding
         </p>
 
         <div class="h-1 w-full mx-auto border-b my-5"></div>
@@ -90,7 +90,7 @@
         <!-- header -->
         <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
             <i class="fas fa-plus"></i>
-            <h3>What is term?</h3>
+            <h3>Two SNI standard helmets with the best quality.</h3>
         </div>
         
         </div>
@@ -100,7 +100,7 @@
         <!-- header -->
         <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
             <i class="fas fa-plus"></i>
-            <h3>When to use Accordion Components?</h3>
+            <h3>Handphone holder to help you navigate while riding.</h3>
         </div>
        
         </div>
@@ -110,7 +110,7 @@
         <!-- header -->
         <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
             <i class="fas fa-plus"></i>
-            <h3>How can it be defined?</h3>
+            <h3>Motorbike with proper and good condition.</h3>
         </div>
        
         </div>
@@ -120,7 +120,7 @@
         <!-- header -->
         <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
             <i class="fas fa-plus"></i>
-            <h3>Chamber reached do he nothing be?</h3>
+            <h3>And lastly of course a joy and unforgettable adventure ❤️.</h3>
         </div>
       
         </div>
