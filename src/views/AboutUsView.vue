@@ -1,7 +1,7 @@
 <template>
-<Image1 /><NavBar />
+<CustomImageVue /><NavBar />
 
-<section class="mt-[330px] md:mt-[700px] px-8 md:px-24 mb-14">
+<section class="mt-[30px] md:mt-[50px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
         <div class="text-center py-4">
             <PageTitleVue>
@@ -61,11 +61,9 @@
 </template>
 
 <script setup>
-import { ref , watch , reactive , onMounted, defineAsyncComponent  } from 'vue' 
-import Image1 from "@/components/LandingPage/Image1.vue"
+import CustomImageVue from '@/components/LandingPage/CustomImage.vue';
 import NavBar from "@/components/LandingPage/NavBar.vue"
 import PageTitleVue from '@/components/Text/PageTitle.vue';
-import FloatingInput from '@/components/Form/FloatingInput.vue';
 import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
 import { useHead } from '@unhead/vue';
 import { front_local_url } from '@/helper/domain';

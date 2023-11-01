@@ -1,7 +1,7 @@
 <template>
- <Image1 /><NavBar />
+ <CustomImageVue /><NavBar />
 
-<section class="mt-[330px] md:mt-[700px] px-8 md:px-24">
+<section class="mt-[30px] md:mt-[50px] px-8 md:px-24">
     <div class="mx-auto">
         <div class="text-center py-4">
             <PageTitleVue>
@@ -163,6 +163,7 @@ import SimpleFooterVue from '@/components/LandingPage/SimpleFooter.vue';
 import FsLightbox from "fslightbox-vue/v3";
 import { useHead } from '@unhead/vue';
 import { front_local_url } from '@/helper/domain';
+import CustomImageVue from '@/components/LandingPage/CustomImage.vue';
 
 
 useHead({
