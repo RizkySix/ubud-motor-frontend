@@ -54,7 +54,7 @@
             </div>
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
-                    <span class="font-semibold">Expired On: </span>
+                    <span class="font-semibold">Payment Due: </span>
                     <span class="font-normal text-sm">{{ dateFormat(item.expired_payment) }}</span>
                 </div>
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
@@ -124,7 +124,7 @@
 
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
-                    <span class="font-semibold">Expired On: </span>
+                    <span class="font-semibold">Payment Due: </span>
                     <span class="font-normal text-sm">{{ dateFormat(item.expired_payment) }}</span>
                 </div>
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
