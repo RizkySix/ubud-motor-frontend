@@ -254,7 +254,7 @@
 
 <BaseModal :width="'max-w-6xl'" :modalActive="modalActive" @close-modal="toggleModal">
   <div class="overflow-x-scroll relative p-4">
-   <span class="flex justify-center">
+   <span class="sticky left-0 flex justify-center">
     <CatalogTitle :variant="'variant2'">Detail Booking</CatalogTitle>
    </span>
     <table class="w-[1000px] md:w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-10 border shadow-xl">
