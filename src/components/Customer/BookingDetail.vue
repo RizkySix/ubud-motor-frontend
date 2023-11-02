@@ -61,9 +61,6 @@
 <script setup>
 import {dateFormat } from '@/helper/helperMethod';
 import {rpCurrency } from '@/helper/currency';
-import EditIcon from '@/components/icons/EditIcon.vue';
-import DeleteIcon from '@/components/icons/DeleteIcon.vue';
-import PackageIcon from '@/components/icons/PackageIcon.vue';
 import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 import { useRouter } from 'vue-router';
 import DateIcon from '@/components/icons/DateIcon.vue';

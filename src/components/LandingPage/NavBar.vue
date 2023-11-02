@@ -13,7 +13,7 @@
     </div>
     <router-link :to="{name: 'gallery'}" class="relative hover:text-blue-400 cursor-pointer">Gallery</router-link >
     <router-link :to="{name: 'about.us'}" class="relative hover:text-blue-400 cursor-pointer">About Us</router-link >
-    <a href="../../../public/term.pdf" target="_blank"  class="relative hover:text-blue-400 cursor-pointer">Term & Conditions</a >
+    <a :href="naked_domain + '/storage/Term/term.pdf'" target="_blank"  class="relative hover:text-blue-400 cursor-pointer">Term & Conditions</a >
   </div>
 
   <!-- MOBILE -->
@@ -52,7 +52,7 @@
       <router-link :to="{name: 'about.us'}" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">About Us</router-link>
     </div>
     <div class="menu-item hover:bg-slate-200 w-full">
-      <a href="../../src/assets/term.pdf" target="_blank" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Term & Conditions</a>
+      <a :href="naked_domain + '/storage/Term/term.pdf'" target="_blank" class="relative hover:text-blue-400 cursor-pointer text-2xl my-4">Term & Conditions</a>
     </div>
   </div>
 </Hamburger>
@@ -62,7 +62,9 @@
 <script setup>
 import {ref} from "vue";
 
+
 import Hamburger from '@/components/Modal/Hamburger.vue';
+import { naked_domain } from "@/helper/domain";
 
 const modalActive = ref(null);
 

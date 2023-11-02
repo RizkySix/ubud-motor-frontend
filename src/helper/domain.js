@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const url = 'http://ubud-motor.test/api/v1'
+const url = 'https://lavista.shalltears.cloud/api/v1'
+const naked_domain = 'https://lavista.shalltears.cloud'
 const front_local_url = 'http://localhost:5173'
 const http = () => {
 
@@ -18,4 +19,4 @@ const http = () => {
     return axios.create(options)
 }
 
-export {http , url , front_local_url}
+export {http , url , front_local_url, naked_domain}

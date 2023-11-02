@@ -28,7 +28,7 @@
 					<h3 class="tracki uppercase dark:text-gray-50">Company</h3>
 					<ul class="space-y-1">
 						<li>
-							<a rel="noopener noreferrer" href="../../../public/term.pdf" target="_blank">Terms and Conditions</a>
+							<a rel="noopener noreferrer" :href="naked_domain + '/storage/Term/term.pdf'" target="_blank">Terms and Conditions</a>
 						</li>
 					</ul>
 				</div>
@@ -58,5 +58,6 @@
 	</footer>
 </template>
 <script setup>
- 
+import { naked_domain } from '@/helper/domain';
+
 </script>
