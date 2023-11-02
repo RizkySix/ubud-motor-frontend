@@ -20,13 +20,18 @@ const customCatalogKey = (catalog) => {
           console.log('wrong date')
         }
        
-        const date = new Date(new Date(oldDate).toISOString());
-     console.log(oldDate)
-     console.log(date)
-       const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-       return new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'long',
-          timeStyle: 'short'
-       }).format(new Date(oldDate));
+     const date = new Date(oldDate);
+
+      try {
+          console.log('real')
+          const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+          return new Intl.DateTimeFormat('en-US', {
+             dateStyle: 'long',
+             timeStyle: 'short'
+          }).format(date);
+      } catch (error) {
+          console.log('olds')
+          return oldDate
+      }
  }
  export {customCatalogKey , dateFormat}
