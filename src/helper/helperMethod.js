@@ -18,6 +18,9 @@ const customCatalogKey = (catalog) => {
  const dateFormat = (oldDate) => {
      const date = new Date(oldDate);
        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-       return new Intl.DateTimeFormat('en-US', options).format(date);
+       return new Intl.DateTimeFormat('en-US', {
+          dateStyle: 'long',
+          timeStyle: 'short'
+       }).format(date);
  }
  export {customCatalogKey , dateFormat}
