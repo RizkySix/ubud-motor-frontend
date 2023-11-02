@@ -167,7 +167,7 @@ import {http , url } from '@/helper/domain';
 import DeleteIcon from '@/components/icons/DeleteIcon.vue';
 import MotorIcon from '@/components/icons/MotorIcon.vue';
 import BookingDetail  from '@/components/Customer/BookingDetail.vue'
-import {confirmation } from '@/helper/confirmation';
+import {confirmationAcceptEnglish } from '@/helper/confirmation';
 import toaster from '@/helper/toaster';
 
 
@@ -208,7 +208,7 @@ const handleFetchRenewal = async() => {
 
 
 const handleCancelBooking = async(uuid) => {
-    if(await confirmation() === false){
+    if(await confirmationAcceptEnglish() === false){
         return false
     }
     try {
@@ -223,7 +223,7 @@ const handleCancelBooking = async(uuid) => {
 }
 
 const handleCancelRenewal = async(uuid) => {
-    if(await confirmation() === false){
+    if(await confirmationAcceptEnglish() === false){
         return false
     }
     try {

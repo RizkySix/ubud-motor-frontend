@@ -36,6 +36,23 @@ const confirmationAccept = async() => {
       return false;
     }
 }
+const confirmationAcceptEnglish = async() => {
+  const result = await Swal.fire({
+      title: 'Are You Sure?',
+      text: "You can't cancel it later!",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, continue!'
+    })
+
+    if (result.isConfirmed) {
+      return true;
+    } else {
+      return false;
+    }
+}
 
 
 const logoutConfirmationCustomer = async() => {
@@ -56,4 +73,4 @@ const logoutConfirmationCustomer = async() => {
     }
 }
 
-export {confirmation , confirmationAccept , logoutConfirmationCustomer}
+export {confirmation , confirmationAccept , logoutConfirmationCustomer , confirmationAcceptEnglish}
