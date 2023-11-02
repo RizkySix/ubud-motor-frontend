@@ -1,8 +1,8 @@
 <template>
 <Sidebar>
     <div class="overflow-x-scroll relative">
-    <div class="fixed mx-auto lg:mx-52">
-    <ul class="flex flex-wrap justify-center -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 px-2">
+    <div class="sticky left-0 mx-auto lg:mx-52">
+    <ul class="bg-white shadow-lg flex flex-wrap justify-center -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 px-2">
         <li class="mr-2 cursor-pointer">
             <a @click="handleFetchRenewalData('today')" class="inline-flex items-center justify-center p-4 border-b-2  rounded-t-lg hover:text-gray-600 hover:border-gray-300 group" :class="{'text-blue-600 border-b-2 border-blue-600': status == 'today', 'border-transparent' : status != 'today'}">
                 <svg class="w-4 h-4 mr-2 group-hover:text-gray-500 " :class="{'text-blue-600': status == 'today' , 'text-gray-400' : status != 'today'}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -27,7 +27,7 @@
     </ul>
 </div>
 
-<table class="long-tbl w-[2000px] text-sm text-left text-gray-500 dark:text-gray-400 mt-44 md:mt-32 border shadow-xl overflow-x-hidden">
+<table class="long-tbl w-[2000px] text-sm text-left text-gray-500 dark:text-gray-400 mt-10 border shadow-xl overflow-x-hidden">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 " style="width:3%">

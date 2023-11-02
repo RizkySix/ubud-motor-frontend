@@ -3,7 +3,7 @@
 <Sidebar>
     
     <div class="overflow-x-scroll relative">
-    <div class="fixed mx-auto lg:mx-52 px-10 md:px-0">
+    <div class="sticky left-0 mx-auto lg:mx-52 px-10 md:px-0">
     <ul class="bg-white shadow-lg flex flex-wrap justify-center -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 px-2">
         <li class="mr-2 cursor-pointer">
             <a @click="handleFetchBookingData('today')" class="inline-flex items-center justify-center p-4 border-b-2  rounded-t-lg hover:text-gray-600 hover:border-gray-300 group" :class="{'text-blue-600 border-b-2 border-blue-600': status == 'today', 'border-transparent' : status != 'today'}">
@@ -43,7 +43,7 @@
     </ul>
 </div>
 
-<table v-if="['today' , 'confirmed' , 'unconfirmed' , 'expired'].includes(status)" class="long-tbl w-[2500px] text-sm text-left text-gray-500 dark:text-gray-400 mt-44 md:mt-32 border shadow-xl">
+<table v-if="['today' , 'confirmed' , 'unconfirmed' , 'expired'].includes(status)" class="long-tbl w-[2500px] text-sm text-left text-gray-500 dark:text-gray-400 mt-10 border shadow-xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 " style="width:3%">
@@ -159,7 +159,7 @@
 </table>
 
 
-<table v-if="status == 'charge'" class="long-tbl w-[1700px] text-sm text-left text-gray-500 dark:text-gray-400 mt-44 md:mt-32 border shadow-xl">
+<table v-if="status == 'charge'" class="long-tbl w-[1700px] text-sm text-left text-gray-500 dark:text-gray-400 mt-10 border shadow-xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 " style="width:3%">
