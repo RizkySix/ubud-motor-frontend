@@ -22,7 +22,7 @@
 <script setup>
 import { useHead } from '@unhead/vue';
 import { defineAsyncComponent } from 'vue';
-import TextLineSkeleton from '@/components/skeleton/TextLineSkeleton.vue'
+import TextLineSkeleton from '@/components/Skeleton/TextLineSkeleton.vue'
 
 const ConfirmReset = defineAsyncComponent(() =>
     import ("@/components/Admin/HitConfirmReset.vue")
