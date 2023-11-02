@@ -16,11 +16,17 @@ const customCatalogKey = (catalog) => {
  }
 
  const dateFormat = (oldDate) => {
+     if (!oldDate) {
+          console.log('wrong date')
+        }
+       
      const date = new Date(oldDate);
+     console.log(oldDate)
+     console.log(date)
        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
        return new Intl.DateTimeFormat('en-US', {
           dateStyle: 'long',
           timeStyle: 'short'
-       }).format(date);
+       }).format(new Date(date));
  }
  export {customCatalogKey , dateFormat}
