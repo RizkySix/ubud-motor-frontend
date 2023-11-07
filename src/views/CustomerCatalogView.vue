@@ -1,5 +1,8 @@
 <template>
- <CustomImageVue /><NavBar />
+ <CustomImageVue />
+ <div class="flex justify-center items-center">
+      <NavBar />
+</div>
 
 <section class="mt-[30px] md:mt-[50px] px-8 md:px-24">
     <div class="mx-auto">

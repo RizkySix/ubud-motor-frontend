@@ -206,7 +206,7 @@ const handleFecthAdmin = async() => {
       adminData.value = response
       
    } catch (error) {
-      console.log(error.response)
+      //console.log(error.response)
    }
 }
 
@@ -224,7 +224,7 @@ const handleUpdateProfile = async() => {
          payload.password_confirmation = passwordPayload.password_confirmation;
       }
 
-      console.log(payload)
+      //console.log(payload)
       const response = await http().put('/admin/profile' , payload)
       waitingResponse.value = false
       toggleModal()
@@ -232,7 +232,7 @@ const handleUpdateProfile = async() => {
    } catch (error) {
       waitingResponse.value = false
       let errors = ''
-        console.log(error.response)
+        //console.log(error.response)
         if(error.response.data.validation_errors){
                 errors =error.response.data.validation_errors
                 Object.keys(errors).forEach(key => {

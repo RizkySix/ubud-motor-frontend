@@ -45,7 +45,7 @@ const handleResetPassword = async() => {
         resendStatus.value = true
         toaster('Reset konfirmasi terkirim' , true)
     } catch (error) {
-        console.log(error.response)
+        //console.log(error.response)
 
         if(error.response.status == 429){
             toaster('Coba 1 menit lagi' , false)

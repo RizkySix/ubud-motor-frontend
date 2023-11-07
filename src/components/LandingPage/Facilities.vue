@@ -1,14 +1,14 @@
 <template>
   <div
-    class="absolute top-[1138px] left-[0px] hidden md:flex flex-col items-start justify-start gap-[8px] text-left text-13xl text-white font-inter"
+    class="mt-[80px] hidden lg:flex  gap-[8px] text-left text-13xl text-white font-inter"
   >
-    <div class="relative bg-whitesmoke w-[16000px] h-[860px] z-[0]" />
+    <div class="relative bg-whitesmoke w-full h-[860px] z-[0]" >
     <div
       class="my-0 mx-[!important] absolute top-[50px] left-[80px] flex flex-row items-end justify-center gap-[8px] z-[1] text-17xl"
     >
       <img
         class="relative rounded-23xl w-[400px] h-[760px] object-cover z-[0]"
-        alt=""
+        alt="banner"
         src="@/assets/potrait.jpg"
       />
       <b
@@ -21,7 +21,7 @@
     >
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
-        alt=""
+        alt="banner"
         src="@/assets/honda.jpg"
       />
       <b
@@ -37,7 +37,7 @@
     >
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
-        alt=""
+        alt="banner"
         src="@/assets/nmax.jpg"
       />
       <b
@@ -50,7 +50,7 @@
     >
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
-        alt=""
+        alt="banner"
         src="@/assets/motor-group.jpg"
       />
       <b
@@ -65,7 +65,7 @@
     >
       <img
         class="relative rounded-23xl w-[400px] h-[360px] object-cover z-[0]"
-        alt=""
+        alt="banner"
         src="@/assets/road.jpg"
       />
       <b
@@ -73,10 +73,11 @@
         >Established Since 2019</b
       >
     </div>
+    </div>  
   </div>
 
   <!-- Mobile -->
-  <div class="flex md:hidden mt-20 flex-col items-start justify-start gap-8 text-left text-13xl text-white font-inter">
+  <div class="flex lg:hidden mt-20 flex-col items-start justify-start gap-8 text-left text-13xl text-white font-inter">
     <div class="relative bg-whitesmoke w-full  h-auto z-[0] p-5">
     
       <div class="justify-center gap-8 text-xl relative mb-5">

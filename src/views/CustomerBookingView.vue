@@ -1,5 +1,8 @@
 <template>
- <CustomImageVue /><NavBar />
+ <CustomImageVue />
+ <div class="flex justify-center items-center">
+      <NavBar />
+</div>
 
 <section class="mt-[30px] md:mt-[50px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
@@ -16,8 +19,8 @@
 
     </div>
 
-    <div class="flex flex-col md:flex-row gap-4">
-        <div class="w-full md:w-1/3">
+    <div class="flex flex-col lg:flex-row gap-4">
+        <div class="w-full lg:w-1/3">
            <div class="w-full">
             <div class="text-center mb-2">
                 <CatalogTitle>
@@ -32,7 +35,7 @@
                 <ImageSkeletonVue v-else />
            </div>
 
-           <div class="w-full hidden md:block">
+           <div class="w-full hidden lg:block">
                 <div class="rounded-lg shadow-lg px-4 py-6 bg-slate-200 mt-5 border border-dashed">
                     <div class="text-center mb-4">
                         <CatalogTitle>
@@ -54,14 +57,14 @@
                 </div>
            </div>
         </div>
-        <div class="w-full md:w-2/3">
+        <div class="w-full lg:w-2/3">
             <div class="w-full">
 
 
                 <div class="rounded-lg shadow-lg border border-dotted p-5">
                     <form @submit.prevent="handleMakeBooking" class="p-5">
                    
-                        <div class="grid md:grid-cols-2 md:gap-6">
+                        <div class="grid lg:grid-cols-2 lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingInput v-model="bookingData.full_name" :type="'text'" :name="'full_name'" :id="'full_name'" :label="'Your Name'" />
                                 <ErrorMessage v-if="errorBag.full_name">{{ errorBag.full_name }}</ErrorMessage>
@@ -72,7 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="grid md:grid-cols-2 md:gap-6">
+                        <div class="grid lg:grid-cols-2 lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                 <FloatingInput v-model="bookingData.whatsapp_number" :type="'number'" :name="'whatsapp_number'" :id="'whatsapp_number'" :label="'Whatsapp Number'" />
                                 <ErrorMessage v-if="errorBag.whatsapp_number">{{ errorBag.whatsapp_number }}</ErrorMessage>
@@ -89,9 +92,9 @@
                             </div>
                         </div>
                        
-                        <div class="grid md:grid-cols-2 md:gap-6">
+                        <div class="grid lg:grid-cols-2 lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <select @change="refreshAmount" required v-model="selectedPackage" id="package" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <select @change="refreshAmount() , packageType()" required v-model="selectedPackage" id="package" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                 <option selected disabled :value="{}">Available package</option>
                                 <option v-for="(price, index) in selectedMotor.price_lists" :value="price" :key="index">
                                     {{ price.package }} ({{ rpCurrency(price.price) }}/{{ price.duration }} {{ price.duration_suffix }})
@@ -105,24 +108,24 @@
                             </div>
                         </div>
 
-                        <div class="grid md:grid-cols-2 md:gap-6">
+                        <div class="grid lg:grid-cols-2 lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
-                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.rental_date" :type="'datetime-local'" :name="'rental_date'" :id="'rental_date'" :label="'Rental Date (today/tomorrow)'" />
+                                <FloatingInput @select-change="refreshAmount() , handleGetDiffDays()" v-model="bookingData.rental_date" :type="'datetime-local'" :name="'rental_date'" :id="'rental_date'" :label="'Rental Date (today/tomorrow)'" />
                                 <ErrorMessage v-if="errorBag.rental_date">{{ errorBag.rental_date }}</ErrorMessage>
                             </div>
 
-                            <div v-if="['hours', 'hour', 'jam', 'jams'].includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
-                                <FloatingInput @select-change="refreshAmount" v-model="bookingData.return_date" :type="'datetime-local'" :name="'return_date'" :id="'return_date'" :label="'Return Date'" />
+                            <div v-if="dailySuffix.includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
+                                <FloatingInput @select-change="refreshAmount() , handleGetDiffDays()" v-model="returnDateOnly" :type="'date'" :name="'return_date'" :id="'return_date'" :label="'Return Date'" />
                                 <ErrorMessage v-if="errorBag.return_date">{{ errorBag.return_date }}</ErrorMessage>
                             </div>
 
-                            <div v-if="!['hours', 'hour', 'jam', 'jams'].includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
+                            <div v-if="!dailySuffix.includes(selectedPackage.duration_suffix)" class="relative z-0 w-full mb-6 group">
                                 <FloatingInput @change-action="refreshAmount" v-model="bookingData.rental_duration" :type="'number'" :name="'rental_duration'" :id="'rental_duration'" :label="'Rental Duration (ex: 2)'" />
                                 <ErrorMessage v-if="errorBag.rental_duration">{{ errorBag.rental_duration }}</ErrorMessage>
                             </div>
                         </div>
                     
-                        <div class="grid md:gap-6">
+                        <div class="grid lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                               
                                 <label for="hs-input-with-leading-and-trailing-icon" class="flex text-sm text-gray-500 dark:text-gray-400 mb-3">Total Amount
@@ -140,8 +143,8 @@
                             </div>
                         </div>
                        
-                        <div class="grid md:grid-cols-2 md:gap-6">
-                            <div class="relative z-0 w-full mb-6 group">
+                        <div class="grid lg:gap-6" :class="{'lg:grid-cols-2': dailyDays >= 5 , 'lg:grid-cols-1': dailyDays < 5}">
+                            <div v-if="dailyDays >= 5" class="relative z-0 w-full mb-6 group">
                                 <FloatingGmap  :type="'text'" :name="'delivery_address'" :id="'delivery_address'" :label="'Delivery Address'" />
                                 <ErrorMessage v-if="errorBag.delivery_address">{{ errorBag.delivery_address }}</ErrorMessage>
                             </div>
@@ -151,7 +154,7 @@
                             </div>
                         </div>
 
-                        <div class="grid md:gap-6">
+                        <div class="grid lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                
                                 <label for="additional_message" class="block mb-2 text-sm text-gray-900">Additional Message</label>
@@ -161,7 +164,7 @@
                             </div>
                         </div>
                         
-                        <div class="grid md:grid-cols-2 md:gap-6">
+                        <div class="grid lg:grid-cols-2 lg:gap-6">
                             <div class="relative z-0 w-full mb-6 group">
                                 <div class="flex items-center justify-center w-full">
                                     <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-slate-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -170,7 +173,7 @@
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                             </svg>
                                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> your Passport picture</p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG, JPG </p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG, JPG, PDF </p>
                                         </div>
                                         <ErrorMessage v-if="errorBag.card_image">{{ errorBag.card_image }}</ErrorMessage>
                                         <input @change="handleChangePassport($event)" id="dropzone-file" type="file" class="hidden" />
@@ -180,7 +183,10 @@
                             </div>
 
                             <div class="relative z-0 w-full mb-6 group">
-                                <img v-if="bookingData.card_image" src="" alt="Passport" id="previewPassport" class="rounded-lg h-[300px] md:h-[350px] w-full object-cover">
+                                <div v-if="bookingData.card_image">
+                                    <img v-if="passportType.image" :src="passportType.image" alt="Passport" id="previewPassport" class="rounded-lg h-[300px] lg:h-[350px] w-full object-cover">
+                                    <embed v-if="passportType.pdf"  :src="passportType.pdf" type="application/pdf" id="previewPassportPdf" class="rounded-lg h-[300px] lg:h-[350px] w-full">
+                                </div>
                                 <ImageSkeletonVue v-else />
                             </div>
                         </div>
@@ -206,7 +212,7 @@
             </div>
         </div>
 
-        <div class="w-full block md:hidden">
+        <div class="w-full block lg:hidden">
                 <div class="rounded-lg shadow-lg px-4 py-6 bg-slate-200 mt-5 border border-dashed">
                     <div class="text-center mb-4">
                         <CatalogTitle>
@@ -318,11 +324,34 @@ const bookingData = reactive({
     card_image: '',
     additional_message: ''
 })
+const returnDateOnly = ref(null)
+const passportType = reactive({
+    image: null,
+    pdf: null
+})
+
+//prop for diff daily package
+const dailyDays = ref(0)
+const dailySuffix = ['hours', 'hour', 'jam', 'jams']
 
 //fetch catalog
 const handleFetchCatalog = async() => {
     const response = await catalog.fetchCatalogAction() 
     catalogs.value = response
+}
+
+
+//handle check diff days rental date with return date
+const handleGetDiffDays = () => {
+
+    if(bookingData.rental_date && bookingData.return_date){
+        //menghitung selisih waktu antara kedua tanggal
+        let timeDiff = new Date(bookingData.rental_date) - new Date(bookingData.return_date)
+
+        //menghitung selisih hari
+        dailyDays.value = Math.abs(Math.ceil(timeDiff / (1000 * 3600 * 24))) + 1
+    }
+
 }
 
 const refreshPackage = () => {
@@ -333,7 +362,17 @@ const refreshPackage = () => {
     }, 500);
 }
 
+const packageType = () => {
+
+    if(!dailySuffix.includes(selectedPackage.value.duration_suffix)){
+        dailyDays.value = selectedPackage.value.duration
+    }else{
+       handleGetDiffDays()
+    }
+}
+
 const refreshAmount = async() => {
+    
    if(bookingData.total_unit && bookingData.rental_date){
     await handleCalculatePrice()
    }
@@ -344,18 +383,24 @@ const waitingCalculate = ref(false)
 //handle calculate price
 const handleCalculatePrice = async() => {
     waitingCalculate.value = true
-    let endpoint = ''
+    let endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + bookingData.total_unit + '&rental_date=' + bookingData.rental_date
+    
+    let rentalDate = bookingData.rental_date
+    let [datePart, timePart] = rentalDate.split('T')
+
 
     switch (selectedPackage.value.duration_suffix) {
         case 'hours':
         case 'hour':
         case 'jam':
         case 'jams':
-            endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + bookingData.total_unit + '&rental_date=' + bookingData.rental_date + '&return_date=' + bookingData.return_date
+            bookingData.return_date = returnDateOnly.value + 'T' + timePart
+            endpoint = endpoint + '&return_date=' + bookingData.return_date
             break;
     
         default:
-            endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + bookingData.total_unit + '&rental_date=' + bookingData.rental_date + '&rental_duration=' + bookingData.rental_duration
+            bookingData.return_date = null
+            endpoint = endpoint + '&rental_duration=' + bookingData.rental_duration
             break;
     }
 
@@ -366,10 +411,10 @@ const handleCalculatePrice = async() => {
         bookingData.amount = response.data.data
     }, 30);
     waitingCalculate.value = false
-    console.log(response.data.data)
+    //console.log(response.data.data)
     
    } catch (error) {
-    console.log(error.response.data)
+    //console.log(error.response.data)
     waitingCalculate.value = false
 
     if(error.response.status == 401){
@@ -389,7 +434,13 @@ const handleChangePassport = (e) => {
     const file = e.target.files[0]
     bookingData.card_image = file
     setTimeout(() => {
-        document.getElementById('previewPassport').src = URL.createObjectURL(file)
+        if(file.type != 'application/pdf'){
+            passportType.image = URL.createObjectURL(file)
+            passportType.pdf = null
+        }else{
+            passportType.pdf = URL.createObjectURL(file)
+            passportType.image = null
+        }
     }, 5);
 }
 
@@ -403,10 +454,11 @@ const handleMakeBooking = async() => {
         return false
     }
     waitingResponse.value = true
+    const deliveryAddressInput = document.getElementById('delivery_address')
 
     bookingData.motor_name = selectedMotor.value.motor_name
     bookingData.package = selectedPackage.value.id
-    bookingData.delivery_address =  document.getElementById('delivery_address').value
+    bookingData.delivery_address =  deliveryAddressInput ? deliveryAddressInput.value : ''
     bookingData.pickup_address =  'Lavista Rental Bike, Gg. Jalak XV, Tibubeneng, Canggu, Badung Regency, Bali 80363'
     
     const form = new FormData()
@@ -425,7 +477,7 @@ const handleMakeBooking = async() => {
         booking.newBooking += 1
         
     } catch (error) {
-        console.log(error.response.data)
+      //  console.log(error)
         waitingResponse.value = false
         let errors = null
 
@@ -457,12 +509,16 @@ const clearPayload = () => {
     bookingData.rental_duration = null
     bookingData.card_image = ''
     bookingData.additional_message = ''
+    returnDateOnly.value = null
 
     selectedMotor.value = {}
     selectedPackage.value = {}
+    passportType.image = null
+    passportType.pdf = null
 
-    document.getElementById('delivery_address').value = ''
-     document.getElementById('pickup_address').value = ''
+    const deliveryAddressInput = document.getElementById('delivery_address')
+    
+    deliveryAddressInput ? deliveryAddressInput.value = '' : null
 }
 
 

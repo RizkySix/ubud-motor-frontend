@@ -1,22 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AdminLoginView from '@/views/AdminLoginView.vue'
-import BookingView from '@/views/BookingView.vue'
-import RenewalView from '@/views/RenewalView.vue'
-import MakeCatalogView from '@/views/MakeCatalogView.vue'
-import MakeGalleryView from '@/views/MakeGalleryView.vue'
-import CatalogView from '@/views/CatalogView.vue'
-import AddPackageView from '@/views/AddPackageView.vue'
-import GalleriesView from '@/views/GalleriesView.vue'
-import CustomerCatalogView from '@/views/CustomerCatalogView.vue'
-import CustomerBookingView from '@/views/CustomerBookingView.vue'
-import CustomerRenewalView from '@/views/CustomerRenewalView.vue'
-import CustomerGalleryView from '@/views/CustomerGalleryView.vue'
-import AboutUsView from '@/views/AboutUsView.vue'
-import AdminRegisterView from '@/views/AdminRegisterView.vue'
-import AdminVerifyOtpView from '@/views/AdminVerifyOtpView.vue'
-import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
-import ResetPasswordConfirmView from '@/views/ResetPasswordConfirmView.vue'
+const HomeView = () => import('@/views/HomeView.vue')
+const AdminLoginView = () => import('@/views/AdminLoginView.vue')
+const BookingView = () => import('@/views/BookingView.vue')
+const RenewalView = () => import('@/views/RenewalView.vue')
+const MakeCatalogView = () => import('@/views/MakeCatalogView.vue')
+const MakeGalleryView = () => import('@/views/MakeGalleryView.vue')
+const CatalogView = () => import('@/views/CatalogView.vue')
+const AddPackageView = () => import('@/views/AddPackageView.vue')
+const GalleriesView = () => import('@/views/GalleriesView.vue')
+const CustomerCatalogView = () => import('@/views/CustomerCatalogView.vue')
+const CustomerBookingView = () => import('@/views/CustomerBookingView.vue')
+const CustomerRenewalView = () => import('@/views/CustomerRenewalView.vue')
+const CustomerGalleryView = () => import('@/views/CustomerGalleryView.vue')
+const AboutUsView = () => import('@/views/AboutUsView.vue')
+const AdminRegisterView = () => import('@/views/AdminRegisterView.vue')
+const AdminVerifyOtpView = () => import('@/views/AdminVerifyOtpView.vue')
+const ForgotPasswordView = () => import('@/views/ForgotPasswordView.vue')
+const ResetPasswordConfirmView = () => import('@/views/ResetPasswordConfirmView.vue')
 import { useAuthenticationStore } from '@/stores/authentication'
 
 let verifiedAdminRoute = [

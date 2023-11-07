@@ -74,15 +74,6 @@
             <div class="relative z-0 w-full mb-6 group">
                 <FloatingInput v-model="prices.price" :type="'number'" :name="'price'" :id="'price'" :label="'Harga'" />
             </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <FloatingInput v-model="prices.package" :type="'text'" :name="'package'" :id="'package'" :label="'Nama Paket (ex: Daily/Monthly)'" />
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <FloatingInput v-model="prices.duration" :type="'number'" :name="'duration'" :id="'duration'" :label="'Durasi Paket (ex: 24)'" />
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <FloatingInput v-model="prices.duration_suffix" :type="'text'" :name="'duration_suffix'" :id="'duration_suffix'" :label="'Tipe (ex: hours/days)'" />
-            </div>
         </div>
         <button @submit.prevent="handleUpdatePrice" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Perbarui</button>
         </form>
@@ -97,7 +88,7 @@
                     <FloatingInput v-model="activeCatalogData.motor_name" :type="'text'" :name="'motor_name'" :id="'motor_name'" :label="'Nama Motor'" />
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
-                    <FloatingInput v-model="activeCatalogData.charge" :type="'number'" :name="'charge'" :id="'charge'" :label="'Charge'" />
+                    <FloatingInput v-model="activeCatalogData.charge" :type="'number'" :name="'charge'" :id="'charge'" :label="'Denda'" />
                 </div>
                 <button @submit.prevent="handleUpdateCatalog" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Perbarui</button>  
         </form>
@@ -107,7 +98,7 @@
 </template>
 
 <script setup>
-import { ref , watch , reactive , onMounted, defineAsyncComponent  } from 'vue' 
+import { ref , reactive , onMounted, defineAsyncComponent  } from 'vue' 
 import Sidebar from '@/components/Admin/Sidebar.vue';
 import CatalogTitle from '@/components/Text/CatalogTitle.vue';
 import {http , url } from '@/helper/domain';
@@ -141,9 +132,6 @@ const handleFetchCatalog = async() => {
 
 const prices = reactive({
     price: null,
-    package: '',
-    duration: null,
-    duration_suffix: '',
     id: null
 })
 
@@ -161,7 +149,7 @@ const handleUpdatePrice = async() => {
         await handleFetchCatalog()
         toaster('Price berhasil diperbarui' , true)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
     }
 }
 
@@ -220,7 +208,7 @@ const handleUpdateCatalog = async() => {
     
         toaster('Catalog berhasil diperbarui' , true)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
     }
 }
 
@@ -235,7 +223,7 @@ const handleDeletePrice = async(priceId) => {
         await handleFetchCatalog()
         toaster('Price berhasil terhapus' , true)
     } catch (error) {
-        console.log(error.response.status)
+        //console.log(error.response.status)
         toaster('Price gagal dihapus' , false)
     }
 }
@@ -248,10 +236,10 @@ const handleDeleteCatalog = async(motorName) => {
         }
 
         const response = await http().delete('/catalog/' + motorName)
-        await handleFetchCatalog()
+        handleRefresh()
         toaster('Catalog berhasil terhapus' , true)
     } catch (error) {
-        console.log(error.response.status)
+        //console.log(error.response.status)
         toaster('Catalog gagal dihapus' , false)
     }
 }

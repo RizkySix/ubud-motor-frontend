@@ -1,10 +1,10 @@
 <template>
   <div
-    class="absolute top-[738px] left-[123px] hidden md:flex flex-col items-center justify-center gap-[8px] text-left text-base text-black font-inter"
+    class="mt-[60px] mx-auto hidden md:flex flex-col items-center justify-center gap-[8px] text-left text-base text-black font-inter"
   >
-    <div class="relative rounded-23xl bg-aliceblue w-[1194px] h-80 z-[0]" />
+    <div class="relative rounded-23xl bg-aliceblue md:w-[660px] lg:w-[80%] h-80 z-[0] p-5" >
     <div
-      class="my-0 mx-[!important] absolute top-[36px] left-[460px] flex flex-col items-center justify-center gap-[9px] z-[1] text-center text-13xl"
+      class="my-0 mx-[!important] flex flex-col items-center justify-center gap-[9px] z-[1] text-center text-13xl mb-14"
     >
       <div class="relative font-medium">Simple Booking </div>
       <div class="relative text-xl font-medium text-dimgray">
@@ -12,23 +12,23 @@
       </div>
     </div>
     <div
-      class="my-0 mx-[!important] absolute top-[160px] flex items-center justify-center gap-[35px] z-[2]"
+      class="my-0 mx-auto w-3/4 flex items-center justify-center gap-[35px] z-[2]"
     >
     
-    <div class=" b mx-auto h-16 w-64 flex justify-center items-center">
-      <div class="i h-16 w-64 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
+    <div class=" b mx-auto h-16 md:w-44 lg:w-64 flex justify-center items-center">
+      <div class="i h-16 md:w-44 lg:w-64 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
       <a class="text-center text-white font-semibold z-10 pointer-events-none">Choose your favorite bike!</a>
     </div>
 
-    <div class=" b mx-auto h-16 w-64 flex justify-center items-center">
-      <div class="i h-16 w-64 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
+    <div class=" b mx-auto h-16 md:w-44 lg:w-64 flex justify-center items-center">
+      <div class="i h-16 md:w-44 lg:w-64 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
       <a class="text-center text-white font-semibold z-10 pointer-events-none">Make an booking!</a>
     </div>
 
-    <div class=" b mx-auto h-16 w-64 flex justify-center items-center">
-      <div class="i h-16 w-64 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
+    <div class=" b mx-auto h-16 md:w-44 lg:w-64 flex justify-center items-center">
+      <div class="i h-16 md:w-44 lg:w-64 bg-gradient-to-br from-yellow-400 to-yellow-600 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out">
       </div>
       <a class="text-center text-white font-semibold z-10 pointer-events-none">Take and pay on the spot!</a>
     </div>
@@ -37,7 +37,7 @@
 
 
     <div
-      class="my-0 mx-[!important] -mt-6 flex items-center justify-center gap-[35px] z-[2]"
+      class="my-0 mx-[!important] mt-24 flex items-center justify-center gap-[35px] z-[2]"
     >
     
     <router-link :to="{name: 'booking'}" class="b animate-bounce mx-auto h-16 w-64 flex justify-center items-center">
@@ -48,11 +48,12 @@
 
     </div>
    
+    </div>
   </div>
 
   <!-- MOBILE -->
   <div
-    class="flex md:hidden px-5 mt-[350px] flex-col items-center justify-center gap-[8px] text-left text-base text-black font-inter"
+    class="flex md:hidden px-5 mt-[40px] flex-col items-center justify-center gap-[8px] text-left text-base text-black font-inter"
   >
     <div class=" rounded-23xl bg-aliceblue w-full h-64 z-[0] p-5">
     <div

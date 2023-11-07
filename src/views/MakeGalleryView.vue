@@ -35,7 +35,7 @@ const storeGallery = async () => {
             gallery_image: myFiles.value
         })
 
-        console.log(response.data)
+        //console.log(response.data)
         router.push({
             name: 'admin.booking'
         })

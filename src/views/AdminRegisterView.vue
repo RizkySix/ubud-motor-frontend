@@ -78,7 +78,7 @@ const handleRegister = async() => {
        })
    }else{
         let errors = ''
-        console.log(response)
+        //console.log(response)
         if(response.validation_errors){
                 errors = response.validation_errors
                 Object.keys(errors).forEach(key => {

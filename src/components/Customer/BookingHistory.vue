@@ -65,7 +65,7 @@
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
                     <span class="font-semibold">Delivery Address: </span>
-                    <span class="font-normal text-sm">{{ item.delivery_address }}</span>
+                    <span class="font-normal text-sm">{{ item.delivery_address ?? '*' }}</span>
                 </div>
                 <div class="relative z-0 w-full mb-2 group flex flex-col">
                     <span class="font-semibold">Pickup Address: </span>
@@ -76,10 +76,10 @@
             <div class="border-t-2 w-full">
                <div class="w-1/4 flex">
                 <div v-if="!item.is_confirmed" @click="handleCancelBooking(item.uuid)" class="relative z-0 w-full mt-4 group cursor-pointer">
-                    <DeleteIcon :width="30" :height="30" />                 
+                    <span class="font-semibold hover:text-slate-500">Cancel</span>                 
                 </div>
                 <div @click="toggleModalDetail(item.booking_details)" class="relative z-0 w-full mt-4 group cursor-pointer">
-                  <MotorIcon :width="30" :height="30" :border="'border border-whitesmoke rounded-full'" />
+                    <span class="font-semibold hover:text-slate-500">Detail</span>
                 </div>
                </div>
             </div>
@@ -146,7 +146,7 @@
             
             <div class="w-full border-t-2">
                 <div v-if="!item.is_confirmed" @click="handleCancelRenewal(item.uuid)" class="relative z-0 w-full mt-4 group flex flex-col cursor-pointer">
-                    <DeleteIcon :width="30" :height="30" />                 
+                    <span class="font-semibold hover:text-slate-500">Cancel</span>                 
                 </div>
             </div>
         </div>
@@ -164,8 +164,6 @@ import { ref , defineAsyncComponent } from 'vue';
 import {rpCurrency } from '@/helper/currency';
 import {dateFormat } from '@/helper/helperMethod';
 import {http , url } from '@/helper/domain';
-import DeleteIcon from '@/components/icons/DeleteIcon.vue';
-import MotorIcon from '@/components/icons/MotorIcon.vue';
 import BookingDetail  from '@/components/Customer/BookingDetail.vue'
 import {confirmationAcceptEnglish } from '@/helper/confirmation';
 import toaster from '@/helper/toaster';
@@ -188,7 +186,7 @@ const handleFetchBooking = async() => {
         waitingResponse.value = false
         onChoosed.value = 'booking'
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
     }
 }
 
@@ -198,11 +196,11 @@ const handleFetchRenewal = async() => {
         const response = await http().get('/booking/extension')
         items.value = response.data.data
         waitingResponse.value = false
-        console.log(items.value)
+        //console.log(items.value)
         onChoosed.value = 'renewal'
         
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
     }
 }
 
@@ -214,10 +212,10 @@ const handleCancelBooking = async(uuid) => {
     try {
         const response = await http().delete('/booking/cancel/' + uuid)
         await handleFetchBooking()
-        console.log(response.data.data)
+        //console.log(response.data.data)
         toaster('Booking canceled' , true)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         toaster('Fail cancel Booking' , false)
     }
 }
@@ -229,10 +227,10 @@ const handleCancelRenewal = async(uuid) => {
     try {
         const response = await http().delete('/booking/extension/cancel/' + uuid)
         await handleFetchRenewal()
-        console.log(response.data.data)
+        //console.log(response.data.data)
         toaster('Renewal canceled' , true)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         toaster('Fail cancel Renewal' , false)
     }
 }

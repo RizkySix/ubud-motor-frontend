@@ -20,11 +20,11 @@ const data = ref(false)
 const getData = async () => {
    try {
         const response = await http().post('/admin/reset/password/' + atob(route.params.email))
-        console.log(response.data)
+        //console.log(response.data)
 
         data.value = true
    } catch (error) {
-        console.log(error.response)
+        //console.log(error.response)
         data.value = false
    }
 }

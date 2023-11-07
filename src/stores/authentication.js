@@ -17,12 +17,12 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
             localStorage.removeItem('token');
           }
 
-          console.log(response.data.data.token)
+          //console.log(response.data.data.token)
 
           return true;
           
         } catch (error) {
-          console.log(error.response.data)
+          //console.log(error.response.data)
 
           return false;
         }
@@ -42,11 +42,11 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
             localStorage.removeItem('token');
           }
 
-          console.log(response.data.data.token)
+          //console.log(response.data.data.token)
 
           return true;
         } catch (error) {
-          console.log(error.response.data)
+          //console.log(error.response.data)
 
           return error.response.data;
         }
@@ -60,7 +60,7 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
           localStorage.removeItem('customer_token')
           return true
         } catch (error) {
-          console.log(error.response)
+          //console.log(error.response)
           return false
         }
       }
@@ -71,7 +71,7 @@ export const useAuthenticationStore = defineStore('authentication' , () => {
             const response = await http().get('/user/data');
             return response.data.data
           } catch (error) {
-            console.log(error.response.data)
+            //console.log(error.response.data)
           }
       }
 

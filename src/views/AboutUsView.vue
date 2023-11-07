@@ -1,5 +1,8 @@
 <template>
-<CustomImageVue /><NavBar />
+<CustomImageVue />
+<div class="flex justify-center items-center">
+      <NavBar />
+</div>
 
 <section class="mt-[30px] md:mt-[50px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
@@ -15,7 +18,7 @@
         </div>
 
 
-        <div class="w-full grid md:grid-cols-2 gap-10">
+        <div class="w-full grid lg:grid-cols-2 gap-10">
             <div class="">
                 <img src="@/assets/about-us.jpg" alt="AboutUS" class="object-cover">
             </div>

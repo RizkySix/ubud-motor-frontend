@@ -59,10 +59,10 @@ const handleLogout = async() => {
 
   try {
     const response = await authentication.logoutAction('/customer/logout')
-    console.log(response.data)
+    //console.log(response.data)
     token.value = localStorage.getItem('customer_token')
   } catch (error) {
-    console.log(error.response.data)
+    //console.log(error.response.data)
   }
 }
 

@@ -132,7 +132,10 @@
                         {{ item.pickup_address }}
                     </td>
                     <td class="px-6 py-4">
-                        <img :src="item.card_image" class="w-50 h-20 object-cover" alt="passport" @click="lightToggle(item.card_image)">
+                        <img v-if="item.card_image.split('.').pop() != 'pdf'" :src="item.card_image" class="w-50 h-20 object-cover" alt="passport" @click="lightToggle(item.card_image)">
+                        <a v-else :href="item.card_image" target="_blank">
+                        <img src="@/assets/pdfimage.png" class="w-50 h-12 object-cover" alt="passport">
+                        </a>
                     </td>
                     <td class="px-6 py-4">
                         {{ item.additional_message ?? 'NULL' }}
@@ -233,7 +236,10 @@
                         {{ item.is_done ? 'Kembali' : 'Belum Kembali' }}
                     </td>
                     <td class="px-6 py-4">
-                        <img :src="item.card_image" class="w-50 h-50 object-cover" @click="lightToggle(item.card_image)">
+                        <img v-if="item.card_image.split('.').pop() != 'pdf'" :src="item.card_image" class="w-50 h-20 object-cover" alt="passport" @click="lightToggle(item.card_image)">
+                        <a v-else :href="item.card_image" target="_blank">
+                        <img src="@/assets/pdfimage.png" class="w-50 h-12 object-cover" alt="passport">
+                        </a>
                     </td>
                     <td class="px-6 py-4 flex flex-col gap-1">
                         <span @click="handleDoneRental(item.id)" class="cursor-pointer rounded-full">
@@ -377,10 +383,11 @@ const handleFetchBookingData = async(type) => {
         items.value = response.data.data
         status.value = type
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         waiting.value = false
     }
 }
+
 
 const handleConfirmBooking = async(uuid) => {
 
@@ -400,7 +407,7 @@ const handleConfirmBooking = async(uuid) => {
 
     } catch (error) {
       
-        console.log(error.response.data)
+        //console.log(error.response.data)
         await handleFetchBookingData(status.value)
         toaster('Gagal Konfirmasi' , false)
     }   
@@ -429,7 +436,7 @@ const handleDoneRental = async(id , index = 0) => {
 
         toaster('Berhasil Konfirmasi' , true)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         toaster('Gagal Konfirmasi' , false)
     }
 }

@@ -154,7 +154,7 @@ const handleFetchRenewalData = async(type) => {
         items.value = response.data.data
         status.value = type
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         waiting.value = false
     }
 }
@@ -169,7 +169,7 @@ const handleConfirmRenewal = async(uuid) => {
         await handleFetchRenewalData(status.value)
         toaster('Berhasil Konfirmasi' , true)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         toaster('Gagal Konfirmasi' , true)
     }
 }

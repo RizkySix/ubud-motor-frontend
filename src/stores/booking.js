@@ -23,11 +23,11 @@ export const useBookingStore = defineStore('booking' , () => {
      
          try {
          const response = await http().get(endpoint)
-         console.log(response.data.data)
+         //console.log(response.data.data)
         return response.data.data
      
         } catch (error) {
-         console.log(error.response.data)
+         //console.log(error.response.data)
         }
      }
 

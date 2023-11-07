@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const url = 'https://lavista.shalltears.cloud/api/v1'
-const naked_domain = 'https://lavista.shalltears.cloud'
+const url = 'http://ubud-motor.test/api/v1'
+const naked_domain = 'http://ubud-motor.test'
 const front_local_url = 'http://localhost:5173'
 const http = () => {
 

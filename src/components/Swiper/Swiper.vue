@@ -76,11 +76,12 @@
 
         const images = ref(props.images)
         const catalog = useCatalogStore()
+        
         const handleFileChange = (e , index , idImage) => {
             const file = e.target.files[0]
             catalog.catalogFiles[index] = file
             document.getElementById(idImage).src = URL.createObjectURL(file)
-            console.log(catalog.catalogFiles)
+            //console.log(catalog.catalogFiles)
         }
 
         const handleDeleteImage = async(index) => {
@@ -90,7 +91,7 @@
 
           catalog.refresh = true
           const response = await catalog.deleteTempImgAction({catalog_position: index} , props.deleteEndpoint)
-          console.log(response.data)
+          //console.log(response.data)
           images.value = []
 
           if(response.data.first_catalog){

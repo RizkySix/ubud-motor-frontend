@@ -34,7 +34,7 @@ const galleries = ref(null)
 const handleFetchGalleries = async() => {
     const response = await gallery.fetchGalleryAction()
     galleries.value = response
-    console.log(galleries.value)
+    //console.log(galleries.value)
 }
 
 const handleDeleteGallery = async(galleryId) => {
@@ -44,7 +44,7 @@ const handleDeleteGallery = async(galleryId) => {
     }
 
     const response = await catalog.deleteTempImgAction(null , '/gallery/' + galleryId)
-    console.log(response)
+    //console.log(response)
     await handleFetchGalleries()
     toaster('Berhasil hapus gallery' , true)
 }

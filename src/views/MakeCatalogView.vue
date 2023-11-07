@@ -29,16 +29,14 @@
     <div class="relative z-0 w-full mb-6 group">
         <FloatingInput v-model="priceLists[index].price" :type="'number'" :name="'price'" :id="'price'+index" :label="'Harga'" />
     </div>
-    <div class="relative z-0 w-full mb-6 group">
-        <FloatingInput v-model="priceLists[index].package" :type="'text'" :name="'package'" :id="'package'+index" :label="'Nama Paket (ex: Daily/Monthly)'" />
-    </div>
-  </div>
-  <div class="grid md:grid-cols-2 md:gap-6 mb-10">
-    <div class="relative z-0 w-full mb-6 group">
-        <FloatingInput v-model="priceLists[index].duration" :type="'number'" :name="'duration'" :id="'duration'+index" :label="'Durasi Paket (ex: 24)'" />
-    </div>
-    <div class="relative z-0 w-full mb-6 group">
-        <FloatingInput v-model="priceLists[index].duration_suffix" :type="'text'" :name="'duration_suffix'" :id="'duration_suffix'+index" :label="'Tipe (ex: hours/days)'" />
+    <div class="relative z-0 w-full mb-6 group mt-4">
+        <label :for="'package'" class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400 ">Paket Tersedia</label>
+        <select @change="changePackage(index)" required id="package" v-model="selectedPackage[index]" class="bg-gray-50 border border-gray-300 mt-1 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <option :value="'Daily (24 hours)'">Daily (24 hours)</option>
+            <option  :value="'Weekly (7 days)'">Weekly (7 days)</option>
+            <option  :value="'Monthly (30 days)'">Monthly (30 days)</option>
+           
+        </select>
     </div>
   </div>
 </div>
@@ -66,14 +64,12 @@ const myFiles = ref([])
 
 //default jumlah pricelist = 1;
 const items = ref(1)
-const priceData = {
-    price: null,
-    duration: null,
-    package: '',
-    duration_suffix: ''
-}
 
-const priceLists = ref([{priceData}])
+const selectedPackage = ref([])
+
+//array untuk menyimpan object2 priceData
+const priceLists = ref([{}])
+
 const catalogPayload = reactive({
     motor_name: '',
     charge: null,
@@ -81,9 +77,28 @@ const catalogPayload = reactive({
     price_lists: []
 })
 
+const changePackage = (index) => {
+   
+    const regex = /(.+?) \((\d+) (\w+)\)/;
+    const match = selectedPackage.value[index].match(regex);
+ 
+    if (match) {
+        const [, packageName, duration, suffix] = match;
+        priceLists.value[index].package = packageName
+        priceLists.value[index].duration = duration
+        priceLists.value[index].duration_suffix = suffix
+
+        console.log(priceLists.value)
+    }else{
+        //console.log('error')
+    }
+
+  
+}
+
 const addPriceLists = () => {
     items.value += 1;
-    priceLists.value.push({priceData})
+    priceLists.value.push({})
 
 }
 
@@ -94,12 +109,7 @@ const removePriceLists = () => {
     }
 }
 
-const errorBag = reactive({
-    motor_name: '',
-    charge: '',
-    path_catalog: '',
-    price_lists: ''
-})
+const errorBag = ref({})
 const hasError = ref(false)
 
 const storeCatalog = async () => {
@@ -108,22 +118,22 @@ const storeCatalog = async () => {
         catalogPayload.price_lists = priceLists.value
         const response =  await http().post('/catalog' , catalogPayload)
 
-        console.log(response.data)
         router.push({
-            name: 'admin.booking'
+            name: 'admin.catalogs'
         })
         toaster('Catalog berhasil dibuat' , true)
 
     } catch (error) {
-        const errors = error.response.data.validation_errors
-        errorBag.charge = ''
-        errorBag.motor_name = ''
-        errorBag.path_catalog = ''
-        errorBag.price_lists = ''
-        for (const propName in errorBag) {
-            if (errors[propName]) {
-                errorBag[propName] = errors[propName][0];
-            }
+        let errors = null
+
+        if(error.response.data.validation_errors){
+            errors = error.response.data.validation_errors
+                Object.keys(errors).forEach(key => {
+                errorBag.value[key] =  errors[key][0]
+            })
+        }else{
+            errors = error.response.data
+            errorBag.value['data'] =  errors.data
         }
 
         hasError.value = true

@@ -15,7 +15,7 @@ export const useCatalogStore = defineStore('catalog' , () => {
           return response.data
         
         } catch (error) {
-          console.log(error.response.data)
+          //console.log(error.response.data)
        
         }
 
@@ -28,7 +28,7 @@ export const useCatalogStore = defineStore('catalog' , () => {
          
           return response.data.data
         } catch (error) {
-            console.log(error.response.data)
+            //console.log(error.response.data)
         }
     }
 

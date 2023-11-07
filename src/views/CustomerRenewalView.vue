@@ -1,5 +1,8 @@
 <template>
-<CustomImageVue /><NavBar />
+<CustomImageVue />
+<div class="flex justify-center items-center">
+      <NavBar />
+</div>
 
 <section class="mt-[30px] md:mt-[50px] px-8 md:px-24 mb-14">
     <div class="title mx-auto">
@@ -139,6 +142,7 @@ const booking = useBookingStore()
 const route = useRoute()
 const packages = ref({})
 const selectedPackage = ref({})
+const starterReturnDate = ref('')
 
 const renewalData = reactive({
     booking_detail_id: null,
@@ -155,14 +159,15 @@ const handleGetPrice = async() => {
     try {
         const response = await http().get('/booking/price?motor_name=' + route.params.motor_name)
         packages.value = response.data.data
-        console.log(response.data.data)
+        //console.log(response.data.data)
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
     }
 }
 
 const refreshAmount = async() => {
     hasError.value = false
+   
     await handleCalculatePrice()
     
 }
@@ -170,18 +175,19 @@ const refreshAmount = async() => {
 //handle calculate price
 const handleCalculatePrice = async() => {
     let endpoint = ''
-    console.log(selectedPackage.value.duration_suffix)
+    //console.log(selectedPackage.value.duration_suffix)
     switch (selectedPackage.value.duration_suffix) {
         case 'hours':
         case 'hour':
         case 'jam':
         case 'jams':
-            endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + 1 + '&rental_date=' + route.params.return_date + '&return_date=' + renewalData.return_date
+            handleSelectStartDate()
+            endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + 1 + '&rental_date=' + route.params.return_date + '&return_date=' + renewalData.return_date + '&type=renewal'
             renewalData.rental_duration = null
             break;
     
         default:
-            endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + 1 + '&rental_date=' + route.params.return_date + '&rental_duration=' + renewalData.rental_duration
+            endpoint = '/booking/calculate?package=' + selectedPackage.value.id + '&total_unit=' + 1 + '&rental_date=' + route.params.return_date + '&rental_duration=' + renewalData.rental_duration + '&type=renewal'
             renewalData.return_date = null
             break;
     }
@@ -194,11 +200,11 @@ const handleCalculatePrice = async() => {
         renewalData.amount = response.data.data
     }, 100);
 
-    console.log(response.data.data)
+    //console.log(response.data.data)
 
    } catch (error) {
 
-    console.log(error.response.data)
+    //console.log(error.response.data)
     if(error.response.data.validation_errors){
         hasError.value = true
         errorBag.value = {
@@ -231,7 +237,7 @@ const handleAddRenewal = async() => {
         clearPayload()
         booking.newBooking += 1
     } catch (error) {
-        console.log(error.response.data)
+        //console.log(error.response.data)
         waitingResponse.value = false
         errorBag.value = error.response.data
         hasError.value = true
@@ -245,6 +251,19 @@ const clearPayload = () => {
     renewalData.amount = 0,
     renewalData.return_date = null,
     renewalData.rental_duration = null
+}
+
+
+const handleSelectStartDate = () => {
+    const returnDate = new Date(route.params.return_date)
+    returnDate.setDate(returnDate.getDate() + 1)
+    const year = returnDate.getFullYear()
+    const month = String(returnDate.getMonth() + 1).padStart(2, '0'); // Ingat, bulan dimulai dari 0
+    const day = String(returnDate.getDate()).padStart(2, '0');
+
+    const stringDate = year + '-' + month + '-' + day
+
+    renewalData.return_date ? null : renewalData.return_date = stringDate
 }
 
 onMounted(async() => {
