@@ -1,29 +1,25 @@
-# FrontEnd-UbudMotor
+## About Project 
 
-This template should help get you started developing with Vue 3 in Vite.
+Ini adalah project freelance website untuk company profile, sistem booking, dan dashboard Admin untuk Lavista rental bike yang terletak di ubud-canggu. Project ini dibuat menggunakan Vuejs 3 (SPA).
+Silahkan kunjungi tautan ini: https://clientlavista.shalltears.cloud/
 
-## Recommended IDE Setup
+## How To Use
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- npm install
+- npm run dev
+- npm run build
 
-## Customize configuration
+## Built With
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+- Vue js 3
+- Vite
+- Pinia
+- Vue Router
+- Filepond/PQINA
+- Vue3 Toastify
+- Swiper Js
+- Flowbite UI
+- Vue google maps
+- Vue-fslightbox
+- Tailwind css
+- Sweetalert
