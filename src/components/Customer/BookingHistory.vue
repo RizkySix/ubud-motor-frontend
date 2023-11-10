@@ -75,7 +75,7 @@
 
             <div class="border-t-2 w-full">
                <div class="w-1/4 flex">
-                <div v-if="!item.is_confirmed" @click="handleCancelBooking(item.uuid)" class="relative z-0 w-full mt-4 group cursor-pointer">
+                <div v-if="!item.is_confirmed" @click="handleCancelBooking(item.uuid)" class="relative z-0 w-full mt-4 group cursor-pointer me-4 lg:me-0">
                     <span class="font-semibold hover:text-slate-500">Cancel</span>                 
                 </div>
                 <div @click="toggleModalDetail(item.booking_details)" class="relative z-0 w-full mt-4 group cursor-pointer">

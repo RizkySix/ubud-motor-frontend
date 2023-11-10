@@ -126,7 +126,7 @@
                         {{ item.is_confirmed ? 'Paid' : 'Unpaid' }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ item.delivery_address }}
+                        {{ item.delivery_address ?? "NULL" }}
                     </td>
                     <td class="px-6 py-4">
                         {{ item.pickup_address }}
